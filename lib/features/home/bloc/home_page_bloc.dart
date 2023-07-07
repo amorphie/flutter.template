@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:burgan_poc/core/component/component_data.dart';
 import 'package:burgan_poc/features/home/network/home_network_manager.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,8 +14,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on<HomePageEventFetchComponents>((event, emit) async {
       emit(HomePageStateLoading());
       var response = await HomeNetworkManager(baseUrlLocal).fetchHomePageComponents();
-      print('Component length is ${response.componentList.length}');
-      // TODO: Build UI with components
+      emit(HomePageStateLoaded(componentList: response.componentList));
     });
   }
 }

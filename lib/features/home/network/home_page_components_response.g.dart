@@ -10,8 +10,7 @@ HomePageComponentsResponse _$HomePageComponentsResponseFromJson(
         Map<String, dynamic> json) =>
     HomePageComponentsResponse(
       componentList: (json['components'] as List<dynamic>?)
-              ?.map((e) =>
-                  HomePageComponentData.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => ComponentData.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
