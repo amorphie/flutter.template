@@ -1,5 +1,6 @@
 import 'package:burgan_poc/core/component/component_id.dart';
 import 'package:burgan_poc/core/reusable_widgets/account_slider/account_slider_widget.dart';
+import 'package:burgan_poc/core/reusable_widgets/overdraft_info/overdraft_info_widget.dart';
 import 'package:flutter/material.dart';
 
 class ComponentToWidgetMapper {
@@ -8,7 +9,7 @@ class ComponentToWidgetMapper {
       case ComponentId.accountSlider:
         return const AccountSliderWidget();
       case ComponentId.overdraftInfo:
-        return Text("Overdraft info"); // TODO: Extract to widget
+        return const OverdraftInfoWidget();
       case ComponentId.accountSummary:
         return Text("Account summary"); // TODO: Extract to widget
       case ComponentId.lastTransactions:
