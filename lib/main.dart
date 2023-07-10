@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
 import 'package:burgan_poc/features/home/ui/home_page.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   HttpOverrides.global = MyHttpOverrides();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
