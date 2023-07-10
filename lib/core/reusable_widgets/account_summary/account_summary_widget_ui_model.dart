@@ -1,3 +1,5 @@
+import 'package:burgan_poc/core/reusable_widgets/account_summary/models/account_summary_component_details_response.dart';
+
 class AccountSummaryWidgetUIModel {
   final String availableLimit;
   final String totalLimit;
@@ -14,4 +16,12 @@ class AccountSummaryWidgetUIModel {
     required this.monthlyInterestRate,
     required this.yearlyInterestRate,
   });
+
+  AccountSummaryWidgetUIModel.fromResponse(AccountSummaryComponentDetailsResponse response)
+      : availableLimit = response.availableLimit,
+        totalLimit = response.totalLimit,
+        currentDebt = response.currentDebt,
+        accountOpeningDate = response.accountOpeningDate,
+        monthlyInterestRate = response.monthlyInterestRate,
+        yearlyInterestRate = response.yearlyInterestRate;
 }
