@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
-import 'package:burgan_poc/features/home/ui/home_page.dart';
+import 'package:burgan_poc/core/navigation/go_router_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -15,12 +16,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: GoRouter(
+        initialLocation: '/',
+        routes: $appRoutes,
+      ),
       title: 'Burgan Poc',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
     );
   }
 }
