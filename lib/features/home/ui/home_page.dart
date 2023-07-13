@@ -1,3 +1,4 @@
+import 'package:burgan_poc/core/component/component_id.dart';
 import 'package:burgan_poc/core/component/component_to_widget_mapper.dart';
 import 'package:burgan_poc/features/home/bloc/home_page_bloc.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,9 @@ class HomePage extends StatelessWidget {
             case HomePageStateLoaded _:
               return Column(
                 children: [
-                  ...state.componentList.map((component) => ComponentToWidgetMapper().map(componentId: component.id))
+                  ...state.componentList.map(
+                    (component) => ComponentToWidgetMapper().map(componentId: ComponentId.fromValue(component.id)),
+                  )
                 ],
               );
             default:

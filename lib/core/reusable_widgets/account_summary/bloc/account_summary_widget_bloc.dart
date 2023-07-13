@@ -23,7 +23,7 @@ class AccountSummaryWidgetBloc extends Bloc<AccountSummaryWidgetEvent, AccountSu
       // TODO: Delete this add event method, this is for SignalR response simulation purposes
       getIt.get<WidgetEventBus>().addEvent(
             WidgetEvent(
-              widgetId: ComponentId.accountSummary,
+              widgetId: ComponentId.accountSummary.value,
               data: AccountSummaryWidgetUIModel.fromResponse(response),
             ),
           );
@@ -35,7 +35,7 @@ class AccountSummaryWidgetBloc extends Bloc<AccountSummaryWidgetEvent, AccountSu
 
   _listenForWidgetEvents() {
     getIt.get<WidgetEventBus>().listen(
-          widgetId: ComponentId.accountSummary,
+          widgetId: ComponentId.accountSummary.value,
           onEventReceived: (WidgetEvent event) {
             if (event.data is AccountSummaryWidgetUIModel) {
               add(AccountSummaryWidgetEventSetUIModel(event.data as AccountSummaryWidgetUIModel));

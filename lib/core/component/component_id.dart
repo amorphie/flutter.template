@@ -1,8 +1,18 @@
-class ComponentId {
-  ComponentId._();
+import 'package:collection/collection.dart';
 
-  static const accountSlider = "account-slider";
-  static const overdraftInfo = "overdraft-info";
-  static const accountSummary = "account-summary";
-  static const lastTransactions = "last-transactions";
+enum ComponentId {
+  accountSlider("account-slider"),
+  overdraftInfo("overdraft-info"),
+  accountSummary("account-summary"),
+  lastTransactions("last-transactions"),
+  subNavigation("sub-navigation"),
+  unknown("");
+
+  const ComponentId(this.value);
+
+  final String value;
+
+  factory ComponentId.fromValue(String? value) {
+    return ComponentId.values.firstWhereOrNull((element) => element.value == value) ?? ComponentId.unknown;
+  }
 }
