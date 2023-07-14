@@ -18,12 +18,14 @@ class HomePage extends StatelessWidget {
             case HomePageStateLoading _:
               return const Center(child: CircularProgressIndicator());
             case HomePageStateLoaded _:
-              return Column(
-                children: [
-                  ...state.componentList.map(
-                    (component) => ComponentToWidgetMapper().map(componentId: ComponentId.fromValue(component.id)),
-                  )
-                ],
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ...state.componentList.map(
+                      (component) => ComponentToWidgetMapper().map(componentId: ComponentId.fromValue(component.id)),
+                    )
+                  ],
+                ),
               );
             default:
               return const Scaffold();

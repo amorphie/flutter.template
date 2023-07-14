@@ -1,6 +1,6 @@
 part of 'sub_navigation_widget_bloc.dart';
 
-abstract class SubNavigationWidgetState extends Equatable {
+sealed class SubNavigationWidgetState extends Equatable {
   const SubNavigationWidgetState();
 }
 
@@ -10,6 +10,10 @@ class SubNavigationWidgetStateLoading extends SubNavigationWidgetState {
 }
 
 class SubNavigationWidgetStateLoaded extends SubNavigationWidgetState {
+  final List<SubNavigationComponentDetails> componentDetailsList;
+
+  const SubNavigationWidgetStateLoaded(this.componentDetailsList);
+
   @override
   List<Object> get props => [];
 }
