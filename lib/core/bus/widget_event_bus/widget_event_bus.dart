@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:burgan_poc/core/bus/widget_event_bus/widget_event.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 
 @singleton
 class WidgetEventBus {
-  final _eventBus = StreamController<WidgetEvent>();
+  final _eventBus = BehaviorSubject<WidgetEvent>();
 
   listen({
     required String widgetId,
