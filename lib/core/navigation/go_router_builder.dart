@@ -5,19 +5,15 @@ import 'package:go_router/go_router.dart';
 
 part 'go_router_builder.g.dart';
 
-@TypedGoRoute<HomeScreenRoute>(
-    path: '/',
-    routes: [
-      TypedGoRoute<AccountDetailsRoute>(
-        path: 'account-details/:iban',
-      )
-    ]
-)
-
+@TypedGoRoute<HomeScreenRoute>(path: '/', routes: [
+  TypedGoRoute<AccountDetailsRoute>(
+    path: 'account-details/:iban',
+  )
+])
 @immutable
 class HomeScreenRoute extends GoRouteData {
   @override
-  Widget build(BuildContext context, GoRouterState state)  {
+  Widget build(BuildContext context, GoRouterState state) {
     return const HomePage();
   }
 }
@@ -32,6 +28,8 @@ class AccountDetailsRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return AccountDetailsPage(iban: iban);
+    final uri = Uri.parse(state.location);
+    final queryParam1 = uri.queryParameters["param1"];
+    return AccountDetailsPage(iban: iban, queryParam1: queryParam1);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:burgan_poc/core/localization/localizable_text.dart';
+import 'package:burgan_poc/core/navigation/navigation_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'sub_navigation_component_details.g.dart';
@@ -14,9 +15,8 @@ class SubNavigationComponentDetails {
   @JsonKey(name: "page", defaultValue: "")
   final String navigateTo;
 
-  @JsonKey(name: "navigation-type", defaultValue: "")
-  // TODO: Map to enum with values: (push, pushReplacement, popup, bottomSheet)
-  final String navigationType;
+  @JsonKey(name: "navigation-type", defaultValue: NavigationType.go)
+  final NavigationType navigationType;
 
   @JsonKey(name: "new", defaultValue: false)
   final bool displayNewBadge;

@@ -1,3 +1,5 @@
+import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
+import 'package:burgan_poc/core/navigation/navigation_helper.dart';
 import 'package:burgan_poc/core/reusable_widgets/new_badge/new_badge_widget.dart';
 import 'package:burgan_poc/core/reusable_widgets/sub_navigation/bloc/sub_navigation_widget_bloc.dart';
 import 'package:burgan_poc/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
@@ -11,16 +13,18 @@ class SubNavigationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: BlocBuilder<SubNavigationWidgetBloc, SubNavigationWidgetState>(
-        bloc: SubNavigationWidgetBloc()..add(SubNavigationWidgetEventFetchComponentDetails()),
-        builder: (context, state) {
-          switch (state) {
-            case SubNavigationWidgetStateLoading _:
-              return _buildLoading();
-            case SubNavigationWidgetStateLoaded _:
-              return _buildComponents(state.componentDetailsList, context);
-          }
-        },
+      child: BlocProvider<SubNavigationWidgetBloc>(
+        create: (context) => SubNavigationWidgetBloc()..add(SubNavigationWidgetEventFetchComponentDetails()),
+        child: BlocBuilder<SubNavigationWidgetBloc, SubNavigationWidgetState>(
+          builder: (context, state) {
+            switch (state) {
+              case SubNavigationWidgetStateLoading _:
+                return _buildLoading();
+              case SubNavigationWidgetStateLoaded _:
+                return _buildComponents(state.componentDetailsList, context);
+            }
+          },
+        ),
       ),
     );
   }
@@ -40,34 +44,41 @@ class SubNavigationWidget extends StatelessWidget {
   }
 
   Widget _buildNavigationItemRow(SubNavigationComponentDetails componentDetails, BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              componentDetails.displayName?.localize(context) ?? '',
-              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
-            ),
-            SizedBox(
-              height: 40,
-              child: Row(
-                children: [
-                  if (componentDetails.displayNewBadge)
-                    const Padding(
-                      padding: EdgeInsets.only(right: 4.0),
-                      child: NewBadgeWidget(),
-                    ),
-                  const Icon(Icons.arrow_forward_ios_rounded, size: 20),
-                ],
+    return GestureDetector(
+      onTap: () => getIt.get<NavigationHelper>().navigate(
+            context: context,
+            navigationType: componentDetails.navigationType,
+            path: componentDetails.navigateTo,
+          ),
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                componentDetails.displayName?.localize(context) ?? '',
+                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 40,
+                child: Row(
+                  children: [
+                    if (componentDetails.displayNewBadge)
+                      const Padding(
+                        padding: EdgeInsets.only(right: 4.0),
+                        child: NewBadgeWidget(),
+                      ),
+                    const Icon(Icons.arrow_forward_ios_rounded, size: 20),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
