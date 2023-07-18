@@ -1,5 +1,4 @@
-import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
-import 'package:burgan_poc/core/navigation/navigation_helper.dart';
+import 'package:burgan_poc/core/reusable_widgets/navigation_button/navigation_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/new_badge/new_badge_widget.dart';
 import 'package:burgan_poc/core/reusable_widgets/sub_navigation/bloc/sub_navigation_widget_bloc.dart';
 import 'package:burgan_poc/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
@@ -44,12 +43,9 @@ class SubNavigationWidget extends StatelessWidget {
   }
 
   Widget _buildNavigationItemRow(SubNavigationComponentDetails componentDetails, BuildContext context) {
-    return GestureDetector(
-      onTap: () => getIt.get<NavigationHelper>().navigate(
-            context: context,
-            navigationType: componentDetails.navigationType,
-            path: componentDetails.navigateTo,
-          ),
+    return NavigationButton(
+      navigationType: componentDetails.navigationType,
+      navigationPath: componentDetails.navigateTo,
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
