@@ -15,12 +15,22 @@ RouteBase get $appRoute => GoRouteData.$route(
       factory: $AppRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: 'account-details/:iban',
-          factory: $AccountDetailsPageRouteExtension._fromState,
+          path: 'login',
+          factory: $LoginPageRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'add-address',
-          factory: $AddAddressPageRouteExtension._fromState,
+          path: 'home',
+          factory: $HomePageRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'account-details/:iban',
+              factory: $AccountDetailsPageRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'add-address',
+              factory: $AddAddressPageRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     );
@@ -42,6 +52,40 @@ extension $AppRouteExtension on AppRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $LoginPageRouteExtension on LoginPageRoute {
+  static LoginPageRoute _fromState(GoRouterState state) => LoginPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/login',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $HomePageRouteExtension on HomePageRoute {
+  static HomePageRoute _fromState(GoRouterState state) => HomePageRoute();
+
+  String get location => GoRouteData.$location(
+        '/home',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 extension $AccountDetailsPageRouteExtension on AccountDetailsPageRoute {
   static AccountDetailsPageRoute _fromState(GoRouterState state) =>
       AccountDetailsPageRoute(
@@ -49,7 +93,7 @@ extension $AccountDetailsPageRouteExtension on AccountDetailsPageRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/account-details/${Uri.encodeComponent(iban)}',
+        '/home/account-details/${Uri.encodeComponent(iban)}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -67,7 +111,7 @@ extension $AddAddressPageRouteExtension on AddAddressPageRoute {
       AddAddressPageRoute();
 
   String get location => GoRouteData.$location(
-        '/add-address',
+        '/home/add-address',
       );
 
   void go(BuildContext context) => context.go(location);
