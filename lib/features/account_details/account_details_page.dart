@@ -1,3 +1,7 @@
+import 'package:burgan_poc/core/navigation/app_route.dart';
+import 'package:burgan_poc/core/navigation/navigation_type.dart';
+import 'package:burgan_poc/core/reusable_widgets/navigation_button/navigation_button.dart';
+import 'package:burgan_poc/features/add_address/add_address_page_route.dart';
 import 'package:flutter/material.dart';
 
 class AccountDetailsPage extends StatelessWidget {
@@ -16,6 +20,11 @@ class AccountDetailsPage extends StatelessWidget {
           children: [
             Text(iban),
             Text(queryParam1.toString()),
+            const NavigationButton(
+              navigationPath: "/${AddAddressPageRoute.path}",
+              navigationType: NavigationType.go,
+              child: Text("Navigate to add address page with go command"),
+            ),
           ],
         )));
   }
