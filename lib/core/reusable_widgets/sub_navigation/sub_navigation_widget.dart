@@ -33,7 +33,7 @@ class SubNavigationWidget extends StatelessWidget {
 
   Widget _buildComponents(List<SubNavigationComponentDetails> componentDetailsList, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         children: [
           ...componentDetailsList.map((e) => _buildNavigationItemRow(e, context)),
