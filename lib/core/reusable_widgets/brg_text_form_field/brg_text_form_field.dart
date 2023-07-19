@@ -13,6 +13,7 @@ class BrgTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
+  final String? hintText;
 
   const BrgTextFormField({
     super.key,
@@ -25,6 +26,7 @@ class BrgTextFormField extends StatelessWidget {
     this.keyboardType,
     this.inputFormatters,
     this.maxLength,
+    this.hintText,
   });
 
   @override
@@ -38,6 +40,7 @@ class BrgTextFormField extends StatelessWidget {
         labelText: labelText,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: prefixIcon,
+        hintText: hintText,
       ),
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
@@ -63,6 +66,28 @@ class BrgTextFormField extends StatelessWidget {
       keyboardType: TextInputType.number,
       inputFormatters: BrgInputFormatters.onlyNumbers(),
       maxLength: tcknLength,
+    );
+  }
+
+  factory BrgTextFormField.phoneNumber({required BuildContext context, required TextEditingController controller}) {
+    const phoneNumberLength = 10;
+    return BrgTextFormField(
+      controller: controller,
+      labelText: const LocalizableText(
+        tr: "Cep Telefonu",
+        en: "Phone Number",
+      ).localize(context),
+      hintText: "5**",
+      prefixIcon: const Icon(Icons.keyboard, color: Colors.black), // TODO: Update icon with numeric keyboard icon
+      validator: (input) => (input?.length ?? 0) < phoneNumberLength
+          ? const LocalizableText(
+        tr: "Telefon numarası $phoneNumberLength karakterden kısadır.",
+        en: "Phone number is less than $phoneNumberLength character.",
+      ).localize(context)
+          : null,
+      keyboardType: TextInputType.number,
+      inputFormatters: BrgInputFormatters.onlyNumbers(),
+      maxLength: phoneNumberLength,
     );
   }
 }
