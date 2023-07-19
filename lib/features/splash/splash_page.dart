@@ -1,3 +1,4 @@
+import 'package:burgan_poc/features/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -5,8 +6,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("SPLASH PAGE")),
-    );
+    // TODO: Check whether user is logged in or not and navigate to login or home page
+    return const LoginPage();
   }
 }
