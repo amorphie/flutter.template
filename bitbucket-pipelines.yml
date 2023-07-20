@@ -6,7 +6,7 @@ definitions:
         name: Flutter Pub Get
         runs-on:
           - macos
-          - ios
+          - flutter
         script:
           - flutter pub get
         artifacts:
@@ -20,7 +20,7 @@ definitions:
         name: Flutter lint and test
         runs-on:
           - macos
-          - ios
+          - flutter
         caches:
           - dartpubcache
         script:
@@ -30,7 +30,7 @@ definitions:
         name: Build Flutter Android appbundle
         runs-on:
           - macos
-          - ios
+          - flutter
         caches:
           - dartpubcache
         script:
