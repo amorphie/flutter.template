@@ -22,6 +22,10 @@ RouteBase get $appRoute => GoRouteData.$route(
               path: 'otp',
               factory: $OtpPageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'personal-info',
+              factory: $PersonalInfoPageRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -80,6 +84,24 @@ extension $OtpPageRouteExtension on OtpPageRoute {
 
   String get location => GoRouteData.$location(
         '/login/otp',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PersonalInfoPageRouteExtension on PersonalInfoPageRoute {
+  static PersonalInfoPageRoute _fromState(GoRouterState state) =>
+      PersonalInfoPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/login/personal-info',
       );
 
   void go(BuildContext context) => context.go(location);

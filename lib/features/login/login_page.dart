@@ -6,6 +6,7 @@ import 'package:burgan_poc/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
 import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
+import 'package:burgan_poc/core/util/app_constants.dart';
 import 'package:burgan_poc/core/util/assets.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
 import 'package:burgan_poc/features/login/login_page_route.dart';
@@ -23,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController textControllerTckn;
   late TextEditingController textControllerPhoneNumber;
 
-  final appBarHeight = 100;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - appBarHeight,
+          height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

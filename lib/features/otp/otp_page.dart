@@ -1,10 +1,15 @@
+import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
 import 'package:burgan_poc/core/localization/localizable_text.dart';
+import 'package:burgan_poc/core/navigation/navigation_helper.dart';
+import 'package:burgan_poc/core/navigation/navigation_type.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
 import 'package:burgan_poc/core/reusable_widgets/count_down_timer/circular_count_down_timer.dart';
 import 'package:burgan_poc/core/reusable_widgets/count_down_timer/count_down_timer_text_format.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
+import 'package:burgan_poc/features/login/login_page_route.dart';
+import 'package:burgan_poc/features/personal_info/personal_info_page_route.dart';
 import 'package:flutter/material.dart';
 
 class OtpPage extends StatefulWidget {
@@ -106,7 +111,12 @@ class _OtpPageState extends State<OtpPage> {
     return BrgButton(
       text: const LocalizableText(tr: "Devam", en: "Continue").localize(context),
       onPressed: () {
-        // TODO: Navigate to personal info page
+        // TODO: Navigate with signalR event
+        getIt.get<NavigationHelper>().navigate(
+              context: context,
+              navigationType: NavigationType.go,
+              path: "/${LoginPageRoute.path}/${PersonalInfoPageRoute.path}",
+            );
       },
     );
   }

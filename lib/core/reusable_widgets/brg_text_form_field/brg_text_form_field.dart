@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 
 class BrgTextFormField extends StatelessWidget {
   final String labelText;
-  final TextEditingController? controller;
-  final String? initialValue;
+  final TextEditingController controller;
   final Widget? prefixIcon;
   final FormFieldValidator<String>? validator;
   final InputBorder? border;
@@ -18,8 +17,7 @@ class BrgTextFormField extends StatelessWidget {
   const BrgTextFormField({
     super.key,
     required this.labelText,
-    this.controller,
-    this.initialValue,
+    required this.controller,
     this.prefixIcon,
     this.validator,
     this.border,
@@ -32,7 +30,7 @@ class BrgTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller ?? TextEditingController(text: initialValue),
+      controller: controller,
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
