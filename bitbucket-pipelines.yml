@@ -1,0 +1,59 @@
+clone:
+  depth: 2
+definitions:
+  steps:
+    - step: &Flutter-pub-get
+        name: Flutter Pub Get
+        runs-on:
+          - macos
+          - ios
+        script:
+          - flutter pub get
+        artifacts:
+          - .dart_tool/**
+          - .flutter-plugins
+          - .flutter-plugins-dependencies
+          - build/**
+        caches:
+          - dartpubcache
+    - step: &Lint-and-test
+        name: Flutter lint and test
+        runs-on:
+          - macos
+          - ios
+        caches:
+          - dartpubcache
+        script:
+          - flutter analyze --no-fatal-infos --no-fatal-warnings
+          #- flutter test ./test
+    - step: &Create-android
+        name: Build Flutter Android appbundle
+        runs-on:
+          - macos
+          - ios
+        caches:
+          - dartpubcache
+        script:
+          - flutter build appbundle
+  caches:
+    dartpubcache: $HOME/.pub-cache
+pipelines:
+  pull-requests:
+    '**':
+      - step: *Flutter-pub-get
+      - step: *Lint-and-test
+      - step: *Create-android
+    'feature/*':
+      - step: *Flutter-pub-get
+      - step: *Lint-and-test
+      - step: *Create-android
+  branches:
+    main:
+      - step: *Flutter-pub-get
+      - step: *Lint-and-test
+      - step: *Create-android
+  tags:
+    '*.*.*':
+      - step: *Flutter-pub-get
+      - step: *Lint-and-test
+      - step: *Create-android
