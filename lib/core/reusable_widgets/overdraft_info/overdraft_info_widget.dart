@@ -10,7 +10,7 @@ class OverdraftInfoWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(child: Text("Süper Ek Hesap", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+          const Expanded(child: Text("Süper Ek Hesap", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
           _buildButton("Hesabı Kapat"),
           _buildButton("Limit Güncelle"),
         ],
@@ -20,16 +20,15 @@ class OverdraftInfoWidget extends StatelessWidget {
 
   Padding _buildButton(String buttonText) {
     return Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: ElevatedButton(
-          style: ButtonStyle(
+      padding: const EdgeInsets.all(4.0),
+      child: ElevatedButton(
+        style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.blueAccent),
             backgroundColor: MaterialStateProperty.all<Color>(Colors.white10.withAlpha(150)),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)))
-          ),
-          onPressed: (){},
-          child: Text(buttonText),
-        ),
-      );
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)))),
+        onPressed: () {},
+        child: Text(buttonText),
+      ),
+    );
   }
 }

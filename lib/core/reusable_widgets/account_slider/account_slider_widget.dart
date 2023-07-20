@@ -62,7 +62,7 @@ class AccountSliderWidget extends StatelessWidget {
 
   Widget _buildAvailableBalanceRow() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

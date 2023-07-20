@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:burgan_poc/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
 import 'package:burgan_poc/core/reusable_widgets/sub_navigation/sub_navigation_network_manager.dart';
 import 'package:burgan_poc/features/home/bloc/home_page_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'sub_navigation_widget_event.dart';
 

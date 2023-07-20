@@ -19,7 +19,7 @@ class NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onTap?.call();
         getIt.get<NavigationHelper>().navigate(

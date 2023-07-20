@@ -7,5 +7,4 @@ sealed class SubNavigationWidgetEvent extends Equatable {
 class SubNavigationWidgetEventFetchComponentDetails extends SubNavigationWidgetEvent {
   @override
   List<Object?> get props => [];
-
 }

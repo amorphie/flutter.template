@@ -13,7 +13,7 @@ class NewBadgeWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
         child: Text(
           const LocalizableText(tr: "Yeni", en: "New").localize(context),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );
