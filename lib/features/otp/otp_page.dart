@@ -7,6 +7,8 @@ import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
 import 'package:burgan_poc/core/reusable_widgets/count_down_timer/circular_count_down_timer.dart';
 import 'package:burgan_poc/core/reusable_widgets/count_down_timer/count_down_timer_text_format.dart';
+import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
+import 'package:burgan_poc/core/util/app_constants.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
 import 'package:burgan_poc/features/login/login_page_route.dart';
 import 'package:burgan_poc/features/personal_info/personal_info_page_route.dart';
@@ -40,16 +42,21 @@ class _OtpPageState extends State<OtpPage> {
       appBar: BrgAppBar(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildTitleText(),
-            _buildMessageText(),
-            _buildCircularCountDownTimer(),
-            _buildOtpInputView(context),
-            _buildContinueButton(context),
-          ],
-        ).paddingAll(32),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildTitleText(),
+              _buildMessageText(),
+              _buildCircularCountDownTimer(),
+              _buildOtpInputView(context),
+              _buildContinueButton(context),
+              const Spacer(),
+              const SecurityIconWidget(),
+            ],
+          ).paddingHorizontal(32),
+        ),
       ),
     );
   }
