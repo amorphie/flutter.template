@@ -90,4 +90,26 @@ class BrgTextFormField extends StatelessWidget {
       maxLength: phoneNumberLength,
     );
   }
+
+  factory BrgTextFormField.password({
+    required BuildContext context,
+    required TextEditingController controller,
+    required String labelText,
+    String? validationErrorMessage,
+    int? passwordLength,
+    bool onlyDigits = false,
+  }) {
+    return BrgTextFormField(
+      controller: controller,
+      labelText: labelText,
+      validator: (input) => passwordLength == null
+          ? null
+          : (input?.length ?? 0) < passwordLength
+              ? validationErrorMessage
+              : null,
+      keyboardType: onlyDigits ? TextInputType.number : null,
+      inputFormatters: onlyDigits ? BrgInputFormatters.onlyNumbers() : null,
+      maxLength: passwordLength,
+    );
+  }
 }
