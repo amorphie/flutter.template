@@ -33,63 +33,81 @@ class _OtpPageState extends State<OtpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BrgAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text("Şifre Doğrulama", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
-          const Text(
-            "Lütfen 5** ** 45 ile biten cep telefonunuza gelen doğrulama kodunu giriniz.",
-            style: TextStyle(color: Colors.black),
-          ).paddingVertical(8),
-          CircularCountDownTimer(
-            duration: 120,
-            initialDuration: 0,
-            controller: CountDownController(),
-            width: 232,
-            height: 232,
-            ringColor: const Color(0xFFF7F7F7),
-            fillColor: const Color(0xFF0069AA),
-            fillGradient: null,
-            backgroundGradient: null,
-            strokeWidth: 8.0,
-            strokeCap: StrokeCap.round,
-            textStyle: const TextStyle(fontSize: 33.0, color: Colors.black, fontWeight: FontWeight.bold),
-            textFormat: CountdownTimerTextFormat.MM_SS,
-            isTimerTextShown: true,
-            isReverse: true,
-            autoStart: true,
-            onStart: () {},
-            onComplete: () {},
-            timeFormatterFunction: (defaultFormatterFunction, duration) {
-              if (duration.inSeconds == 0) {
-                return "Start";
-              } else {
-                return Function.apply(defaultFormatterFunction, [duration]);
-              }
-            },
-          ).paddingVertical(16),
-          BrgTextFormField.password(
-            context: context,
-            controller: controllerOtp,
-            labelText: const LocalizableText(
-              tr: "SMS Doğrulama Kodu",
-              en: "SMS OTP",
-            ).localize(context),
-            validationErrorMessage: const LocalizableText(
-              tr: "Şifreniz 6 karakterden kısadır.",
-              en: "Password is less than 6 character.",
-            ).localize(context),
-            passwordLength: 6,
-            onlyDigits: true,
-          ).paddingVertical(16),
-          BrgButton(
-            text: const LocalizableText(tr: "Devam", en: "Continue").localize(context),
-            onPressed: () {
-              // TODO: Navigate to personal info page
-            },
-          )
-        ],
-      ).paddingAll(32),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildTitleText(),
+            _buildMessageText(),
+            _buildCircularCountDownTimer(),
+            _buildOtpInputView(context),
+            _buildContinueButton(context),
+          ],
+        ).paddingAll(32),
+      ),
+    );
+  }
+
+  Widget _buildTitleText() => const Text(
+        "Şifre Doğrulama",
+        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+      );
+
+  Widget _buildMessageText() {
+    return const Text(
+      "Lütfen 5** ** 45 ile biten cep telefonunuza gelen doğrulama kodunu giriniz.",
+      style: TextStyle(color: Colors.black),
+    ).paddingVertical(8);
+  }
+
+  Widget _buildCircularCountDownTimer() {
+    return CircularCountDownTimer(
+      // TODO: Set from API
+      duration: 120,
+      controller: CountDownController(),
+      width: 232,
+      height: 232,
+      ringColor: const Color(0xFFF7F7F7),
+      fillColor: const Color(0xFF0069AA),
+      strokeWidth: 8.0,
+      textStyle: const TextStyle(fontSize: 32.0, color: Colors.black, fontWeight: FontWeight.bold),
+      textFormat: CountdownTimerTextFormat.MM_SS,
+      isTimerTextShown: true,
+      isReverse: true,
+      autoStart: true,
+      onComplete: () {
+        // TODO: Implement timeout logics
+      },
+      timeFormatterFunction: (defaultFormatterFunction, duration) {
+        return Function.apply(defaultFormatterFunction, [duration]);
+      },
+    ).paddingVertical(16);
+  }
+
+  Widget _buildOtpInputView(BuildContext context) {
+    return BrgTextFormField.password(
+      context: context,
+      controller: controllerOtp,
+      labelText: const LocalizableText(
+        tr: "SMS Doğrulama Kodu",
+        en: "SMS OTP",
+      ).localize(context),
+      validationErrorMessage: const LocalizableText(
+        tr: "Şifreniz 6 karakterden kısadır.",
+        en: "Password is less than 6 character.",
+      ).localize(context),
+      passwordLength: 6,
+      onlyDigits: true,
+    ).paddingVertical(16);
+  }
+
+  Widget _buildContinueButton(BuildContext context) {
+    return BrgButton(
+      text: const LocalizableText(tr: "Devam", en: "Continue").localize(context),
+      onPressed: () {
+        // TODO: Navigate to personal info page
+      },
     );
   }
 }
