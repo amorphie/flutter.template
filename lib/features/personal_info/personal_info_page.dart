@@ -51,6 +51,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
             key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Spacer(),
                 _buildNameInputWidget(context),
@@ -73,7 +74,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
         child: Text(
           const LocalizableText(tr: "Kişisel Bilgiler", en: "Personal Informations").localize(),
           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
-        ),
+        ).padding(right: 48),
       ),
     );
   }
@@ -118,10 +119,11 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return BrgButton(
       text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
       onPressed: () {
+        formKey.currentState?.save();
         if (formKey.currentState?.validate() ?? false) {
           // TODO: Navigate to set password page with signalR event
         }
       },
-    );
+    ).padding(top: 16);
   }
 }
