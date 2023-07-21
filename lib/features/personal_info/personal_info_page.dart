@@ -1,8 +1,10 @@
 import 'package:burgan_poc/core/localization/localizable_text.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
+import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
 import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgan_poc/core/util/app_constants.dart';
+import 'package:burgan_poc/core/util/brg_validator.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -16,18 +18,23 @@ class PersonalInfoPage extends StatefulWidget {
 class _PersonalInfoPageState extends State<PersonalInfoPage> {
   late TextEditingController textControllerName;
   late TextEditingController textControllerSurname;
+  late TextEditingController textControllerEmail;
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     textControllerName = TextEditingController();
     textControllerSurname = TextEditingController();
+    textControllerEmail = TextEditingController();
   }
 
   @override
   void dispose() {
     textControllerName.dispose();
     textControllerSurname.dispose();
+    textControllerEmail.dispose();
     super.dispose();
   }
 
@@ -39,16 +46,21 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
         physics: const BouncingScrollPhysics(),
         child: SizedBox(
           height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
-              _buildNameInputWidget(context),
-              _buildSurnameInputWidget(context),
-              const Spacer(),
-              const SecurityIconWidget(),
-            ],
-          ).paddingHorizontal(32),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(),
+                _buildNameInputWidget(context),
+                _buildSurnameInputWidget(context),
+                _buildEmailInputWidget(context),
+                _buildContinueButton(context),
+                const Spacer(),
+                const SecurityIconWidget(),
+              ],
+            ).paddingHorizontal(32),
+          ),
         ),
       ),
     );
@@ -83,6 +95,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return BrgTextFormField(
       labelText: const LocalizableText(tr: "E-posta", en: "E-mail").localize(),
       controller: textControllerEmail,
+      validator: BrgValidator().email,
     ).paddingVertical(16);
   }
 
@@ -90,11 +103,8 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return BrgButton(
       text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
       onPressed: () {
-        // TODO: Navigate with signalR event
         if (formKey.currentState?.validate() ?? false) {
-          print('Valid');
-        } else {
-          print('Invdalid');
+          // TODO: Navigate to set password page with signalR event
         }
       },
     );
