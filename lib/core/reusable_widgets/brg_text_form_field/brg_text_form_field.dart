@@ -1,5 +1,7 @@
 import 'package:burgan_poc/core/localization/localizable_text.dart';
 import 'package:burgan_poc/core/util/brg_input_formatters.dart';
+import 'package:burgan_poc/core/util/brg_validator.dart';
+import 'package:burgan_poc/core/util/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -55,12 +57,7 @@ class BrgTextFormField extends StatelessWidget {
         en: "T.C. Identification Number",
       ).localize(),
       prefixIcon: const Icon(Icons.person, color: Colors.black),
-      validator: (input) => (input?.length ?? 0) < tcknLength
-          ? const LocalizableText(
-              tr: "T.C.kimlik numarası $tcknLength karakterden kısadır.",
-              en: "T.C. identification number is less than $tcknLength character.",
-            ).localize()
-          : null,
+      validator: BrgValidator().tckn,
       keyboardType: TextInputType.number,
       inputFormatters: BrgInputFormatters.onlyNumbers(),
       maxLength: tcknLength,
@@ -76,13 +73,9 @@ class BrgTextFormField extends StatelessWidget {
         en: "Phone Number",
       ).localize(),
       hintText: "5**",
-      prefixIcon: const Icon(Icons.keyboard, color: Colors.black), // TODO: Update icon with numeric keyboard icon
-      validator: (input) => (input?.length ?? 0) < phoneNumberLength
-          ? const LocalizableText(
-        tr: "Telefon numarası $phoneNumberLength karakterden kısadır.",
-        en: "Phone number is less than $phoneNumberLength character.",
-      ).localize()
-          : null,
+      // TODO: Update icon with numeric keyboard icon
+      prefixIcon: const Icon(Icons.keyboard, color: Colors.black),
+      validator: BrgValidator().phoneNumber,
       keyboardType: TextInputType.number,
       inputFormatters: BrgInputFormatters.onlyNumbers(),
       maxLength: phoneNumberLength,
@@ -100,11 +93,9 @@ class BrgTextFormField extends StatelessWidget {
     return BrgTextFormField(
       controller: controller,
       labelText: labelText,
-      validator: (input) => passwordLength == null
+      validator: passwordLength == null
           ? null
-          : (input?.length ?? 0) < passwordLength
-              ? validationErrorMessage
-              : null,
+          : BrgValidator().minLength(minLength: passwordLength, errorMessage: validationErrorMessage.orEmpty),
       keyboardType: onlyDigits ? TextInputType.number : null,
       inputFormatters: onlyDigits ? BrgInputFormatters.onlyNumbers() : null,
       maxLength: passwordLength,
