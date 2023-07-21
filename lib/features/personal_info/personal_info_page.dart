@@ -1,4 +1,7 @@
+import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
 import 'package:burgan_poc/core/localization/localizable_text.dart';
+import 'package:burgan_poc/core/navigation/navigation_helper.dart';
+import 'package:burgan_poc/core/navigation/navigation_type.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
@@ -6,6 +9,8 @@ import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_i
 import 'package:burgan_poc/core/util/app_constants.dart';
 import 'package:burgan_poc/core/util/brg_validator.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
+import 'package:burgan_poc/features/login/login_page_route.dart';
+import 'package:burgan_poc/features/set_password/set_password_page_route.dart';
 import 'package:flutter/material.dart';
 
 class PersonalInfoPage extends StatefulWidget {
@@ -122,6 +127,11 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
         formKey.currentState?.save();
         if (formKey.currentState?.validate() ?? false) {
           // TODO: Navigate to set password page with signalR event
+          getIt.get<NavigationHelper>().navigate(
+                context: context,
+                navigationType: NavigationType.go,
+                path: "/${LoginPageRoute.path}/${SetPasswordPageRoute.path}",
+              );
         }
       },
     ).padding(top: 16);

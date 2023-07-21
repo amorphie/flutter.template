@@ -26,6 +26,10 @@ RouteBase get $appRoute => GoRouteData.$route(
               path: 'personal-info',
               factory: $PersonalInfoPageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'set-password',
+              factory: $SetPasswordPageRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -102,6 +106,24 @@ extension $PersonalInfoPageRouteExtension on PersonalInfoPageRoute {
 
   String get location => GoRouteData.$location(
         '/login/personal-info',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SetPasswordPageRouteExtension on SetPasswordPageRoute {
+  static SetPasswordPageRoute _fromState(GoRouterState state) =>
+      SetPasswordPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/login/set-password',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -4,6 +4,7 @@ import 'package:burgan_poc/features/home/routing/home_page_route.dart';
 import 'package:burgan_poc/features/login/login_page_route.dart';
 import 'package:burgan_poc/features/otp/otp_page_route.dart';
 import 'package:burgan_poc/features/personal_info/personal_info_page_route.dart';
+import 'package:burgan_poc/features/set_password/set_password_page_route.dart';
 import 'package:burgan_poc/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,6 +20,7 @@ part 'app_route.g.dart';
       routes: [
         TypedGoRoute<OtpPageRoute>(path: OtpPageRoute.path),
         TypedGoRoute<PersonalInfoPageRoute>(path: PersonalInfoPageRoute.path),
+        TypedGoRoute<SetPasswordPageRoute>(path: SetPasswordPageRoute.path),
       ],
     ),
     TypedGoRoute<HomePageRoute>(

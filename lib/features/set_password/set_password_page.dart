@@ -1,0 +1,113 @@
+import 'package:burgan_poc/core/localization/localizable_text.dart';
+import 'package:burgan_poc/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
+import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
+import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
+import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
+import 'package:burgan_poc/core/util/app_constants.dart';
+import 'package:burgan_poc/core/util/brg_validator.dart';
+import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
+import 'package:flutter/material.dart';
+
+class SetPasswordPage extends StatefulWidget {
+  const SetPasswordPage({Key? key}) : super(key: key);
+
+  @override
+  State<SetPasswordPage> createState() => _SetPasswordPageState();
+}
+
+class _SetPasswordPageState extends State<SetPasswordPage> {
+  late TextEditingController textControllerPassword;
+  late TextEditingController textControllerRepeatedPassword;
+
+  final formKey = GlobalKey<FormState>();
+  final int passwordMinLength = 8;
+
+  FormFieldValidator<String> get passwordValidatorMinLength => BrgValidator().minLength(
+        minLength: passwordMinLength,
+        errorMessage: LocalizableText(
+          tr: "Şifre en az $passwordMinLength karakterden oluşmalıdır.",
+          en: "Password field should contain at least $passwordMinLength characters",
+        ).localize(),
+      );
+
+  @override
+  void initState() {
+    super.initState();
+    textControllerPassword = TextEditingController();
+    textControllerRepeatedPassword = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textControllerPassword.dispose();
+    textControllerRepeatedPassword.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Spacer(),
+                _buildPasswordInputWidget(context),
+                _buildPasswordConfirmationInputWidget(context),
+                _buildChangeButton(context),
+                const Spacer(),
+                const SecurityIconWidget(),
+              ],
+            ).paddingHorizontal(32),
+          ),
+        ),
+      ),
+    );
+  }
+
+  BrgAppBar _buildAppBar(BuildContext context) {
+    return BrgAppBar(
+      title: Center(
+        child: Text(
+          const LocalizableText(tr: "Şifre", en: "Password").localize(),
+          style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
+        ).padding(right: 48),
+      ),
+    );
+  }
+
+  Widget _buildPasswordInputWidget(BuildContext context) {
+    return BrgTextFormField(
+      labelText: const LocalizableText(tr: "Şifre", en: "Password").localize(),
+      controller: textControllerPassword,
+      validator: passwordValidatorMinLength,
+    ).paddingVertical(16);
+  }
+
+  Widget _buildPasswordConfirmationInputWidget(BuildContext context) {
+    return BrgTextFormField(
+      labelText: const LocalizableText(tr: "Şifre Tekrar", en: "Confirm Password").localize(),
+      controller: textControllerRepeatedPassword,
+      validator: passwordValidatorMinLength,
+    ).paddingVertical(16);
+  }
+
+  Widget _buildChangeButton(BuildContext context) {
+    return BrgButton(
+      text: const LocalizableText(tr: "Değiştir", en: "Change").localize(),
+      onPressed: () {
+        formKey.currentState?.save();
+        if (formKey.currentState?.validate() ?? false) {
+          // TODO: Navigate to set security question page with signalR event
+        }
+      },
+    ).padding(top: 16);
+  }
+}
