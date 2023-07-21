@@ -1,9 +1,10 @@
 import 'package:burgan_poc/core/localization/localizable_text.dart';
+import 'package:burgan_poc/core/util/assets.dart';
 import 'package:burgan_poc/core/util/brg_input_formatters.dart';
 import 'package:burgan_poc/core/util/brg_validator.dart';
-import 'package:burgan_poc/core/util/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BrgTextFormField extends StatelessWidget {
   final String labelText;
@@ -76,8 +77,7 @@ class BrgTextFormField extends StatelessWidget {
         en: "Phone Number",
       ).localize(),
       hintText: "5**",
-      // TODO: Update icon with numeric keyboard icon
-      prefixIcon: const Icon(Icons.keyboard, color: Colors.black),
+      prefixIcon: SvgPicture.asset(Assets.icKeyboardNumeric.path, width: 8, height: 8, fit: BoxFit.scaleDown),
       validator: BrgValidator().phoneNumber,
       keyboardType: TextInputType.number,
       inputFormatters: BrgInputFormatters.onlyNumbers(),
@@ -93,6 +93,7 @@ class BrgTextFormField extends StatelessWidget {
     int? maxLength,
     bool onlyDigits = false,
     bool obscureText = true,
+    Widget? prefixIcon,
   }) {
     return BrgTextFormField(
       controller: controller,
@@ -102,6 +103,7 @@ class BrgTextFormField extends StatelessWidget {
       inputFormatters: onlyDigits ? BrgInputFormatters.onlyNumbers() : null,
       maxLength: maxLength,
       obscureText: obscureText,
+      prefixIcon: prefixIcon,
     );
   }
 }

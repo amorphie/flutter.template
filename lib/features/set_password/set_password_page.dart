@@ -4,10 +4,12 @@ import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
 import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgan_poc/core/util/app_constants.dart';
+import 'package:burgan_poc/core/util/assets.dart';
 import 'package:burgan_poc/core/util/brg_validator.dart';
 import 'package:burgan_poc/core/util/extensions/form_field_validator_extensions.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SetPasswordPage extends StatefulWidget {
   const SetPasswordPage({Key? key}) : super(key: key);
@@ -32,7 +34,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
         if (input != textControllerPassword.value.text) {
           return const LocalizableText(
             tr: "Şifreler birbiriyle eşleşmiyor.",
-            en: "Passwords are not matched."
+            en: "Passwords are not matched.",
           ).localize();
         } else {
           return null;
@@ -121,6 +123,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
         errorMessage: passwordValidationErrorMessage,
       ),
       maxLength: passwordLength,
+      prefixIcon: SvgPicture.asset(Assets.icKeyboardNumeric.path, width: 8, height: 8, fit: BoxFit.scaleDown),
       obscureText: true,
       onlyDigits: true,
     ).padding(top: 32, bottom: 16);
@@ -135,6 +138,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
           .minLength(minLength: passwordLength, errorMessage: passwordValidationErrorMessage)
           .mergeWith(passwordsMatchValidator),
       maxLength: passwordLength,
+      prefixIcon: SvgPicture.asset(Assets.icKeyboardNumeric.path, width: 8, height: 8, fit: BoxFit.scaleDown),
       obscureText: true,
       onlyDigits: true,
     ).paddingVertical(16);
@@ -142,7 +146,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
 
   Widget _buildChangeButton(BuildContext context) {
     return BrgButton(
-      text: const LocalizableText(tr: "Değiştir", en: "Change").localize(),
+      text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
       onPressed: () {
         formKey.currentState?.save();
         if (formKey.currentState?.validate() ?? false) {
