@@ -9,6 +9,7 @@ import 'package:burgan_poc/core/reusable_widgets/count_down_timer/circular_count
 import 'package:burgan_poc/core/reusable_widgets/count_down_timer/count_down_timer_text_format.dart';
 import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgan_poc/core/util/app_constants.dart';
+import 'package:burgan_poc/core/util/brg_validator.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
 import 'package:burgan_poc/features/login/login_page_route.dart';
 import 'package:burgan_poc/features/personal_info/personal_info_page_route.dart';
@@ -23,6 +24,7 @@ class OtpPage extends StatefulWidget {
 
 class _OtpPageState extends State<OtpPage> {
   late TextEditingController controllerOtp;
+  final otpLength = 6;
 
   @override
   void initState() {
@@ -105,12 +107,16 @@ class _OtpPageState extends State<OtpPage> {
         tr: "SMS Doğrulama Kodu",
         en: "SMS OTP",
       ).localize(),
-      validationErrorMessage: const LocalizableText(
-        tr: "Şifreniz 6 karakterden kısadır.",
-        en: "Password is less than 6 character.",
-      ).localize(),
-      passwordLength: 6,
+      validator: BrgValidator().minLength(
+        minLength: otpLength,
+        errorMessage: const LocalizableText(
+          tr: "Şifreniz 6 karakterden kısadır.",
+          en: "Password is less than 6 character.",
+        ).localize(),
+      ),
+      maxLength: otpLength,
       onlyDigits: true,
+      obscureText: false,
     ).paddingVertical(16);
   }
 

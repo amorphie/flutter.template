@@ -5,6 +5,7 @@ import 'package:burgan_poc/core/reusable_widgets/brg_text_form_field/brg_text_fo
 import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgan_poc/core/util/app_constants.dart';
 import 'package:burgan_poc/core/util/brg_validator.dart';
+import 'package:burgan_poc/core/util/extensions/form_field_validator_extensions.dart';
 import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -20,15 +21,23 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
   late TextEditingController textControllerRepeatedPassword;
 
   final formKey = GlobalKey<FormState>();
-  final int passwordMinLength = 8;
+  final int passwordLength = 6;
 
-  FormFieldValidator<String> get passwordValidatorMinLength => BrgValidator().minLength(
-        minLength: passwordMinLength,
-        errorMessage: LocalizableText(
-          tr: "Şifre en az $passwordMinLength karakterden oluşmalıdır.",
-          en: "Password field should contain at least $passwordMinLength characters",
-        ).localize(),
-      );
+  String get passwordValidationErrorMessage => LocalizableText(
+        tr: "Şifre $passwordLength karakterden oluşmalıdır.",
+        en: "Password field should contain $passwordLength characters",
+      ).localize();
+
+  FormFieldValidator<String> get passwordsMatchValidator => (input) {
+        if (input != textControllerPassword.value.text) {
+          return const LocalizableText(
+            tr: "Şifreler birbiriyle eşleşmiyor.",
+            en: "Passwords are not matched."
+          ).localize();
+        } else {
+          return null;
+        }
+      };
 
   @override
   void initState() {
@@ -59,6 +68,10 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Spacer(),
+                _buildTitleText(),
+                _buildBulletItemWidget("Şifreniz 6 karakter olmalıdır.").padding(top: 8),
+                _buildBulletItemWidget("Şifreniz numaralardan oluşmalıdır."),
+                _buildBulletItemWidget("Şifreniz ardışık ve tekrar rakamlardan oluşmamalıdır."),
                 _buildPasswordInputWidget(context),
                 _buildPasswordConfirmationInputWidget(context),
                 _buildChangeButton(context),
@@ -83,19 +96,47 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
     );
   }
 
+  Widget _buildTitleText() => const Text(
+        "Şifre Belirle",
+        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+      );
+
+  Widget _buildBulletItemWidget(String description) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(Icons.circle, size: 6).padding(top: 4, right: 4),
+        Flexible(child: Text(description, maxLines: 3)),
+      ],
+    ).paddingVertical(4);
+  }
+
   Widget _buildPasswordInputWidget(BuildContext context) {
-    return BrgTextFormField(
+    return BrgTextFormField.password(
+      context: context,
       labelText: const LocalizableText(tr: "Şifre", en: "Password").localize(),
       controller: textControllerPassword,
-      validator: passwordValidatorMinLength,
-    ).paddingVertical(16);
+      validator: BrgValidator().minLength(
+        minLength: passwordLength,
+        errorMessage: passwordValidationErrorMessage,
+      ),
+      maxLength: passwordLength,
+      obscureText: true,
+      onlyDigits: true,
+    ).padding(top: 32, bottom: 16);
   }
 
   Widget _buildPasswordConfirmationInputWidget(BuildContext context) {
-    return BrgTextFormField(
+    return BrgTextFormField.password(
+      context: context,
       labelText: const LocalizableText(tr: "Şifre Tekrar", en: "Confirm Password").localize(),
       controller: textControllerRepeatedPassword,
-      validator: passwordValidatorMinLength,
+      validator: BrgValidator()
+          .minLength(minLength: passwordLength, errorMessage: passwordValidationErrorMessage)
+          .mergeWith(passwordsMatchValidator),
+      maxLength: passwordLength,
+      obscureText: true,
+      onlyDigits: true,
     ).paddingVertical(16);
   }
 

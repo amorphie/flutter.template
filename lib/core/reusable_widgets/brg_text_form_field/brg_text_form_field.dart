@@ -15,6 +15,7 @@ class BrgTextFormField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
   final String? hintText;
+  final bool obscureText;
 
   const BrgTextFormField({
     super.key,
@@ -27,6 +28,7 @@ class BrgTextFormField extends StatelessWidget {
     this.inputFormatters,
     this.maxLength,
     this.hintText,
+    this.obscureText = false,
   });
 
   @override
@@ -45,6 +47,7 @@ class BrgTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       maxLength: maxLength,
+      obscureText: obscureText,
     );
   }
 
@@ -86,19 +89,19 @@ class BrgTextFormField extends StatelessWidget {
     required BuildContext context,
     required TextEditingController controller,
     required String labelText,
-    String? validationErrorMessage,
-    int? passwordLength,
+    required FormFieldValidator<String> validator,
+    int? maxLength,
     bool onlyDigits = false,
+    bool obscureText = true,
   }) {
     return BrgTextFormField(
       controller: controller,
       labelText: labelText,
-      validator: passwordLength == null
-          ? null
-          : BrgValidator().minLength(minLength: passwordLength, errorMessage: validationErrorMessage.orEmpty),
+      validator: validator,
       keyboardType: onlyDigits ? TextInputType.number : null,
       inputFormatters: onlyDigits ? BrgInputFormatters.onlyNumbers() : null,
-      maxLength: passwordLength,
+      maxLength: maxLength,
+      obscureText: obscureText,
     );
   }
 }
