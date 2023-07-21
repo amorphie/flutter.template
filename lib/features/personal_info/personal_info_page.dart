@@ -21,6 +21,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   late TextEditingController textControllerEmail;
 
   final formKey = GlobalKey<FormState>();
+  final nameSurnameMinLength = 2;
 
   @override
   void initState() {
@@ -81,6 +82,13 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return BrgTextFormField(
       labelText: const LocalizableText(tr: "Ad", en: "Name").localize(),
       controller: textControllerName,
+      validator: BrgValidator().minLength(
+        minLength: nameSurnameMinLength,
+        errorMessage: LocalizableText(
+          tr: "Ad alanı en az $nameSurnameMinLength karakterden oluşmalıdır.",
+          en: "Name field should contain at least $nameSurnameMinLength characters",
+        ).localize(),
+      ),
     ).paddingVertical(16);
   }
 
@@ -88,6 +96,13 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return BrgTextFormField(
       labelText: const LocalizableText(tr: "Soyad", en: "Surname").localize(),
       controller: textControllerSurname,
+      validator: BrgValidator().minLength(
+        minLength: nameSurnameMinLength,
+        errorMessage: LocalizableText(
+          tr: "Soyad alanı en az $nameSurnameMinLength karakterden oluşmalıdır.",
+          en: "Surname field should contain at least $nameSurnameMinLength characters",
+        ).localize(),
+      ),
     ).paddingVertical(16);
   }
 
