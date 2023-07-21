@@ -146,7 +146,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
       prefixIcon: SvgPicture.asset(Assets.icKeyboardNumeric.path, width: 8, height: 8, fit: BoxFit.scaleDown),
       obscureText: true,
       onlyDigits: true,
-    ).paddingVertical(16);
+    ).paddingVertical(8);
   }
 
   Widget _buildChangeButton(BuildContext context) {
