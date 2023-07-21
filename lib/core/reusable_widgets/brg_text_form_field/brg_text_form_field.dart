@@ -53,13 +53,13 @@ class BrgTextFormField extends StatelessWidget {
       labelText: const LocalizableText(
         tr: "T.C.Kimlik Numarası",
         en: "T.C. Identification Number",
-      ).localize(context),
+      ).localize(),
       prefixIcon: const Icon(Icons.person, color: Colors.black),
       validator: (input) => (input?.length ?? 0) < tcknLength
           ? const LocalizableText(
               tr: "T.C.kimlik numarası $tcknLength karakterden kısadır.",
               en: "T.C. identification number is less than $tcknLength character.",
-            ).localize(context)
+            ).localize()
           : null,
       keyboardType: TextInputType.number,
       inputFormatters: BrgInputFormatters.onlyNumbers(),
@@ -74,14 +74,14 @@ class BrgTextFormField extends StatelessWidget {
       labelText: const LocalizableText(
         tr: "Cep Telefonu",
         en: "Phone Number",
-      ).localize(context),
+      ).localize(),
       hintText: "5**",
       prefixIcon: const Icon(Icons.keyboard, color: Colors.black), // TODO: Update icon with numeric keyboard icon
       validator: (input) => (input?.length ?? 0) < phoneNumberLength
           ? const LocalizableText(
         tr: "Telefon numarası $phoneNumberLength karakterden kısadır.",
         en: "Phone number is less than $phoneNumberLength character.",
-      ).localize(context)
+      ).localize()
           : null,
       keyboardType: TextInputType.number,
       inputFormatters: BrgInputFormatters.onlyNumbers(),

@@ -24,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController textControllerTckn;
   late TextEditingController textControllerPhoneNumber;
 
-
   @override
   void initState() {
     super.initState();
@@ -60,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: textControllerPhoneNumber,
               ).padding(left: 32, right: 32, top: 8, bottom: 16),
               BrgButton(
-                text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(context),
+                text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(),
                 onPressed: () {
                   // TODO: Validate and start login/register flow
                   getIt.get<NavigationHelper>().navigate(

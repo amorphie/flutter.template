@@ -58,7 +58,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return BrgAppBar(
       title: Center(
         child: Text(
-          const LocalizableText(tr: "Kişisel Bilgiler", en: "Personal Informations").localize(context),
+          const LocalizableText(tr: "Kişisel Bilgiler", en: "Personal Informations").localize(),
           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
@@ -67,15 +67,36 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
 
   Widget _buildNameInputWidget(BuildContext context) {
     return BrgTextFormField(
-      labelText: const LocalizableText(tr: "Ad", en: "Name").localize(context),
+      labelText: const LocalizableText(tr: "Ad", en: "Name").localize(),
       controller: textControllerName,
     ).paddingVertical(16);
   }
 
   Widget _buildSurnameInputWidget(BuildContext context) {
     return BrgTextFormField(
-      labelText: const LocalizableText(tr: "Soyad", en: "Surname").localize(context),
+      labelText: const LocalizableText(tr: "Soyad", en: "Surname").localize(),
       controller: textControllerSurname,
     ).paddingVertical(16);
+  }
+
+  Widget _buildEmailInputWidget(BuildContext context) {
+    return BrgTextFormField(
+      labelText: const LocalizableText(tr: "E-posta", en: "E-mail").localize(),
+      controller: textControllerEmail,
+    ).paddingVertical(16);
+  }
+
+  Widget _buildContinueButton(BuildContext context) {
+    return BrgButton(
+      text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
+      onPressed: () {
+        // TODO: Navigate with signalR event
+        if (formKey.currentState?.validate() ?? false) {
+          print('Valid');
+        } else {
+          print('Invdalid');
+        }
+      },
+    );
   }
 }

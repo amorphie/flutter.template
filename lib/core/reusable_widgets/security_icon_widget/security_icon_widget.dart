@@ -19,7 +19,7 @@ class SecurityIconWidget extends StatelessWidget {
           child: Image.asset(Assets.icSecurity.path),
         ),
         Text(
-          const LocalizableText(tr: "GÜVENLİK", en: "SECURITY").localize(context),
+          const LocalizableText(tr: "GÜVENLİK", en: "SECURITY").localize(),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
         ).padding(left: 4)
       ],

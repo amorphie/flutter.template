@@ -15,7 +15,7 @@ class LocalizableText {
 
   factory LocalizableText.fromJson(Map<String, dynamic> json) => _$LocalizableTextFromJson(json);
 
-  String localize(BuildContext context) {
+  String localize() {
     // TODO: Read localization bloc's current state and localize it
     return tr;
   }

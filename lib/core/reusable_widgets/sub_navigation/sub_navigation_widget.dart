@@ -57,7 +57,7 @@ class SubNavigationWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                componentDetails.displayName?.localize(context) ?? '',
+                componentDetails.displayName?.localize() ?? '',
                 style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
               ),
               SizedBox(

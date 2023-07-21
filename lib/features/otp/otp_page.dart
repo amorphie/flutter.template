@@ -104,11 +104,11 @@ class _OtpPageState extends State<OtpPage> {
       labelText: const LocalizableText(
         tr: "SMS Doğrulama Kodu",
         en: "SMS OTP",
-      ).localize(context),
+      ).localize(),
       validationErrorMessage: const LocalizableText(
         tr: "Şifreniz 6 karakterden kısadır.",
         en: "Password is less than 6 character.",
-      ).localize(context),
+      ).localize(),
       passwordLength: 6,
       onlyDigits: true,
     ).paddingVertical(16);
@@ -116,7 +116,7 @@ class _OtpPageState extends State<OtpPage> {
 
   Widget _buildContinueButton(BuildContext context) {
     return BrgButton(
-      text: const LocalizableText(tr: "Devam", en: "Continue").localize(context),
+      text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
       onPressed: () {
         // TODO: Navigate with signalR event
         getIt.get<NavigationHelper>().navigate(
