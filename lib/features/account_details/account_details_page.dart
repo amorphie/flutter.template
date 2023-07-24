@@ -1,6 +1,6 @@
-import 'package:burgan_poc/core/navigation/navigation_type.dart';
-import 'package:burgan_poc/core/reusable_widgets/navigation_button/navigation_button.dart';
-import 'package:burgan_poc/features/add_address/add_address_page_route.dart';
+import 'package:burgankuwait/core/navigation/navigation_type.dart';
+import 'package:burgankuwait/core/reusable_widgets/navigation_button/navigation_button.dart';
+import 'package:burgankuwait/features/add_address/add_address_page_route.dart';
 import 'package:flutter/material.dart';
 
 class AccountDetailsPage extends StatelessWidget {

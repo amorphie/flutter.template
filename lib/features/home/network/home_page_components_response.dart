@@ -1,4 +1,4 @@
-import 'package:burgan_poc/core/component/component_data.dart';
+import 'package:burgankuwait/core/component/component_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'home_page_components_response.g.dart';

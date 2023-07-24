@@ -1,4 +1,4 @@
-import 'package:burgan_poc/core/reusable_widgets/account_summary/models/account_summary_component_details_response.dart';
+import 'package:burgankuwait/core/reusable_widgets/account_summary/models/account_summary_component_details_response.dart';
 
 class AccountSummaryWidgetUIModel {
   final String availableLimit;

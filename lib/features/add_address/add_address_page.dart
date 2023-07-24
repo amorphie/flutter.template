@@ -1,5 +1,5 @@
-import 'package:burgan_poc/core/navigation/navigation_type.dart';
-import 'package:burgan_poc/core/reusable_widgets/navigation_button/navigation_button.dart';
+import 'package:burgankuwait/core/navigation/navigation_type.dart';
+import 'package:burgankuwait/core/reusable_widgets/navigation_button/navigation_button.dart';
 import 'package:flutter/material.dart';
 
 class AddAddressPage extends StatelessWidget {

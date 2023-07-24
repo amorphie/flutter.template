@@ -1,6 +1,6 @@
-import 'package:burgan_poc/core/component/component_id.dart';
-import 'package:burgan_poc/core/component/component_to_widget_mapper.dart';
-import 'package:burgan_poc/features/home/bloc/home_page_bloc.dart';
+import 'package:burgankuwait/core/component/component_id.dart';
+import 'package:burgankuwait/core/component/component_to_widget_mapper.dart';
+import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

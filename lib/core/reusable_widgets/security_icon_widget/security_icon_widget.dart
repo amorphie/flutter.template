@@ -1,6 +1,6 @@
-import 'package:burgan_poc/core/localization/localizable_text.dart';
-import 'package:burgan_poc/core/util/assets.dart';
-import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
+import 'package:burgankuwait/core/localization/localizable_text.dart';
+import 'package:burgankuwait/core/util/assets.dart';
+import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
 class SecurityIconWidget extends StatelessWidget {

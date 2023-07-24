@@ -1,4 +1,4 @@
-package com.example.burgan_poc
+package com.commencis.burgankuwait
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
-import 'package:burgan_poc/core/navigation/app_route.dart';
+import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
+import 'package:burgankuwait/core/navigation/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _routerConfig,
-      title: 'Burgan Poc',
+      title: 'Burgan Kuwait',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

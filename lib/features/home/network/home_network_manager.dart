@@ -1,5 +1,5 @@
-import 'package:burgan_poc/core/network/network_manager.dart';
-import 'package:burgan_poc/features/home/network/home_page_components_response.dart';
+import 'package:burgankuwait/core/network/network_manager.dart';
+import 'package:burgankuwait/features/home/network/home_page_components_response.dart';
 
 class HomeNetworkManager extends NetworkManager {
   HomeNetworkManager(String url) : super(baseURL: url);

@@ -1,10 +1,10 @@
-import 'package:burgan_poc/core/localization/localizable_text.dart';
-import 'package:burgan_poc/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgan_poc/core/reusable_widgets/brg_button/brg_button.dart';
-import 'package:burgan_poc/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
-import 'package:burgan_poc/core/reusable_widgets/terms_and_conditions/terms_and_conditions_widget.dart';
-import 'package:burgan_poc/core/util/app_constants.dart';
-import 'package:burgan_poc/core/util/extensions/widget_extensions.dart';
+import 'package:burgankuwait/core/localization/localizable_text.dart';
+import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
+import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
+import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
+import 'package:burgankuwait/core/reusable_widgets/terms_and_conditions/terms_and_conditions_widget.dart';
+import 'package:burgankuwait/core/util/app_constants.dart';
+import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
 class TermsAndConditionsPage extends StatelessWidget {

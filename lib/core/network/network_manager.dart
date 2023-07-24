@@ -15,7 +15,7 @@
 
 import 'dart:convert';
 
-import 'package:burgan_poc/core/network/query_providers/http_query_provider.dart';
+import 'package:burgankuwait/core/network/query_providers/http_query_provider.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkManager {

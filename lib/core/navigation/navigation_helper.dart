@@ -1,4 +1,4 @@
-import 'package:burgan_poc/core/navigation/navigation_type.dart';
+import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';

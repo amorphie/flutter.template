@@ -1,4 +1,4 @@
-import 'package:burgan_poc/features/login/login_page.dart';
+import 'package:burgankuwait/features/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {

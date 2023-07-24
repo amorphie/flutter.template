@@ -1,5 +1,5 @@
-import 'package:burgan_poc/core/component/component_data.dart';
-import 'package:burgan_poc/features/home/network/home_network_manager.dart';
+import 'package:burgankuwait/core/component/component_data.dart';
+import 'package:burgankuwait/features/home/network/home_network_manager.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

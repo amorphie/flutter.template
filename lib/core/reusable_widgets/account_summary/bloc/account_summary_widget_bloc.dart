@@ -1,10 +1,10 @@
-import 'package:burgan_poc/core/bus/widget_event_bus/widget_event.dart';
-import 'package:burgan_poc/core/bus/widget_event_bus/widget_event_bus.dart';
-import 'package:burgan_poc/core/component/component_id.dart';
-import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
-import 'package:burgan_poc/core/reusable_widgets/account_summary/account_summary_network_manager.dart';
-import 'package:burgan_poc/core/reusable_widgets/account_summary/account_summary_widget_ui_model.dart';
-import 'package:burgan_poc/features/home/bloc/home_page_bloc.dart';
+import 'package:burgankuwait/core/bus/widget_event_bus/widget_event.dart';
+import 'package:burgankuwait/core/bus/widget_event_bus/widget_event_bus.dart';
+import 'package:burgankuwait/core/component/component_id.dart';
+import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
+import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_network_manager.dart';
+import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget_ui_model.dart';
+import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

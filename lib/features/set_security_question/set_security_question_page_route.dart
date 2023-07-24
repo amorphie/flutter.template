@@ -1,4 +1,4 @@
-import 'package:burgan_poc/features/set_security_question/set_security_question_page.dart';
+import 'package:burgankuwait/features/set_security_question/set_security_question_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

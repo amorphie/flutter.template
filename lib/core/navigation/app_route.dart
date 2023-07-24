@@ -1,14 +1,14 @@
-import 'package:burgan_poc/features/account_details/account_details_page_route.dart';
-import 'package:burgan_poc/features/add_address/add_address_page_route.dart';
-import 'package:burgan_poc/features/home/routing/home_page_route.dart';
-import 'package:burgan_poc/features/login/login_page_route.dart';
-import 'package:burgan_poc/features/otp/otp_page_route.dart';
-import 'package:burgan_poc/features/personal_info/personal_info_page_route.dart';
-import 'package:burgan_poc/features/set_password/set_password_page_route.dart';
-import 'package:burgan_poc/features/set_security_picture/set_security_picture_page_route.dart';
-import 'package:burgan_poc/features/set_security_question/set_security_question_page_route.dart';
-import 'package:burgan_poc/features/splash/splash_page.dart';
-import 'package:burgan_poc/features/terms_and_conditions/terms_and_conditions_page_route.dart';
+import 'package:burgankuwait/features/account_details/account_details_page_route.dart';
+import 'package:burgankuwait/features/add_address/add_address_page_route.dart';
+import 'package:burgankuwait/features/home/routing/home_page_route.dart';
+import 'package:burgankuwait/features/login/login_page_route.dart';
+import 'package:burgankuwait/features/otp/otp_page_route.dart';
+import 'package:burgankuwait/features/personal_info/personal_info_page_route.dart';
+import 'package:burgankuwait/features/set_password/set_password_page_route.dart';
+import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';
+import 'package:burgankuwait/features/set_security_question/set_security_question_page_route.dart';
+import 'package:burgankuwait/features/splash/splash_page.dart';
+import 'package:burgankuwait/features/terms_and_conditions/terms_and_conditions_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

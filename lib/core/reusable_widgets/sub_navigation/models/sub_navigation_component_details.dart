@@ -1,5 +1,5 @@
-import 'package:burgan_poc/core/localization/localizable_text.dart';
-import 'package:burgan_poc/core/navigation/navigation_type.dart';
+import 'package:burgankuwait/core/localization/localizable_text.dart';
+import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'sub_navigation_component_details.g.dart';

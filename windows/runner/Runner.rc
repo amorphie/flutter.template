@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "burgan_poc" "\0"
+            VALUE "CompanyName", "com.commencis" "\0"
+            VALUE "FileDescription", "burgankuwait" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "burgan_poc" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "burgan_poc.exe" "\0"
-            VALUE "ProductName", "burgan_poc" "\0"
+            VALUE "InternalName", "burgankuwait" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.commencis. All rights reserved." "\0"
+            VALUE "OriginalFilename", "burgankuwait.exe" "\0"
+            VALUE "ProductName", "burgankuwait" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

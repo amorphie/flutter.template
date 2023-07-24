@@ -1,4 +1,4 @@
-import 'package:burgan_poc/core/util/extensions/string_extensions.dart';
+import 'package:burgankuwait/core/util/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class BrgDropdownFormField extends StatelessWidget {

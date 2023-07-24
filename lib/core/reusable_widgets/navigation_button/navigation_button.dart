@@ -1,6 +1,6 @@
-import 'package:burgan_poc/core/dependency_injection/dependency_injection.dart';
-import 'package:burgan_poc/core/navigation/navigation_helper.dart';
-import 'package:burgan_poc/core/navigation/navigation_type.dart';
+import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
+import 'package:burgankuwait/core/navigation/navigation_helper.dart';
+import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:flutter/material.dart';
 
 class NavigationButton extends StatelessWidget {

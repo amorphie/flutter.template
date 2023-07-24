@@ -1,7 +1,7 @@
-import 'package:burgan_poc/core/reusable_widgets/navigation_button/navigation_button.dart';
-import 'package:burgan_poc/core/reusable_widgets/new_badge/new_badge_widget.dart';
-import 'package:burgan_poc/core/reusable_widgets/sub_navigation/bloc/sub_navigation_widget_bloc.dart';
-import 'package:burgan_poc/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
+import 'package:burgankuwait/core/reusable_widgets/navigation_button/navigation_button.dart';
+import 'package:burgankuwait/core/reusable_widgets/new_badge/new_badge_widget.dart';
+import 'package:burgankuwait/core/reusable_widgets/sub_navigation/bloc/sub_navigation_widget_bloc.dart';
+import 'package:burgankuwait/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

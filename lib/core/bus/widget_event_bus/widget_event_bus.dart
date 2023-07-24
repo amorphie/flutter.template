@@ -1,4 +1,4 @@
-import 'package:burgan_poc/core/bus/widget_event_bus/widget_event.dart';
+import 'package:burgankuwait/core/bus/widget_event_bus/widget_event.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 

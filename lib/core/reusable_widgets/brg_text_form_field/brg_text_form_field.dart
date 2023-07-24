@@ -1,7 +1,7 @@
-import 'package:burgan_poc/core/localization/localizable_text.dart';
-import 'package:burgan_poc/core/util/assets.dart';
-import 'package:burgan_poc/core/util/brg_input_formatters.dart';
-import 'package:burgan_poc/core/util/brg_validator.dart';
+import 'package:burgankuwait/core/localization/localizable_text.dart';
+import 'package:burgankuwait/core/util/assets.dart';
+import 'package:burgankuwait/core/util/brg_input_formatters.dart';
+import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,4 +1,4 @@
-import 'package:burgan_poc/features/account_details/account_details_page.dart';
+import 'package:burgankuwait/features/account_details/account_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
