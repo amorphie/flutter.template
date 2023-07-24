@@ -34,6 +34,10 @@ RouteBase get $appRoute => GoRouteData.$route(
               path: 'set-security-question',
               factory: $SetSecurityQuestionPageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'set-security-picture',
+              factory: $SetSecurityPicturePageRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -147,6 +151,24 @@ extension $SetSecurityQuestionPageRouteExtension
 
   String get location => GoRouteData.$location(
         '/login/set-security-question',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SetSecurityPicturePageRouteExtension on SetSecurityPicturePageRoute {
+  static SetSecurityPicturePageRoute _fromState(GoRouterState state) =>
+      SetSecurityPicturePageRoute();
+
+  String get location => GoRouteData.$location(
+        '/login/set-security-picture',
       );
 
   void go(BuildContext context) => context.go(location);
