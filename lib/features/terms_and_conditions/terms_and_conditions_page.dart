@@ -22,8 +22,8 @@ class TermsAndConditionsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildTermsAndConditionsWidget(),
-              _buildTermsAndConditionsWidget(),
+              _buildTermsAndConditionsWidget(context),
+              _buildTermsAndConditionsWidget(context),
               _buildContinueButton(context),
               const Spacer(),
               const SecurityIconWidget(),
@@ -45,12 +45,13 @@ class TermsAndConditionsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTermsAndConditionsWidget() {
+  Widget _buildTermsAndConditionsWidget(BuildContext context) {
     return TermsAndConditionsWidget(
       titleText: "Sözleşme Başlık",
       contentText:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap typesetting industry.",
       toggleText: "Okudum, kabul ediyorum.",
+      contentMaxHeight: MediaQuery.of(context).size.height * 0.3,
       onSwitchToggled: (bool isAccepted) {
         // TODO: Update switch status
       },
