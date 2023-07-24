@@ -38,6 +38,10 @@ RouteBase get $appRoute => GoRouteData.$route(
               path: 'set-security-picture',
               factory: $SetSecurityPicturePageRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'terms-and-conditions',
+              factory: $TermsAndConditionsRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -169,6 +173,24 @@ extension $SetSecurityPicturePageRouteExtension on SetSecurityPicturePageRoute {
 
   String get location => GoRouteData.$location(
         '/login/set-security-picture',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TermsAndConditionsRouteExtension on TermsAndConditionsRoute {
+  static TermsAndConditionsRoute _fromState(GoRouterState state) =>
+      TermsAndConditionsRoute();
+
+  String get location => GoRouteData.$location(
+        '/login/terms-and-conditions',
       );
 
   void go(BuildContext context) => context.go(location);
