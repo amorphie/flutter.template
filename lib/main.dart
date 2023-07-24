@@ -17,10 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: GoRouter(
-        initialLocation: AppRoute.path,
-        routes: $appRoutes,
-      ),
+      routerConfig: _routerConfig,
       title: 'Burgan Poc',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -28,6 +25,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+final _routerConfig = GoRouter(
+  initialLocation: AppRoute.path,
+  routes: $appRoutes,
+);
 
 // TODO: Delete this overrides
 class MyHttpOverrides extends HttpOverrides{
