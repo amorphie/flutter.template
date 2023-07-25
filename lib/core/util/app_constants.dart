@@ -1,5 +1,5 @@
 class AppConstants {
   AppConstants._();
 
-  static const appBarHeight = 100;
+  static const safeAreaPercentage = 0.85;
 }

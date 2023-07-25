@@ -45,7 +45,7 @@ class _OtpPageState extends State<OtpPage> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
+          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

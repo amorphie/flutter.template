@@ -67,7 +67,7 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
+          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
           child: Form(
             key: formKey,
             child: Column(

@@ -35,7 +35,7 @@ class SetSecurityPicturePage extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - AppConstants.appBarHeight,
+          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
