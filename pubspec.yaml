@@ -21,21 +21,31 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.0 <3.1.0'
 
+# REMEMBER: Update this documentation below when you add a new dependency into project:
+# https://hackmd.io/_LfI82f2Rbe7BZdKQQSxVQ?both
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  # UI Related
+  flutter_svg: ^2.0.7
+
+  # Core
   http: ^1.1.0
   flutter_bloc: ^8.1.3
   equatable: ^2.0.5
   json_annotation: ^4.8.1
   rxdart: ^0.27.7
+
+  # DI
   get_it: ^7.6.0
   injectable: ^2.1.2
+
+  # Routing
   go_router: ^9.0.3
+
+  # Utility
   collection: ^1.17.1
-  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
