@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget_ui_model.dart';
 import 'package:burgankuwait/core/reusable_widgets/account_summary/bloc/account_summary_widget_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletons/skeletons.dart';
 
 class AccountSummaryWidget extends StatelessWidget {
   // TODO: Get iban from constructor
@@ -25,7 +28,7 @@ class AccountSummaryWidget extends StatelessWidget {
             builder: (context, state) {
               switch (state) {
                 case AccountSummaryWidgetStateLoading _:
-                  return _buildLoading();
+                  return _buildSkeletonLoading();
                 case AccountSummaryWidgetStateLoaded _:
                   return _buildComponents(state.uiModel);
               }
@@ -36,8 +39,43 @@ class AccountSummaryWidget extends StatelessWidget {
     );
   }
 
-  // TODO: Display skeleton loading
-  Widget _buildLoading() => const SizedBox(height: 180, child: Center(child: CircularProgressIndicator()));
+  Widget _buildSkeletonLoading() {
+    const itemCount = 6;
+    return SizedBox(
+      height: 200,
+      child: ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: itemCount,
+        itemBuilder: (context, index) => SkeletonItem(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SkeletonLine(
+                  style: SkeletonLineStyle(
+                      width: 120 + index * itemCount * (pow(-1, index).toDouble()),
+                      height: 16,
+                      borderRadius: BorderRadius.circular(8)),
+                ),
+                SkeletonLine(
+                  style: SkeletonLineStyle(width: 40, height: 16, borderRadius: BorderRadius.circular(8)),
+                ),
+              ],
+            ),
+          ),
+        ),
+        separatorBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SkeletonLine(
+              style: SkeletonLineStyle(width: double.infinity, height: 1, borderRadius: BorderRadius.circular(8)),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   Widget _buildComponents(AccountSummaryWidgetUIModel uiModel) {
     return Column(
