@@ -21,6 +21,18 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('internal-key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+def prodKeystoreProperties = new Properties()
+def prodKeystorePropertiesFile = rootProject.file('production-key.properties')
+if (prodKeystorePropertiesFile.exists()) {
+    prodKeystoreProperties.load(new FileInputStream(prodKeystorePropertiesFile))
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -54,11 +66,37 @@ android {
         versionName flutterVersionName
     }
 
-    buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+    signingConfigs {
+        internal {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+        prod {
+            keyAlias prodKeystoreProperties['keyAlias']
+            keyPassword prodKeystoreProperties['keyPassword']
+            storeFile prodKeystoreProperties['storeFile'] ? file(prodKeystoreProperties['storeFile']) : null
+            storePassword prodKeystoreProperties['storePassword']
+        }
+    }
+
+    flavorDimensions "flavors"
+
+    productFlavors {
+        def internalSigningConfig = signingConfigs.internal
+        def productionSigningConfig = signingConfigs.prod
+
+        internal {
+            dimension = "flavors"
+            applicationIdSuffix = ".internal"
+            signingConfig internalSigningConfig
+            applicationId = "com.commencis.burgankuwait.internal"
+        }
+        prod {
+            dimension = "flavors"
+            signingConfig productionSigningConfig
+            applicationId = "com.commencis.burgankuwait"
         }
     }
 }
