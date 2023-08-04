@@ -2,7 +2,74 @@ clone:
   depth: 2
 definitions:
   steps:
-    - step: &Flutter-pub-get
+    - step: &set-environment-variables
+        name: Set Environment Variables
+        clone:
+          enabled: false
+        runs-on:
+          - macos
+          - flutter
+        script:
+          # Deployment Variables are CONF, CERTIFICATE_FILE, and CERTIFICATE_PASS
+          - printenv | xargs echo export > .envs
+        artifacts:
+          download: false # do not download artifacts in this step
+          paths:
+            - .envs
+    - step: &copy-scripts
+        name: Copy Scripts
+        clone:
+          enabled: false
+        runs-on:
+          - macos
+          - flutter
+        script:
+          - >-
+            cp ~/jenkins/helpers/incrementBuildNumFlutter.sh \
+               ~/jenkins/helpers/fetchBuildNum.sh \
+               ~/jenkins/helpers/build_flutter.sh .
+          - >-
+            cp ~/jenkins/helpers/baboonCore.sh \
+               ~/jenkins/helpers/codeSigning.sh \
+               ~/jenkins/helpers/ent_dist.sh \
+               ~/jenkins/helpers/manualPacking.sh \
+               ~/jenkins/helpers/xcodeBuildArchive.sh \
+               ~/jenkins/helpers/build_flutter.sh .
+
+        artifacts:
+          download: false # do not download artifacts in this step
+          paths: # defining artifacts to be passed to each future step
+            - baboonCore.sh
+            - codeSigning.sh
+            - ent_dist.sh
+            - incrementBuildNumFlutter.sh
+            - fetchBuildNum.sh
+            - build_flutter.sh
+            - manualPacking.sh
+            - xcodeBuildArchive.sh
+    - step: &increment-build-number
+        name: Increment Build Number
+        runs-on:
+          - macos
+          - flutter
+        script:
+          - ./incrementBuildNumFlutter.sh $PROJECT $MIN_BUILD_NUMBER
+        artifacts:
+          - pubspec.yaml
+    - step: &ent-dist
+        name: Code Signing with Ent Dist
+        runs-on:
+          - macos
+          - flutter
+        script:
+          # Deployment Variables are CONF, CERTIFICATE_FILE, and CERTIFICATE_PASS
+          - source .envs
+          - cd ios
+          # Run Script
+          - ../ent_dist.sh $CONF
+        artifacts:
+          - app-signing.keychain-db
+    - step: &flutter-pub-get
         name: Flutter Pub Get
         runs-on:
           - macos
@@ -16,8 +83,8 @@ definitions:
           - build/**
         caches:
           - dartpubcache
-    - step: &Lint-and-test
-        name: Flutter lint and test
+    - step: &flutter-lint-and-test
+        name: Flutter Lint and Test
         runs-on:
           - macos
           - flutter
@@ -26,7 +93,76 @@ definitions:
         script:
           - flutter analyze --no-fatal-infos --no-fatal-warnings
           #- flutter test ./test
-    - step: &Create-android
+    - step: &flutter-build-ios
+        name: Flutter Build iOS
+        runs-on:
+          - macos
+          - flutter
+        script:
+          - ./build_flutter.sh ios
+        artifacts:
+          - ios/**
+        caches:
+          - dartpubcache
+    - step: &build-ios
+        name: Commencis Build iOS
+        runs-on:
+          - macos
+          - flutter
+        script:
+          # Deployment Variables are CONF, CERTIFICATE_FILE, and CERTIFICATE_PASS
+          - source .envs
+          - cd ios
+          # Run Script
+          - ../xcodeBuildArchive.sh XCODE_VERSION=$XCODE_VERSION XCODE_WORKSPACE=$XCODE_WORKSPACE CONF=$CONF
+          - cd ..
+        artifacts:
+          - ios/**
+    - step: &deploy-ios
+        name: Send iOS Package to Baboon
+        runs-on:
+          - macos
+          - flutter
+        script:
+          # Deployment Variables are CONF, CERTIFICATE_FILE, and CERTIFICATE_PASS
+          - source .envs
+          - cd ios
+          # Setup Variables
+          - DIST_PACKAGE=ios
+          # Run Script
+          - ../manualPacking.sh $APP_NAME $CONF
+          - ../baboonCore.sh $APP_NAME $CONF $DIST_PROJECT $DIST_PACKAGE
+        artifacts: # dSYMs are required for Firebase symbol upload
+          - Runner.xcarchive/dSYMs/**
+    - step: &flutter-build-android
+        name: Flutter Build Android
+        runs-on:
+          - macos
+          - flutter
+        script:
+          - ./build_flutter.sh android
+        artifacts:
+          - android/**
+          - build/**
+        caches:
+          - dartpubcache
+    - step: &deploy-android
+        name: Send Andriod Package to Baboon
+        runs-on:
+          - macos
+          - flutter
+        script:
+          # Custom Pipeline Variables are PACKAGE, CONF, and OUTPUT
+          - source .envs
+          # Setup Variables
+          - >-
+            VERSION=$(cat ${FLUTTER_PATH}pubspec.yaml|grep 'version:'|sed 's/version: [0-9.]*+//')
+          - echo "Version is $VERSION"
+          - COMMENCIS_HELPERS="$HOME/jenkins/helpers"
+          - DIST_PACKAGE=android
+          # Run Script
+          - ${COMMENCIS_HELPERS}/common/baboonCore.sh $CONF $VERSION "${OUTPUT}/*" $DIST_PROJECT $DIST_PACKAGE
+    - step: &create-android-appbundle
         name: Build Flutter Android appbundle
         runs-on:
           - macos
@@ -35,25 +171,50 @@ definitions:
           - dartpubcache
         script:
           - flutter build appbundle
+        artifacts:
+          - build/**
   caches:
     dartpubcache: $HOME/.pub-cache
 pipelines:
-  pull-requests:
-    '**':
-      - step: *Flutter-pub-get
-      - step: *Lint-and-test
-      - step: *Create-android
-    'feature/*':
-      - step: *Flutter-pub-get
-      - step: *Lint-and-test
-      - step: *Create-android
+  # 'feature/*':
+  #     - step: *copy-scripts
+  #     - step: *Flutter-pub-get
+  #     - step: *Lint-and-test
+  #     - step: *increment-build-number
+  #     # InternalRelease
+  #     - step:
+  #         <<: *set-environment-variables
+  #         deployment: Release
+  #     - step: *ent-dist
+  #     - step: *build-deploy
+  #     - step: *Create-android
+  # pull-requests:
+  #   '**':
+  #     - step: *copy-scripts
+  #     - step: *increment-build-number
+  #     - step: *Flutter-pub-get
+  #     - step: *Lint-and-test
+  #     # InternalRelease
+  #     - step:
+  #         <<: *set-environment-variables
+  #         deployment: Release
+  #     - step: *ent-dist
+  #     - step: *build-deploy
+  #     - step: *Create-android
   branches:
     main:
-      - step: *Flutter-pub-get
-      - step: *Lint-and-test
-      - step: *Create-android
-  tags:
-    '*.*.*':
-      - step: *Flutter-pub-get
-      - step: *Lint-and-test
-      - step: *Create-android
+      - step: *copy-scripts
+      - step: *increment-build-number
+      - step: *flutter-pub-get
+      - step: *flutter-lint-and-test
+      - step: *flutter-build-ios
+      # InternalRelease
+      - step: 
+          <<: *set-environment-variables
+          deployment: Release
+      - step: *ent-dist
+      - step: *build-ios
+      - step: *deploy-ios
+      - step: *flutter-build-android
+      # - step: *create-android-appbundle
+      - step: *deploy-android
