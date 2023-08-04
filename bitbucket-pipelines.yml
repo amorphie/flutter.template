@@ -10,7 +10,6 @@ definitions:
           - macos
           - flutter
         script:
-          # Deployment Variables are CONF, CERTIFICATE_FILE, and CERTIFICATE_PASS
           - printenv | xargs echo export > .envs
         artifacts:
           download: false # do not download artifacts in this step
@@ -47,6 +46,7 @@ definitions:
             - build_flutter.sh
             - manualPacking.sh
             - xcodeBuildArchive.sh
+
     - step: &increment-build-number
         name: Increment Build Number
         runs-on:
@@ -56,6 +56,7 @@ definitions:
           - ./incrementBuildNumFlutter.sh $PROJECT $MIN_BUILD_NUMBER
         artifacts:
           - pubspec.yaml
+
     - step: &ent-dist
         name: Code Signing with Ent Dist
         runs-on:
@@ -69,6 +70,7 @@ definitions:
           - ../ent_dist.sh $CONF
         artifacts:
           - app-signing.keychain-db
+
     - step: &flutter-pub-get
         name: Flutter Pub Get
         runs-on:
@@ -83,6 +85,7 @@ definitions:
           - build/**
         caches:
           - dartpubcache
+
     - step: &flutter-lint-and-test
         name: Flutter Lint and Test
         runs-on:
@@ -93,6 +96,7 @@ definitions:
         script:
           - flutter analyze --no-fatal-infos --no-fatal-warnings
           #- flutter test ./test
+
     - step: &flutter-build-ios
         name: Flutter Build iOS
         runs-on:
@@ -104,6 +108,7 @@ definitions:
           - ios/**
         caches:
           - dartpubcache
+
     - step: &build-ios
         name: Commencis Build iOS
         runs-on:
@@ -118,6 +123,7 @@ definitions:
           - cd ..
         artifacts:
           - ios/**
+
     - step: &deploy-ios
         name: Send iOS Package to Baboon
         runs-on:
@@ -134,18 +140,24 @@ definitions:
           - ../baboonCore.sh $APP_NAME $CONF $DIST_PROJECT $DIST_PACKAGE
         artifacts: # dSYMs are required for Firebase symbol upload
           - Runner.xcarchive/dSYMs/**
+
     - step: &flutter-build-android
         name: Flutter Build Android
         runs-on:
           - macos
           - flutter
         script:
-          - ./build_flutter.sh android
+          - >-
+            if [ -z "$BUILD_VARIANT" ]; then
+              BUILD_VARIANT=internal 
+            fi
+          - ./build_flutter.sh android -f ${BUILD_VARIANT}
         artifacts:
           - android/**
           - build/**
         caches:
           - dartpubcache
+
     - step: &deploy-android
         name: Send Andriod Package to Baboon
         runs-on:
@@ -156,12 +168,17 @@ definitions:
           - source .envs
           # Setup Variables
           - >-
+            if [ -z "$BUILD_VARIANT" ]; then
+              BUILD_VARIANT=internal
+            fi
+          - >-
             VERSION=$(cat ${FLUTTER_PATH}pubspec.yaml|grep 'version:'|sed 's/version: [0-9.]*+//')
-          - echo "Version is $VERSION"
           - COMMENCIS_HELPERS="$HOME/jenkins/helpers"
           - DIST_PACKAGE=android
+          - OUTPUT=build/app/outputs/apk/${BUILD_VARIANT}/release
           # Run Script
           - ${COMMENCIS_HELPERS}/common/baboonCore.sh $CONF $VERSION "${OUTPUT}/*" $DIST_PROJECT $DIST_PACKAGE
+
     - step: &create-android-appbundle
         name: Build Flutter Android appbundle
         runs-on:
@@ -176,6 +193,28 @@ definitions:
   caches:
     dartpubcache: $HOME/.pub-cache
 pipelines:
+  custom:
+    ci:
+      - variables:
+          - name: BUILD_VARIANT
+            default: internal
+            allowed-values:
+              - internal
+              - prod
+      - step: *copy-scripts
+      - step: *increment-build-number
+      - step: *flutter-pub-get
+      - step: *flutter-lint-and-test
+      - step: *flutter-build-ios
+      - step:
+          <<: *set-environment-variables
+          deployment: Release
+      - step: *ent-dist
+      - step: *build-ios
+      - step: *deploy-ios
+      - step: *flutter-build-android # TODO: Build android with app bundle
+      - step: *deploy-android
+
   # 'feature/*':
   #     - step: *copy-scripts
   #     - step: *Flutter-pub-get
@@ -201,6 +240,7 @@ pipelines:
   #     - step: *ent-dist
   #     - step: *build-deploy
   #     - step: *Create-android
+
   branches:
     main:
       - step: *copy-scripts
@@ -208,13 +248,11 @@ pipelines:
       - step: *flutter-pub-get
       - step: *flutter-lint-and-test
       - step: *flutter-build-ios
-      # InternalRelease
-      - step: 
+      - step:
           <<: *set-environment-variables
           deployment: Release
       - step: *ent-dist
       - step: *build-ios
       - step: *deploy-ios
-      - step: *flutter-build-android
-      # - step: *create-android-appbundle
+      - step: *flutter-build-android # TODO: Build android with app bundle
       - step: *deploy-android
