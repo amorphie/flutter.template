@@ -103,11 +103,7 @@ definitions:
           - macos
           - flutter
         script:
-          - >-
-            if [ -z "$BUILD_VARIANT" ]; then
-              BUILD_VARIANT=internal 
-            fi
-          - ./build_flutter.sh ios -f ${BUILD_VARIANT}
+          - ./build_flutter.sh ios --target $FLUTTER_TARGET -f $FLUTTER_FLAVOR
         artifacts:
           - ios/**
         caches:
@@ -151,11 +147,7 @@ definitions:
           - macos
           - flutter
         script:
-          - >-
-            if [ -z "$BUILD_VARIANT" ]; then
-              BUILD_VARIANT=internal 
-            fi
-          - ./build_flutter.sh android -f ${BUILD_VARIANT}
+          - ./build_flutter.sh android --target $FLUTTER_TARGET -f $FLUTTER_FLAVOR
         artifacts:
           - android/**
           - build/**
@@ -163,7 +155,7 @@ definitions:
           - dartpubcache
 
     - step: &deploy-android
-        name: Send Andriod Package to Baboon
+        name: Send Android Package to Baboon
         runs-on:
           - macos
           - flutter
@@ -172,14 +164,9 @@ definitions:
           - source .envs
           # Setup Variables
           - >-
-            if [ -z "$BUILD_VARIANT" ]; then
-              BUILD_VARIANT=internal
-            fi
-          - >-
             VERSION=$(cat ${FLUTTER_PATH}pubspec.yaml|grep 'version:'|sed 's/version: [0-9.]*+//')
           - COMMENCIS_HELPERS="$HOME/jenkins/helpers"
           - DIST_PACKAGE=android
-          - OUTPUT=build/app/outputs/apk/${BUILD_VARIANT}/release
           # Run Script
           - ${COMMENCIS_HELPERS}/common/baboonCore.sh $CONF $VERSION "${OUTPUT}/*" $DIST_PROJECT $DIST_PACKAGE
 
@@ -198,13 +185,7 @@ definitions:
     dartpubcache: $HOME/.pub-cache
 pipelines:
   custom:
-    ci:
-      - variables:
-          - name: BUILD_VARIANT
-            default: internal
-            allowed-values:
-              - internal
-              - prod
+    internal:
       - step: *copy-scripts
       - step: *increment-build-number
       - step: *flutter-pub-get
@@ -212,7 +193,7 @@ pipelines:
       - step: *flutter-build-ios
       - step:
           <<: *set-environment-variables
-          deployment: Release
+          deployment: InternalRelease
       - step: *ent-dist
       - step: *build-ios
       - step: *deploy-ios
@@ -254,7 +235,7 @@ pipelines:
       - step: *flutter-build-ios
       - step:
           <<: *set-environment-variables
-          deployment: Release
+          deployment: InternalRelease
       - step: *ent-dist
       - step: *build-ios
       - step: *deploy-ios
