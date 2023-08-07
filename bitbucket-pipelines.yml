@@ -103,7 +103,11 @@ definitions:
           - macos
           - flutter
         script:
-          - ./build_flutter.sh ios
+          - >-
+            if [ -z "$BUILD_VARIANT" ]; then
+              BUILD_VARIANT=internal 
+            fi
+          - ./build_flutter.sh ios -f ${BUILD_VARIANT}
         artifacts:
           - ios/**
         caches:
