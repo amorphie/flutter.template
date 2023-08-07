@@ -91,7 +91,6 @@ android {
             dimension = "flavors"
             applicationIdSuffix = ".internal"
             signingConfig internalSigningConfig
-            applicationId = "com.commencis.burgankuwait.internal"
         }
         prod {
             dimension = "flavors"
