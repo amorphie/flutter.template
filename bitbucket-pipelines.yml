@@ -103,7 +103,7 @@ definitions:
           - macos
           - flutter
         script:
-          - ./build_flutter.sh ios --target $FLUTTER_TARGET -f $FLUTTER_FLAVOR
+          - ./build_flutter.sh ios -t $FLUTTER_TARGET -f $FLUTTER_FLAVOR
         artifacts:
           - ios/**
         caches:
@@ -147,7 +147,8 @@ definitions:
           - macos
           - flutter
         script:
-          - ./build_flutter.sh android --target $FLUTTER_TARGET -f $FLUTTER_FLAVOR
+          - source .envs
+          - ./build_flutter.sh android -t $FLUTTER_TARGET -f $FLUTTER_FLAVOR
         artifacts:
           - android/**
           - build/**
