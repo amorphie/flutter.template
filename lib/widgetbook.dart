@@ -27,7 +27,14 @@ class WidgetbookApp extends StatelessWidget {
           ],
         ),
       ],
-      addons: [],
+      addons: [
+        MaterialThemeAddon(
+          themes: [
+            WidgetbookTheme(name: 'Light', data: ThemeData.light()),
+            WidgetbookTheme(name: 'Dark', data: ThemeData.dark()),
+          ],
+        ),
+      ],
     );
   }
 }
