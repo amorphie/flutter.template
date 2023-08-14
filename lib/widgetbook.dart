@@ -34,6 +34,9 @@ class WidgetbookApp extends StatelessWidget {
             WidgetbookTheme(name: 'Dark', data: ThemeData.dark()),
           ],
         ),
+        DeviceFrameAddon(
+          devices: [...Devices.ios.all, ...Devices.android.all],
+        ),
       ],
     );
   }
