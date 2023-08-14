@@ -1,3 +1,4 @@
+import 'package:burgankuwait/widgetbook/pages/widgetbook_folder_login_signup_pages.dart';
 import 'package:burgankuwait/widgetbook/reusable_widgets/widgetbook_brg_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -24,6 +25,12 @@ class WidgetbookApp extends StatelessWidget {
                 widgetbookBrgTextFormField,
               ],
             ),
+          ],
+        ),
+        WidgetbookFolder(
+          name: 'Pages',
+          children: [
+            widgetbookFolderLoginSignupPages,
           ],
         ),
       ],
