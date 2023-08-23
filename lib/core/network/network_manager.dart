@@ -17,14 +17,22 @@ import 'dart:convert';
 
 import 'package:burgankuwait/core/network/query_providers/http_query_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 
 class NetworkManager {
   final String baseURL;
 
-  Map<String, String> get _defaultHeaders => {
-        'Content-Type': 'application/json',
-        'Accept-Language': 'tr',
+  Map<String, String> get _defaultGetHeaders => {
+        'Accept-Language': 'en-EN',
       };
+
+  Map<String, String> get _defaultPostHeaders => <String, String>{}
+    ..addAll(_defaultGetHeaders)
+    ..addAll({
+      'Content-Type': 'application/json',
+      'User': const Uuid().v1(), // TODO: Get it from storage
+      'Behalf-Of-User': const Uuid().v1(), // TODO: Get it from storage
+    });
 
   NetworkManager({required this.baseURL});
 
@@ -32,7 +40,7 @@ class NetworkManager {
     String path, {
     List<HTTPQueryProvider> queryProviders = const [],
   }) async {
-    var headers = _defaultHeaders;
+    var headers = _defaultGetHeaders;
     for (var provider in queryProviders) {
       headers.addAll(await provider.queries);
     }
@@ -48,7 +56,7 @@ class NetworkManager {
     Object body, {
     List<HTTPQueryProvider> queryProviders = const [],
   }) async {
-    var headers = _defaultHeaders;
+    var headers = _defaultPostHeaders;
     for (var provider in queryProviders) {
       headers.addAll(await provider.queries);
     }
@@ -61,7 +69,7 @@ class NetworkManager {
   }
 
   Future<Map<String, dynamic>> requestDelete(String path) async {
-    var headers = _defaultHeaders;
+    var headers = _defaultGetHeaders;
 
     final response = await http.delete(
       Uri.parse('$baseURL/$path'),
