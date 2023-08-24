@@ -29,6 +29,9 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   }
 
   _onSignalrNavigation(String navigationPath) {
+    if (isClosed) {
+      return;
+    }
     add(OtpEventHandleNavigation(navigationPath: navigationPath));
   }
 }

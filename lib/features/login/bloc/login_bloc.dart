@@ -33,6 +33,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   _onSignalrNavigation(String navigationPath) {
+    if (isClosed) {
+      return;
+    }
     add(LoginEventHandleNavigation(navigationPath: navigationPath));
   }
 }
