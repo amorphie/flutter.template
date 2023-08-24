@@ -42,6 +42,10 @@ RouteBase get $appRoute => GoRouteData.$route(
               path: 'terms-and-conditions',
               factory: $TermsAndConditionsRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'terms-and-conditions-second',
+              factory: $TermsAndConditionsSecondRouteExtension._fromState,
+            ),
           ],
         ),
         GoRouteData.$route(
@@ -191,6 +195,25 @@ extension $TermsAndConditionsRouteExtension on TermsAndConditionsRoute {
 
   String get location => GoRouteData.$location(
         '/login/terms-and-conditions',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TermsAndConditionsSecondRouteExtension
+    on TermsAndConditionsSecondRoute {
+  static TermsAndConditionsSecondRoute _fromState(GoRouterState state) =>
+      TermsAndConditionsSecondRoute();
+
+  String get location => GoRouteData.$location(
+        '/login/terms-and-conditions-second',
       );
 
   void go(BuildContext context) => context.go(location);
