@@ -71,4 +71,15 @@ class LoginWorkflowManager extends NetworkManager {
       "queryData": ""
     });
   }
+
+  Future submitSecurityImage(String selectedPictureId) async {
+    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-sequrity-image', {
+      "entityData": {"imageId": selectedPictureId},
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
+  }
 }

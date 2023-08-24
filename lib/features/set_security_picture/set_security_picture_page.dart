@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
@@ -8,9 +7,9 @@ import 'package:burgankuwait/core/reusable_widgets/brg_image_selector/brg_image_
 import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
-import 'package:burgankuwait/features/login/login_page_route.dart';
-import 'package:burgankuwait/features/terms_and_conditions/terms_and_conditions_page_route.dart';
+import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetSecurityPicturePage extends StatelessWidget {
   const SetSecurityPicturePage({Key? key}) : super(key: key);
@@ -32,24 +31,33 @@ class SetSecurityPicturePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Spacer(),
-              _buildTitleText(),
-              _buildDescriptionText(),
-              _buildImageSelectorWidget(),
-              _buildContinueButton(context),
-              const Spacer(),
-              const SecurityIconWidget(),
-            ],
-          ).paddingHorizontal(32),
-        ),
+      body: BlocConsumer<SetSecurityPictureBloc, SetSecurityPictureState>(
+        listener: (context, state) {
+          if (state is SetSecurityPictureStateInitial && state.navigationPath != null) {
+            _handleNavigation(context, state.navigationPath!);
+          }
+        },
+        builder: (context, state) {
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Spacer(),
+                  _buildTitleText(),
+                  _buildDescriptionText(),
+                  _buildImageSelectorWidget(),
+                  _buildContinueButton(context),
+                  const Spacer(),
+                  const SecurityIconWidget(),
+                ],
+              ).paddingHorizontal(32),
+            ),
+          );
+        },
       ),
     );
   }
@@ -84,7 +92,7 @@ class SetSecurityPicturePage extends StatelessWidget {
     return BrgImageSelectorWidget.network(
       urlList: _securityImageUrlList,
       onSelected: (index) {
-        // TODO: Set selected item index
+        // TODO: Set selected security image ID
       },
     ).padding(top: 32);
   }
@@ -94,13 +102,21 @@ class SetSecurityPicturePage extends StatelessWidget {
       text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
       onPressed: () {
         // TODO: Validate security picture selection
-        // TODO: Navigate to set question picture page with signalR event
-        getIt.get<NavigationHelper>().navigate(
-              context: context,
-              navigationType: NavigationType.go,
-              path: "/${LoginPageRoute.path}/${TermsAndConditionsRoute.path}",
+        context.read<SetSecurityPictureBloc>().add(
+              const SetSecurityPictureEventPressContinueButton(
+                // TODO: Pass security image ID from API
+                selectedPictureId: "43cdf94e-cb4a-41fc-8f27-f76e2a70aa20",
+              ),
             );
       },
     ).padding(top: 16);
+  }
+
+  void _handleNavigation(BuildContext context, String navigationPath) {
+    NavigationHelper().navigate(
+      context: context,
+      navigationType: NavigationType.pushReplacement,
+      path: navigationPath,
+    );
   }
 }
