@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
   void _handleNavigation(BuildContext context, String navigationPath) {
     NavigationHelper().navigate(
       context: context,
-      navigationType: NavigationType.push,
+      navigationType: NavigationType.pushReplacement,
       path: navigationPath,
     );
   }

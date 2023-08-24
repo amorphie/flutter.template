@@ -84,7 +84,7 @@ class TermsAndConditionsSecondPage extends StatelessWidget {
   void _handleNavigation(BuildContext context, String navigationPath) {
     NavigationHelper().navigate(
       context: context,
-      navigationType: NavigationType.go,
+      navigationType: NavigationType.pushReplacement,
       path: navigationPath,
     );
   }
