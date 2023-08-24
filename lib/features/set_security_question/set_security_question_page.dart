@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
@@ -10,9 +9,9 @@ import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
-import 'package:burgankuwait/features/login/login_page_route.dart';
-import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';
+import 'package:burgankuwait/features/set_security_question/bloc/set_security_question_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetSecurityQuestionPage extends StatefulWidget {
   const SetSecurityQuestionPage({Key? key}) : super(key: key);
@@ -53,28 +52,37 @@ class _SetSecurityQuestionPageState extends State<SetSecurityQuestionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Spacer(),
-                _buildTitleText(),
-                _buildDescriptionText(),
-                _buildSecurityQuestionDropdownWidget(),
-                _buildAnswerInputWidget(context),
-                _buildContinueButton(context),
-                const Spacer(),
-                const SecurityIconWidget(),
-              ],
-            ).paddingHorizontal(32),
-          ),
-        ),
+      body: BlocConsumer<SetSecurityQuestionBloc, SetSecurityQuestionState>(
+        listener: (context, state) {
+          if (state is SetSecurityQuestionStateInitial && state.navigationPath != null) {
+            _handleNavigation(context, state.navigationPath!);
+          }
+        },
+        builder: (context, state) {
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Spacer(),
+                    _buildTitleText(),
+                    _buildDescriptionText(),
+                    _buildSecurityQuestionDropdownWidget(),
+                    _buildAnswerInputWidget(context),
+                    _buildContinueButton(context),
+                    const Spacer(),
+                    const SecurityIconWidget(),
+                  ],
+                ).paddingHorizontal(32),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -133,14 +141,20 @@ class _SetSecurityQuestionPageState extends State<SetSecurityQuestionPage> {
       onPressed: () {
         formKey.currentState?.save();
         if (formKey.currentState?.validate() ?? false) {
-          // TODO: Navigate to set question picture page with signalR event
-          getIt.get<NavigationHelper>().navigate(
-                context: context,
-                navigationType: NavigationType.go,
-                path: "/${LoginPageRoute.path}/${SetSecurityPicturePageRoute.path}",
+          context.read<SetSecurityQuestionBloc>().add(
+                // TODO: Pass security question ID
+                SetSecurityQuestionEventPressContinueButton(answer: textControllerAnswer.text),
               );
         }
       },
     ).padding(top: 16);
+  }
+
+  void _handleNavigation(BuildContext context, String navigationPath) {
+    NavigationHelper().navigate(
+      context: context,
+      navigationType: NavigationType.pushReplacement,
+      path: navigationPath,
+    );
   }
 }

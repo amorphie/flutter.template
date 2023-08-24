@@ -57,4 +57,18 @@ class LoginWorkflowManager extends NetworkManager {
       "queryData": ""
     });
   }
+
+  Future submitSecurityQuestion(String answer) async {
+    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-sequrity-question', {
+      "entityData": {
+        "question": "13c8ecc3-bf95-461c-aad6-6131c06f20e5", // TODO: Get it from API
+        "answer": answer
+      },
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
+  }
 }
