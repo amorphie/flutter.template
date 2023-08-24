@@ -46,4 +46,15 @@ class LoginWorkflowManager extends NetworkManager {
       "queryData": ""
     });
   }
+
+  Future submitPassword(String password) async {
+    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-openbanking-send-password', {
+      "entityData": {"password": password},
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
+  }
 }

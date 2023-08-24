@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
@@ -11,9 +10,9 @@ import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:burgankuwait/core/util/extensions/form_field_validator_extensions.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
-import 'package:burgankuwait/features/login/login_page_route.dart';
-import 'package:burgankuwait/features/set_security_question/set_security_question_page_route.dart';
+import 'package:burgankuwait/features/set_password/bloc/set_password_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SetPasswordPage extends StatefulWidget {
@@ -64,30 +63,39 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Spacer(),
-                _buildTitleText(),
-                _buildBulletItemWidget("Şifreniz 6 karakter olmalıdır.").padding(top: 8),
-                _buildBulletItemWidget("Şifreniz numaralardan oluşmalıdır."),
-                _buildBulletItemWidget("Şifreniz ardışık ve tekrar rakamlardan oluşmamalıdır."),
-                _buildPasswordInputWidget(context),
-                _buildPasswordConfirmationInputWidget(context),
-                _buildChangeButton(context),
-                const Spacer(),
-                const SecurityIconWidget(),
-              ],
-            ).paddingHorizontal(32),
-          ),
-        ),
+      body: BlocConsumer<SetPasswordBloc, SetPasswordState>(
+        listener: (context, state) {
+          if (state is SetPasswordStateInitial && state.navigationPath != null) {
+            _handleNavigation(context, state.navigationPath!);
+          }
+        },
+        builder: (context, state) {
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Spacer(),
+                    _buildTitleText(),
+                    _buildBulletItemWidget("Şifreniz 6 karakter olmalıdır.").padding(top: 8),
+                    _buildBulletItemWidget("Şifreniz numaralardan oluşmalıdır."),
+                    _buildBulletItemWidget("Şifreniz ardışık ve tekrar rakamlardan oluşmamalıdır."),
+                    _buildPasswordInputWidget(context),
+                    _buildPasswordConfirmationInputWidget(context),
+                    _buildChangeButton(context),
+                    const Spacer(),
+                    const SecurityIconWidget(),
+                  ],
+                ).paddingHorizontal(32),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -155,14 +163,19 @@ class _SetPasswordPageState extends State<SetPasswordPage> {
       onPressed: () {
         formKey.currentState?.save();
         if (formKey.currentState?.validate() ?? false) {
-          // TODO: Navigate to set security question page with signalR event
-          getIt.get<NavigationHelper>().navigate(
-                context: context,
-                navigationType: NavigationType.go,
-                path: "/${LoginPageRoute.path}/${SetSecurityQuestionPageRoute.path}",
+          context.read<SetPasswordBloc>().add(
+                SetPasswordEventPressContinueButton(password: textControllerPassword.text),
               );
         }
       },
     ).padding(top: 16);
+  }
+
+  void _handleNavigation(BuildContext context, String navigationPath) {
+    NavigationHelper().navigate(
+      context: context,
+      navigationType: NavigationType.pushReplacement,
+      path: navigationPath,
+    );
   }
 }
