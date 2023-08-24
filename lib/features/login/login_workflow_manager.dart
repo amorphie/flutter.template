@@ -82,4 +82,15 @@ class LoginWorkflowManager extends NetworkManager {
       "queryData": ""
     });
   }
+
+  Future submitFirstContracts({required bool contract1, required bool contract2}) async {
+    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-contract-1', {
+      "entityData": {"contract1": contract1, "contract2": contract2},
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
+  }
 }
