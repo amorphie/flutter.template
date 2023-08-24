@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
@@ -12,8 +11,10 @@ import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/features/login/login_page_route.dart';
+import 'package:burgankuwait/features/otp/bloc/otp_bloc.dart';
 import 'package:burgankuwait/features/personal_info/personal_info_page_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class OtpPage extends StatefulWidget {
 
 class _OtpPageState extends State<OtpPage> {
   late TextEditingController controllerOtp;
-  final otpLength = 6;
+  final int otpLength = 4;
 
   @override
   void initState() {
@@ -44,20 +45,29 @@ class _OtpPageState extends State<OtpPage> {
       appBar: BrgAppBar(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildTitleText(),
-              _buildMessageText(),
-              _buildCircularCountDownTimer(),
-              _buildOtpInputView(context),
-              _buildContinueButton(context),
-              const Spacer(),
-              const SecurityIconWidget(),
-            ],
-          ).paddingHorizontal(32),
+        child: BlocConsumer<OtpBloc, OtpState>(
+          listener: (context, state) {
+            if (state is OtpStateInitial && state.navigateToPersonalInfo) {
+              _navigateToPersonalInfoPage(context);
+            }
+          },
+          builder: (context, state) {
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildTitleText(),
+                  _buildMessageText(),
+                  _buildCircularCountDownTimer(),
+                  _buildOtpInputView(context),
+                  _buildContinueButton(context),
+                  const Spacer(),
+                  const SecurityIconWidget(),
+                ],
+              ).paddingHorizontal(32),
+            );
+          },
         ),
       ),
     );
@@ -109,9 +119,9 @@ class _OtpPageState extends State<OtpPage> {
       ).localize(),
       validator: BrgValidator().minLength(
         minLength: otpLength,
-        errorMessage: const LocalizableText(
-          tr: "Şifreniz 6 karakterden kısadır.",
-          en: "Password is less than 6 character.",
+        errorMessage: LocalizableText(
+          tr: "Şifreniz $otpLength karakterden kısadır.",
+          en: "Password is less than $otpLength character.",
         ).localize(),
       ),
       maxLength: otpLength,
@@ -124,13 +134,16 @@ class _OtpPageState extends State<OtpPage> {
     return BrgButton(
       text: const LocalizableText(tr: "Devam", en: "Continue").localize(),
       onPressed: () {
-        // TODO: Navigate with signalR event
-        getIt.get<NavigationHelper>().navigate(
-              context: context,
-              navigationType: NavigationType.go,
-              path: "/${LoginPageRoute.path}/${PersonalInfoPageRoute.path}",
-            );
+        context.read<OtpBloc>().add(OtpEventPressContinueButton(otp: controllerOtp.text));
       },
+    );
+  }
+
+  void _navigateToPersonalInfoPage(BuildContext context) {
+    NavigationHelper().navigate(
+      context: context,
+      navigationType: NavigationType.pushReplacement,
+      path: "/${LoginPageRoute.path}/${PersonalInfoPageRoute.path}",
     );
   }
 }
