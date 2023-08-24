@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: Check whether user is logged in or not and navigate to login or home page
     return BlocProvider(
-      create: (context) => LoginBloc(networkManager: LoginWorkflowManager()),
+      create: (context) => LoginBloc(workflowManager: LoginWorkflowManager()),
       child: const LoginPage(),
     );
   }

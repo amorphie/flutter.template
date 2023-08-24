@@ -5,10 +5,11 @@ abstract class OtpState extends Equatable {
 }
 
 class OtpStateInitial extends OtpState {
-  const OtpStateInitial({this.navigateToPersonalInfo = false});
+  final String? navigationPath;
+
+  const OtpStateInitial({this.navigationPath});
 
   @override
-  List<Object> get props => [navigateToPersonalInfo];
+  List<Object?> get props => [navigationPath];
 
-  final bool navigateToPersonalInfo;
 }

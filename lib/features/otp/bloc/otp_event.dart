@@ -12,7 +12,10 @@ class OtpEventPressContinueButton extends OtpEvent {
   List<Object?> get props => [otp];
 }
 
-class OtpEventNavigateToSetPersonalInfo extends OtpEvent {
+class OtpEventHandleNavigation extends OtpEvent {
+  final String navigationPath;
+
+  const OtpEventHandleNavigation({required this.navigationPath});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [navigationPath];
 }

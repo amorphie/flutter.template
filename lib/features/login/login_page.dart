@@ -10,8 +10,6 @@ import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/features/login/bloc/login_bloc.dart';
-import 'package:burgankuwait/features/login/login_page_route.dart';
-import 'package:burgankuwait/features/otp/otp_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,12 +44,8 @@ class _LoginPageState extends State<LoginPage> {
       appBar: _buildAppBar(),
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state is LoginStateInitial && state.navigateToOtp) {
-            NavigationHelper().navigate(
-              context: context,
-              navigationType: NavigationType.push,
-              path: "/${LoginPageRoute.path}/${OtpPageRoute.path}",
-            );
+          if (state is LoginStateInitial && state.navigationPath != null) {
+            _handleNavigation(context, state.navigationPath!);
           }
         },
         builder: (context, state) {
@@ -96,6 +90,14 @@ class _LoginPageState extends State<LoginPage> {
           );
         },
       ),
+    );
+  }
+
+  void _handleNavigation(BuildContext context, String navigationPath) {
+    NavigationHelper().navigate(
+      context: context,
+      navigationType: NavigationType.push,
+      path: navigationPath,
     );
   }
 

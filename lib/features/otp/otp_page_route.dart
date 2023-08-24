@@ -12,7 +12,7 @@ class OtpPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => OtpBloc(networkManager: LoginWorkflowManager()),
+      create: (context) => OtpBloc(workflowManager: LoginWorkflowManager()),
       child: const OtpPage(),
     );
   }

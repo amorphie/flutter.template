@@ -5,10 +5,10 @@ abstract class LoginState extends Equatable {
 }
 
 class LoginStateInitial extends LoginState {
-  final bool navigateToOtp;
+  final String? navigationPath;
 
-  const LoginStateInitial({this.navigateToOtp = false});
+  const LoginStateInitial({this.navigationPath});
 
   @override
-  List<Object> get props => [navigateToOtp];
+  List<Object?> get props => [navigationPath];
 }

@@ -14,7 +14,10 @@ class LoginEventLoginWithCredentials extends LoginEvent {
   List<Object?> get props => [tckn, phoneNumber];
 }
 
-class LoginEventNavigateToOtp extends LoginEvent {
+class LoginEventHandleNavigation extends LoginEvent {
+  final String navigationPath;
+
+  const LoginEventHandleNavigation({required this.navigationPath});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [navigationPath];
 }

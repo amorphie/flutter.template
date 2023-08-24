@@ -10,27 +10,25 @@ part 'otp_event.dart';
 part 'otp_state.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
-  final LoginWorkflowManager networkManager;
+  final LoginWorkflowManager workflowManager;
 
-  OtpBloc({required this.networkManager}) : super(const OtpStateInitial()) {
+  OtpBloc({required this.workflowManager}) : super(const OtpStateInitial()) {
     _listenForSignalrUpdates();
     on<OtpEventPressContinueButton>((event, emit) => _onContinueButtonPressed(event.otp));
-    on<OtpEventNavigateToSetPersonalInfo>((event, emit) => emit(const OtpStateInitial(navigateToPersonalInfo: true)));
+    on<OtpEventHandleNavigation>((event, emit) => emit(OtpStateInitial(navigationPath: event.navigationPath)));
   }
 
   Future _onContinueButtonPressed(String otp) async {
-    await networkManager.getTransitions();
+    await workflowManager.getTransitions();
     // TODO: Pass transition id to submitOtp method
-    await networkManager.submitOtp(otp);
+    await workflowManager.submitOtp(otp);
   }
 
   _listenForSignalrUpdates() {
-    SignalrConnectionManager(onPageNavigation: _onNavigateToOtp).init();
+    SignalrConnectionManager(onPageNavigation: _onSignalrNavigation).init();
   }
 
-  _onNavigateToOtp(bool isNavigationAllowed) {
-    if (isNavigationAllowed) {
-      add(OtpEventNavigateToSetPersonalInfo());
-    }
+  _onSignalrNavigation(String navigationPath) {
+    add(OtpEventHandleNavigation(navigationPath: navigationPath));
   }
 }

@@ -12,7 +12,7 @@ class LoginPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => LoginBloc(networkManager: LoginWorkflowManager()),
+      create: (context) => LoginBloc(workflowManager: LoginWorkflowManager()),
       child: const LoginPage(),
     );
   }

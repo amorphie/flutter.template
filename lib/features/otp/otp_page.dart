@@ -47,8 +47,8 @@ class _OtpPageState extends State<OtpPage> {
         physics: const BouncingScrollPhysics(),
         child: BlocConsumer<OtpBloc, OtpState>(
           listener: (context, state) {
-            if (state is OtpStateInitial && state.navigateToPersonalInfo) {
-              _navigateToPersonalInfoPage(context);
+            if (state is OtpStateInitial && state.navigationPath != null) {
+              _handleNavigation(context, state.navigationPath!);
             }
           },
           builder: (context, state) {
@@ -139,11 +139,11 @@ class _OtpPageState extends State<OtpPage> {
     );
   }
 
-  void _navigateToPersonalInfoPage(BuildContext context) {
+  void _handleNavigation(BuildContext context, String navigationPath) {
     NavigationHelper().navigate(
       context: context,
       navigationType: NavigationType.pushReplacement,
-      path: "/${LoginPageRoute.path}/${PersonalInfoPageRoute.path}",
+      path: navigationPath,
     );
   }
 }

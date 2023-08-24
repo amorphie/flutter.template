@@ -11,17 +11,17 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LoginWorkflowManager networkManager;
+  final LoginWorkflowManager workflowManager;
 
-  LoginBloc({required this.networkManager}) : super(const LoginStateInitial()) {
+  LoginBloc({required this.workflowManager}) : super(const LoginStateInitial()) {
     _listenForSignalrUpdates();
     on<LoginEventLoginWithCredentials>((event, emit) => _onLoginWithCredentials(event, emit));
-    on<LoginEventNavigateToOtp>((event, emit) => emit(const LoginStateInitial(navigateToOtp: true)));
+    on<LoginEventHandleNavigation>((event, emit) => emit(LoginStateInitial(navigationPath: event.navigationPath)));
   }
 
   Future _onLoginWithCredentials(LoginEventLoginWithCredentials event, Emitter<LoginState> emit) async {
-    await networkManager.getTransitions();
-    await networkManager.login(
+    await workflowManager.getTransitions();
+    await workflowManager.login(
       LoginRegisterRequest(
         LoginEntity(tckn: event.tckn, phoneNumber: event.phoneNumber),
       ),
@@ -29,12 +29,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   _listenForSignalrUpdates() {
-    SignalrConnectionManager(onPageNavigation: _onNavigateToOtp).init();
+    SignalrConnectionManager(onPageNavigation: _onSignalrNavigation).init();
   }
 
-  _onNavigateToOtp(bool isNavigationAllowed) {
-    if (isNavigationAllowed) {
-      add(LoginEventNavigateToOtp());
-    }
+  _onSignalrNavigation(String navigationPath) {
+    add(LoginEventHandleNavigation(navigationPath: navigationPath));
   }
 }
