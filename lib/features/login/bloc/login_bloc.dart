@@ -12,8 +12,10 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginWorkflowManager workflowManager;
+  final SignalrConnectionManager signalrConnectionManager;
 
-  LoginBloc({required this.workflowManager}) : super(const LoginStateInitial()) {
+  LoginBloc({required this.workflowManager, required this.signalrConnectionManager})
+      : super(const LoginStateInitial()) {
     _listenForSignalrUpdates();
     on<LoginEventLoginWithCredentials>((event, emit) => _onLoginWithCredentials(event, emit));
     on<LoginEventHandleNavigation>((event, emit) => emit(LoginStateInitial(navigationPath: event.navigationPath)));
@@ -29,7 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   _listenForSignalrUpdates() {
-    SignalrConnectionManager(onPageNavigation: _onSignalrNavigation).init();
+    signalrConnectionManager.init(onPageNavigation: _onSignalrNavigation);
   }
 
   _onSignalrNavigation(String navigationPath) {
@@ -37,5 +39,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return;
     }
     add(LoginEventHandleNavigation(navigationPath: navigationPath));
+    signalrConnectionManager.stop();
   }
 }

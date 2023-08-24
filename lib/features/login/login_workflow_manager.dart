@@ -31,4 +31,19 @@ class LoginWorkflowManager extends NetworkManager {
       "queryData": ""
     });
   }
+
+  Future submitPersonalInfo(String name, String surname, String email) async {
+    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-personal-information', {
+      "entityData": {
+        "firstName": name,
+        "lastName": surname,
+        "eMail": email,
+      },
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
+  }
 }

@@ -7,15 +7,15 @@ class SignalrConnectionManager {
   final String serverUrl;
   final String methodName;
   late HubConnection _hubConnection;
-  final Function(String navigationPath)? onPageNavigation;
+  late Function(String navigationPath)? _onPageNavigation;
 
   SignalrConnectionManager({
     this.serverUrl = AppConstants.workflowHubUrl,
     this.methodName = "SendMessage",
-    this.onPageNavigation,
   });
 
-  Future<void> init() async {
+  Future<void> init({Function(String navigationPath)? onPageNavigation}) async {
+    _onPageNavigation = onPageNavigation;
     _hubConnection = HubConnectionBuilder()
         .withUrl(serverUrl)
         .withAutomaticReconnect(retryDelays: [2000, 5000, 10000, 20000]).build();
@@ -29,14 +29,18 @@ class SignalrConnectionManager {
     }
   }
 
+  void stop() {
+    _hubConnection.stop();
+  }
+
   void _handleIncomingNavigation(List<Object?>? args) {
-    if (onPageNavigation == null) {
+    if (_onPageNavigation == null) {
       return;
     }
     final isNavigationAllowed = (jsonDecode(args?[0]?.toString() ?? "")?["page"])?["operation"] == "Open";
     final navigationPath = (jsonDecode(args?[0]?.toString() ?? "")?["page"])?["pageRoute"]?["label"] as String?;
     if (isNavigationAllowed && navigationPath != null) {
-      onPageNavigation!(navigationPath);
+      _onPageNavigation!(navigationPath);
     }
   }
 }

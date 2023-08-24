@@ -1,3 +1,4 @@
+import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/otp/bloc/otp_bloc.dart';
 import 'package:burgankuwait/features/otp/otp_page.dart';
@@ -12,7 +13,10 @@ class OtpPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => OtpBloc(workflowManager: LoginWorkflowManager()),
+      create: (context) => OtpBloc(
+        workflowManager: LoginWorkflowManager(),
+        signalrConnectionManager: SignalrConnectionManager(),
+      ),
       child: const OtpPage(),
     );
   }

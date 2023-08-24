@@ -11,8 +11,9 @@ part 'otp_state.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final LoginWorkflowManager workflowManager;
+  final SignalrConnectionManager signalrConnectionManager;
 
-  OtpBloc({required this.workflowManager}) : super(const OtpStateInitial()) {
+  OtpBloc({required this.workflowManager, required this.signalrConnectionManager}) : super(const OtpStateInitial()) {
     _listenForSignalrUpdates();
     on<OtpEventPressContinueButton>((event, emit) => _onContinueButtonPressed(event.otp));
     on<OtpEventHandleNavigation>((event, emit) => emit(OtpStateInitial(navigationPath: event.navigationPath)));
@@ -25,7 +26,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   }
 
   _listenForSignalrUpdates() {
-    SignalrConnectionManager(onPageNavigation: _onSignalrNavigation).init();
+    signalrConnectionManager.init(onPageNavigation: _onSignalrNavigation);
   }
 
   _onSignalrNavigation(String navigationPath) {
@@ -33,5 +34,6 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       return;
     }
     add(OtpEventHandleNavigation(navigationPath: navigationPath));
+    signalrConnectionManager.stop();
   }
 }

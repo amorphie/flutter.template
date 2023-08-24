@@ -1,6 +1,7 @@
+import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/features/login/bloc/login_bloc.dart';
-import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/login/login_page.dart';
+import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +13,10 @@ class LoginPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => LoginBloc(workflowManager: LoginWorkflowManager()),
+      create: (context) => LoginBloc(
+        workflowManager: LoginWorkflowManager(),
+        signalrConnectionManager: SignalrConnectionManager(),
+      ),
       child: const LoginPage(),
     );
   }
