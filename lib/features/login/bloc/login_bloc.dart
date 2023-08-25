@@ -22,6 +22,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future _onLoginWithCredentials(LoginEventLoginWithCredentials event, Emitter<LoginState> emit) async {
+    workflowManager.resetRecordId();
     await workflowManager.getTransitions();
     await workflowManager.login(
       LoginRegisterRequest(

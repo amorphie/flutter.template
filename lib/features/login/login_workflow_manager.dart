@@ -9,6 +9,7 @@ class LoginWorkflowManager extends NetworkManager {
   static String recordId = const Uuid().v1();
   final String entity = "openbanking-register";
 
+  // Has no effect, it only helps developers for next steps
   Future getTransitions() async {
     final response = await requestGet('workflow/consumer/$entity/record/$recordId/transition');
     print('Response is $response');
@@ -103,5 +104,9 @@ class LoginWorkflowManager extends NetworkManager {
       "routeData": "",
       "queryData": ""
     });
+  }
+
+  void resetRecordId() {
+    recordId = const Uuid().v1();
   }
 }
