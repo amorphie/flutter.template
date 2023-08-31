@@ -65,23 +65,8 @@ class _LoginPageState extends State<LoginPage> {
                     context: context,
                     controller: textControllerPhoneNumber,
                   ).padding(left: 32, right: 32, top: 8, bottom: 16),
-                  BrgButton(
-                    text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(),
-                    onPressed: () {
-                      final prefix = textControllerPhoneNumber.text.substring(0, 3);
-                      final number = textControllerPhoneNumber.text.substring(3, textControllerPhoneNumber.text.length);
-                      context.read<LoginBloc>().add(
-                            LoginEventLoginWithCredentials(
-                              tckn: textControllerTckn.text,
-                              phoneNumber: BrgPhoneNumber(
-                                countryCode: "90", // TODO: Get country code from user input
-                                prefix: prefix,
-                                number: number,
-                              ),
-                            ),
-                          );
-                    },
-                  ).padding(left: 32, right: 32, bottom: 16),
+                  _buildLoginSignupButton(context, const LocalizableText(tr: "KAYIT OL", en: "SIGNUP").localize()),
+                  _buildLoginSignupButton(context, const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize()),
                   const Spacer(),
                   const SecurityIconWidget(),
                 ],
@@ -91,6 +76,26 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     );
+  }
+
+  Widget _buildLoginSignupButton(BuildContext context, String buttonText) {
+    return BrgButton(
+      text: buttonText,
+      onPressed: () {
+        final prefix = textControllerPhoneNumber.text.substring(0, 3);
+        final number = textControllerPhoneNumber.text.substring(3, textControllerPhoneNumber.text.length);
+        context.read<LoginBloc>().add(
+              LoginEventLoginWithCredentials(
+                tckn: textControllerTckn.text,
+                phoneNumber: BrgPhoneNumber(
+                  countryCode: "90", // TODO: Get country code from user input
+                  prefix: prefix,
+                  number: number,
+                ),
+              ),
+            );
+      },
+    ).padding(left: 32, right: 32, bottom: 16);
   }
 
   void _handleNavigation(BuildContext context, String navigationPath) {
