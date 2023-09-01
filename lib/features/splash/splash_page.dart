@@ -1,6 +1,7 @@
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/features/login/login_page_route.dart';
+import 'package:burgankuwait/features/welcome_page/welcome_page_route.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -21,8 +22,8 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(Duration(seconds: 2));
     NavigationHelper().navigate(
       context: context,
-      navigationType: NavigationType.pushReplacement,
-      path: "/${LoginPageRoute.path}",
+      navigationType: NavigationType.go,
+      path: "/${WelcomePageRoute.path}",
     );
   }
 

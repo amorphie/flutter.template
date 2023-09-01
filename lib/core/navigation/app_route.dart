@@ -10,6 +10,7 @@ import 'package:burgankuwait/features/set_security_question/set_security_questio
 import 'package:burgankuwait/features/splash/splash_page.dart';
 import 'package:burgankuwait/features/terms_and_conditions/terms_and_conditions_page_route.dart';
 import 'package:burgankuwait/features/terms_and_conditions_second/terms_and_conditions_second_page_route.dart';
+import 'package:burgankuwait/features/welcome_page/welcome_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ part 'app_route.g.dart';
 @TypedGoRoute<AppRoute>(
   path: AppRoute.path,
   routes: [
+    TypedGoRoute<WelcomePageRoute>(path: WelcomePageRoute.path),
     TypedGoRoute<LoginPageRoute>(
       path: LoginPageRoute.path,
       routes: [

@@ -15,6 +15,10 @@ RouteBase get $appRoute => GoRouteData.$route(
       factory: $AppRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
+          path: 'welcome',
+          factory: $WelcomePageRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'login',
           factory: $LoginPageRouteExtension._fromState,
           routes: [
@@ -70,6 +74,23 @@ extension $AppRouteExtension on AppRoute {
 
   String get location => GoRouteData.$location(
         '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $WelcomePageRouteExtension on WelcomePageRoute {
+  static WelcomePageRoute _fromState(GoRouterState state) => WelcomePageRoute();
+
+  String get location => GoRouteData.$location(
+        '/welcome',
       );
 
   void go(BuildContext context) => context.go(location);
