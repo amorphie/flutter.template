@@ -1,4 +1,5 @@
 import 'package:burgankuwait/core/localization/localizable_text.dart';
+import 'package:burgankuwait/core/models/brg_phone_number.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
@@ -7,35 +8,33 @@ import 'package:burgankuwait/core/reusable_widgets/brg_text_form_field/brg_text_
 import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
-import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
-import 'package:burgankuwait/features/login/bloc/login_bloc.dart';
+import 'package:burgankuwait/features/register/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   late TextEditingController textControllerTckn;
-  late TextEditingController textControllerPassword;
-  final passwordLength = 6;
+  late TextEditingController textControllerPhoneNumber;
 
   @override
   void initState() {
     super.initState();
     textControllerTckn = TextEditingController(text: null); // Pass locally saved TCKN from storage if exist
-    textControllerPassword = TextEditingController(text: null);
+    textControllerPhoneNumber = TextEditingController(text: null);
   }
 
   @override
   void dispose() {
     textControllerTckn.dispose();
-    textControllerPassword.dispose();
+    textControllerPhoneNumber.dispose();
     super.dispose();
   }
 
@@ -43,9 +42,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: BlocConsumer<LoginBloc, LoginState>(
+      body: BlocConsumer<RegisterBloc, RegisterState>(
         listener: (context, state) {
-          if (state is LoginStateInitial && state.navigationPath != null) {
+          if (state is RegisterStateInitial && state.navigationPath != null) {
             _handleNavigation(context, state.navigationPath!);
           }
         },
@@ -62,19 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                     context: context,
                     controller: textControllerTckn,
                   ).padding(left: 32, right: 32, top: 32, bottom: 8),
-                  BrgTextFormField.password(
+                  BrgTextFormField.phoneNumber(
                     context: context,
-                    labelText: const LocalizableText(tr: "Şifre", en: "Password").localize(),
-                    controller: textControllerPassword,
-                    validator: BrgValidator().minLength(
-                      minLength: passwordLength,
-                      errorMessage: LocalizableText(
-                        tr: "Şifreniz $passwordLength karakterden kısadır.",
-                        en: "Password is less than $passwordLength character.",
-                      ).localize(),
-                    ),
-                    maxLength: passwordLength,
-                    onlyDigits: true,
+                    controller: textControllerPhoneNumber,
                   ).padding(left: 32, right: 32, top: 8, bottom: 16),
                   _buildLoginButton(context),
                   const Spacer(),
@@ -88,16 +77,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildLoginButton(
-    BuildContext context,
-  ) {
+  Widget _buildLoginButton(BuildContext context) {
     return BrgButton(
-      text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(),
+      text: const LocalizableText(tr: "KAYIT OL", en: "SIGNUP").localize(),
       onPressed: () {
-        context.read<LoginBloc>().add(
-              LoginEventLoginWithCredentials(
-                username: textControllerTckn.text,
-                password: textControllerPassword.text, // TODO: Pass password
+        final prefix = textControllerPhoneNumber.text.substring(0, 3);
+        final number = textControllerPhoneNumber.text.substring(3, textControllerPhoneNumber.text.length);
+        context.read<RegisterBloc>().add(
+              RegisterEventRegisterWithPhoneNumber(
+                tckn: textControllerTckn.text,
+                phoneNumber: BrgPhoneNumber(
+                  countryCode: "90", // TODO: Get country code from user input
+                  prefix: prefix,
+                  number: number,
+                ),
               ),
             );
       },

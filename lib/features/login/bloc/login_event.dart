@@ -5,13 +5,13 @@ sealed class LoginEvent extends Equatable {
 }
 
 class LoginEventLoginWithCredentials extends LoginEvent {
-  final String tckn;
-  final BrgPhoneNumber phoneNumber;
+  final String username;
+  final String password;
 
-  const LoginEventLoginWithCredentials({required this.tckn, required this.phoneNumber});
+  const LoginEventLoginWithCredentials({required this.username, required this.password});
 
   @override
-  List<Object?> get props => [tckn, phoneNumber];
+  List<Object?> get props => [username, password];
 }
 
 class LoginEventHandleNavigation extends LoginEvent {

@@ -53,6 +53,16 @@ RouteBase get $appRoute => GoRouteData.$route(
           ],
         ),
         GoRouteData.$route(
+          path: 'register',
+          factory: $RegisterPageRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'otp',
+              factory: $OtpPageRouteExtension._fromState,
+            ),
+          ],
+        ),
+        GoRouteData.$route(
           path: 'home',
           factory: $HomePageRouteExtension._fromState,
           routes: [
@@ -235,6 +245,24 @@ extension $TermsAndConditionsSecondRouteExtension
 
   String get location => GoRouteData.$location(
         '/login/terms-and-conditions-second',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $RegisterPageRouteExtension on RegisterPageRoute {
+  static RegisterPageRoute _fromState(GoRouterState state) =>
+      RegisterPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/register',
       );
 
   void go(BuildContext context) => context.go(location);

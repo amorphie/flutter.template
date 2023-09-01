@@ -4,6 +4,7 @@ import 'package:burgankuwait/features/home/routing/home_page_route.dart';
 import 'package:burgankuwait/features/login/login_page_route.dart';
 import 'package:burgankuwait/features/otp/otp_page_route.dart';
 import 'package:burgankuwait/features/personal_info/personal_info_page_route.dart';
+import 'package:burgankuwait/features/register/register_page_route.dart';
 import 'package:burgankuwait/features/set_password/set_password_page_route.dart';
 import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';
 import 'package:burgankuwait/features/set_security_question/set_security_question_page_route.dart';
@@ -31,6 +32,12 @@ part 'app_route.g.dart';
         TypedGoRoute<SetSecurityPicturePageRoute>(path: SetSecurityPicturePageRoute.path),
         TypedGoRoute<TermsAndConditionsRoute>(path: TermsAndConditionsRoute.path),
         TypedGoRoute<TermsAndConditionsSecondRoute>(path: TermsAndConditionsSecondRoute.path),
+      ],
+    ),
+    TypedGoRoute<RegisterPageRoute>(
+      path: RegisterPageRoute.path,
+      routes: [
+        TypedGoRoute<OtpPageRoute>(path: OtpPageRoute.path),
       ],
     ),
     TypedGoRoute<HomePageRoute>(

@@ -2,6 +2,7 @@ import 'package:burgankuwait/core/navigation/app_route.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/features/login/login_page_route.dart';
+import 'package:burgankuwait/features/register/register_page_route.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -35,7 +36,7 @@ class WelcomePage extends StatelessWidget {
               BrgButton(text: "LOGIN", onPressed: () => LoginPageRoute().go(context)).padding(top: 200),
               BrgButton(
                 text: "REGISTER",
-                onPressed: () => LoginPageRoute().go(context),
+                onPressed: () => RegisterPageRoute().go(context),
                 color: Colors.white,
                 textColor: Colors.blue,
               ).padding(top: 24),

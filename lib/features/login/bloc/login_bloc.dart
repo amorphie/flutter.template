@@ -1,9 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:burgankuwait/core/models/brg_phone_number.dart';
 import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
-import 'package:burgankuwait/features/login/models/login_entity.dart';
-import 'package:burgankuwait/features/login/models/login_register_request.dart';
 import 'package:equatable/equatable.dart';
 
 part 'login_event.dart';
@@ -24,11 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future _onLoginWithCredentials(LoginEventLoginWithCredentials event, Emitter<LoginState> emit) async {
     workflowManager.resetRecordId();
     await workflowManager.getTransitions();
-    await workflowManager.login(
-      LoginRegisterRequest(
-        LoginEntity(tckn: event.tckn, phoneNumber: event.phoneNumber),
-      ),
-    );
+    await workflowManager.login(username: event.username, password: event.password);
   }
 
   _listenForSignalrUpdates() {

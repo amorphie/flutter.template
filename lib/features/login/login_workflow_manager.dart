@@ -1,6 +1,6 @@
+import 'package:burgankuwait/core/models/brg_phone_number.dart';
 import 'package:burgankuwait/core/network/network_manager.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
-import 'package:burgankuwait/features/login/models/login_register_request.dart';
 import 'package:uuid/uuid.dart';
 
 class LoginWorkflowManager extends NetworkManager {
@@ -15,11 +15,34 @@ class LoginWorkflowManager extends NetworkManager {
     print('Response is $response');
   }
 
-  Future login(LoginRegisterRequest requestModel) async {
-    await requestPost(
-      'workflow/consumer/$entity/record/$recordId/transition/openbanking-register-send-sms',
-      requestModel.toJson(),
-    );
+  Future register({required String tckn, required BrgPhoneNumber phoneNumber}) async {
+    await requestPost('workflow/consumer/$entity/record/$recordId/transition/openbanking-register-send-sms', {
+      "entityData": {"reference": tckn, "phone": phoneNumber.toJson()},
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
+  }
+
+  Future login({required String username, required String password}) async {
+    await requestPost('workflow/consumer/login/record/$recordId/transition/start-password-flow-web', {
+      "entityData": {
+        "username": username,
+        "password": password,
+        "client_id": "aa87c83e-493d-473a-a9d1-87ebe3f8f7f5",
+        "client_secret": "asdasd",
+        "scopes": ["retail-loan", "openId"],
+        "grant_type": "password",
+        "record_id": "3f4db333-0515-423f-9dd5-3394e712f7e9"
+      },
+      "formData": "",
+      "additionalData": "",
+      "getSignalRHub": true,
+      "routeData": "",
+      "queryData": ""
+    });
   }
 
   Future submitOtp(String otp) async {
