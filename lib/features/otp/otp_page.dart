@@ -26,7 +26,7 @@ class OtpPage extends StatefulWidget {
 
 class _OtpPageState extends State<OtpPage> {
   late TextEditingController controllerOtp;
-  final int otpLength = 4;
+  final int otpLength = 6;
 
   @override
   void initState() {
