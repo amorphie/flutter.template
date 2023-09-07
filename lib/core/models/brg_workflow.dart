@@ -1,0 +1,4 @@
+enum BrgWorkflow {
+  login,
+  register,
+}

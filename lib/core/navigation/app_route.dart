@@ -2,7 +2,8 @@ import 'package:burgankuwait/features/account_details/account_details_page_route
 import 'package:burgankuwait/features/add_address/add_address_page_route.dart';
 import 'package:burgankuwait/features/home/routing/home_page_route.dart';
 import 'package:burgankuwait/features/login/login_page_route.dart';
-import 'package:burgankuwait/features/otp/otp_page_route.dart';
+import 'package:burgankuwait/features/otp/routes/login_otp_page_route.dart';
+import 'package:burgankuwait/features/otp/routes/register_otp_page_route.dart';
 import 'package:burgankuwait/features/personal_info/personal_info_page_route.dart';
 import 'package:burgankuwait/features/register/register_page_route.dart';
 import 'package:burgankuwait/features/set_password/set_password_page_route.dart';
@@ -25,19 +26,19 @@ part 'app_route.g.dart';
     TypedGoRoute<LoginPageRoute>(
       path: LoginPageRoute.path,
       routes: [
-        TypedGoRoute<OtpPageRoute>(path: OtpPageRoute.path),
+        TypedGoRoute<LoginOtpPageRoute>(path: LoginOtpPageRoute.path),
+      ],
+    ),
+    TypedGoRoute<RegisterPageRoute>(
+      path: RegisterPageRoute.path,
+      routes: [
+        TypedGoRoute<RegisterOtpPageRoute>(path: RegisterOtpPageRoute.path),
         TypedGoRoute<PersonalInfoPageRoute>(path: PersonalInfoPageRoute.path),
         TypedGoRoute<SetPasswordPageRoute>(path: SetPasswordPageRoute.path),
         TypedGoRoute<SetSecurityQuestionPageRoute>(path: SetSecurityQuestionPageRoute.path),
         TypedGoRoute<SetSecurityPicturePageRoute>(path: SetSecurityPicturePageRoute.path),
         TypedGoRoute<TermsAndConditionsRoute>(path: TermsAndConditionsRoute.path),
         TypedGoRoute<TermsAndConditionsSecondRoute>(path: TermsAndConditionsSecondRoute.path),
-      ],
-    ),
-    TypedGoRoute<RegisterPageRoute>(
-      path: RegisterPageRoute.path,
-      routes: [
-        TypedGoRoute<OtpPageRoute>(path: OtpPageRoute.path),
       ],
     ),
     TypedGoRoute<HomePageRoute>(

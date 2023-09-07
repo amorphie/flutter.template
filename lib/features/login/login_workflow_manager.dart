@@ -1,4 +1,5 @@
 import 'package:burgankuwait/core/models/brg_phone_number.dart';
+import 'package:burgankuwait/core/models/brg_workflow.dart';
 import 'package:burgankuwait/core/network/network_manager.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:uuid/uuid.dart';
@@ -7,16 +8,17 @@ class LoginWorkflowManager extends NetworkManager {
   LoginWorkflowManager() : super(baseURL: AppConstants.baseUrl);
 
   static String recordId = const Uuid().v1();
-  final String entity = "openbanking-register";
+  final String entityRegister = "openbanking-register";
+  final String entityLogin = "login";
 
   // Has no effect, it only helps developers for next steps
   Future getTransitions() async {
-    final response = await requestGet('workflow/consumer/$entity/record/$recordId/transition');
+    final response = await requestGet('workflow/consumer/$entityRegister/record/$recordId/transition');
     print('Response is $response');
   }
 
   Future register({required String tckn, required BrgPhoneNumber phoneNumber}) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/openbanking-register-send-sms', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/openbanking-register-send-sms', {
       "entityData": {"reference": tckn, "phone": phoneNumber.toJson()},
       "formData": "",
       "additionalData": "",
@@ -31,11 +33,10 @@ class LoginWorkflowManager extends NetworkManager {
       "entityData": {
         "username": username,
         "password": password,
-        "client_id": "aa87c83e-493d-473a-a9d1-87ebe3f8f7f5",
-        "client_secret": "asdasd",
-        "scopes": ["retail-loan", "openId"],
-        "grant_type": "password",
-        "record_id": "3f4db333-0515-423f-9dd5-3394e712f7e9"
+        "client_id": "aa87c83e-493d-473a-a9d1-87ebe3f8f7f6",
+        "client_secret": "7055067a-1729-45ff-ba6e-0253d1b3a0e8",
+        "scopes": ["retail-customer", "openId"],
+        "grant_type": "password"
       },
       "formData": "",
       "additionalData": "",
@@ -45,8 +46,10 @@ class LoginWorkflowManager extends NetworkManager {
     });
   }
 
-  Future submitOtp(String otp) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/openbanking-sms-key-send', {
+  Future submitOtp(String otp, BrgWorkflow workflow) async {
+    final selectedEntity = workflow == BrgWorkflow.register ? entityRegister : entityLogin;
+    final selectedTransition = workflow == BrgWorkflow.register ? 'openbanking-sms-key-send': 'send-otp-login-flow';
+    await requestPost('workflow/consumer/$selectedEntity/record/$recordId/transition/$selectedTransition', {
       "entityData": {"smsKey": otp},
       "formData": "",
       "additionalData": "",
@@ -57,7 +60,7 @@ class LoginWorkflowManager extends NetworkManager {
   }
 
   Future submitPersonalInfo(String name, String surname, String email) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-personal-information', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-personal-information', {
       "entityData": {
         "firstName": name,
         "lastName": surname,
@@ -72,7 +75,7 @@ class LoginWorkflowManager extends NetworkManager {
   }
 
   Future submitPassword(String password) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-openbanking-send-password', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-openbanking-send-password', {
       "entityData": {"password": password},
       "formData": "",
       "additionalData": "",
@@ -83,7 +86,7 @@ class LoginWorkflowManager extends NetworkManager {
   }
 
   Future submitSecurityQuestion(String answer) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-sequrity-question', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-sequrity-question', {
       "entityData": {
         "question": "13c8ecc3-bf95-461c-aad6-6131c06f20e5", // TODO: Get it from API
         "answer": answer
@@ -97,7 +100,7 @@ class LoginWorkflowManager extends NetworkManager {
   }
 
   Future submitSecurityImage(String selectedPictureId) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-sequrity-image', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-sequrity-image', {
       "entityData": {"imageId": selectedPictureId},
       "formData": "",
       "additionalData": "",
@@ -108,7 +111,7 @@ class LoginWorkflowManager extends NetworkManager {
   }
 
   Future submitFirstContracts({required bool contract1, required bool contract2}) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-contract-1', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-contract-1', {
       "entityData": {"contract1": contract1, "contract2": contract2},
       "formData": "",
       "additionalData": "",
@@ -119,7 +122,7 @@ class LoginWorkflowManager extends NetworkManager {
   }
 
   Future submitThirdContract({required bool contract3}) async {
-    await requestPost('workflow/consumer/$entity/record/$recordId/transition/ob-send-contract-2', {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-contract-2', {
       "entityData": {"contract3": contract3},
       "formData": "",
       "additionalData": "",

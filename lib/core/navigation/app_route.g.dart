@@ -24,7 +24,17 @@ RouteBase get $appRoute => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: 'otp',
-              factory: $OtpPageRouteExtension._fromState,
+              factory: $LoginOtpPageRouteExtension._fromState,
+            ),
+          ],
+        ),
+        GoRouteData.$route(
+          path: 'register',
+          factory: $RegisterPageRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'otp',
+              factory: $RegisterOtpPageRouteExtension._fromState,
             ),
             GoRouteData.$route(
               path: 'personal-info',
@@ -49,16 +59,6 @@ RouteBase get $appRoute => GoRouteData.$route(
             GoRouteData.$route(
               path: 'terms-and-conditions-second',
               factory: $TermsAndConditionsSecondRouteExtension._fromState,
-            ),
-          ],
-        ),
-        GoRouteData.$route(
-          path: 'register',
-          factory: $RegisterPageRouteExtension._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'otp',
-              factory: $OtpPageRouteExtension._fromState,
             ),
           ],
         ),
@@ -130,121 +130,12 @@ extension $LoginPageRouteExtension on LoginPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $OtpPageRouteExtension on OtpPageRoute {
-  static OtpPageRoute _fromState(GoRouterState state) => OtpPageRoute();
+extension $LoginOtpPageRouteExtension on LoginOtpPageRoute {
+  static LoginOtpPageRoute _fromState(GoRouterState state) =>
+      LoginOtpPageRoute();
 
   String get location => GoRouteData.$location(
         '/login/otp',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $PersonalInfoPageRouteExtension on PersonalInfoPageRoute {
-  static PersonalInfoPageRoute _fromState(GoRouterState state) =>
-      PersonalInfoPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/personal-info',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $SetPasswordPageRouteExtension on SetPasswordPageRoute {
-  static SetPasswordPageRoute _fromState(GoRouterState state) =>
-      SetPasswordPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/set-password',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $SetSecurityQuestionPageRouteExtension
-    on SetSecurityQuestionPageRoute {
-  static SetSecurityQuestionPageRoute _fromState(GoRouterState state) =>
-      SetSecurityQuestionPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/set-security-question',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $SetSecurityPicturePageRouteExtension on SetSecurityPicturePageRoute {
-  static SetSecurityPicturePageRoute _fromState(GoRouterState state) =>
-      SetSecurityPicturePageRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/set-security-picture',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $TermsAndConditionsRouteExtension on TermsAndConditionsRoute {
-  static TermsAndConditionsRoute _fromState(GoRouterState state) =>
-      TermsAndConditionsRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/terms-and-conditions',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $TermsAndConditionsSecondRouteExtension
-    on TermsAndConditionsSecondRoute {
-  static TermsAndConditionsSecondRoute _fromState(GoRouterState state) =>
-      TermsAndConditionsSecondRoute();
-
-  String get location => GoRouteData.$location(
-        '/login/terms-and-conditions-second',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -263,6 +154,134 @@ extension $RegisterPageRouteExtension on RegisterPageRoute {
 
   String get location => GoRouteData.$location(
         '/register',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $RegisterOtpPageRouteExtension on RegisterOtpPageRoute {
+  static RegisterOtpPageRoute _fromState(GoRouterState state) =>
+      RegisterOtpPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/otp',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PersonalInfoPageRouteExtension on PersonalInfoPageRoute {
+  static PersonalInfoPageRoute _fromState(GoRouterState state) =>
+      PersonalInfoPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/personal-info',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SetPasswordPageRouteExtension on SetPasswordPageRoute {
+  static SetPasswordPageRoute _fromState(GoRouterState state) =>
+      SetPasswordPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/set-password',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SetSecurityQuestionPageRouteExtension
+    on SetSecurityQuestionPageRoute {
+  static SetSecurityQuestionPageRoute _fromState(GoRouterState state) =>
+      SetSecurityQuestionPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/set-security-question',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SetSecurityPicturePageRouteExtension on SetSecurityPicturePageRoute {
+  static SetSecurityPicturePageRoute _fromState(GoRouterState state) =>
+      SetSecurityPicturePageRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/set-security-picture',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TermsAndConditionsRouteExtension on TermsAndConditionsRoute {
+  static TermsAndConditionsRoute _fromState(GoRouterState state) =>
+      TermsAndConditionsRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/terms-and-conditions',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TermsAndConditionsSecondRouteExtension
+    on TermsAndConditionsSecondRoute {
+  static TermsAndConditionsSecondRoute _fromState(GoRouterState state) =>
+      TermsAndConditionsSecondRoute();
+
+  String get location => GoRouteData.$location(
+        '/register/terms-and-conditions-second',
       );
 
   void go(BuildContext context) => context.go(location);
