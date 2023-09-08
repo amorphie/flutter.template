@@ -7,10 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletons/skeletons.dart';
 
 class AccountSummaryWidget extends StatelessWidget {
-  // TODO: Get iban from constructor
-  final String iban = "TR76 0012 5095 3200 5404 8973 98";
+  final String iban;
 
-  const AccountSummaryWidget({Key? key}) : super(key: key);
+  const AccountSummaryWidget({Key? key, required this.iban}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

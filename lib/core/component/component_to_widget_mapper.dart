@@ -6,6 +6,7 @@ import 'package:burgankuwait/core/reusable_widgets/overdraft_info/overdraft_info
 import 'package:burgankuwait/core/reusable_widgets/sub_navigation/sub_navigation_widget.dart';
 import 'package:flutter/material.dart';
 
+// TODO: Delete this class after writing builders for all components
 class ComponentToWidgetMapper {
   Widget map({required ComponentId componentId}) {
     switch (componentId) {
@@ -14,7 +15,7 @@ class ComponentToWidgetMapper {
       case ComponentId.overdraftInfo:
         return const OverdraftInfoWidget();
       case ComponentId.accountSummary:
-        return const AccountSummaryWidget();
+        return const AccountSummaryWidget(iban: "TR76 0012 5095 3200 5404 8973 98");
       case ComponentId.lastTransactions:
         return const LastTransactionWidget();
       case ComponentId.subNavigation:

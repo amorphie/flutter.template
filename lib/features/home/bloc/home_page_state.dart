@@ -15,10 +15,10 @@ class HomePageStateLoading extends HomePageState {
 }
 
 class HomePageStateLoaded extends HomePageState {
-  final List<ComponentData> componentList;
+  final Map<String, dynamic> componentsMap;
 
-  const HomePageStateLoaded({required this.componentList});
+  const HomePageStateLoaded({required this.componentsMap});
 
   @override
-  List<Object> get props => [componentList];
+  List<Object> get props => [componentsMap];
 }
