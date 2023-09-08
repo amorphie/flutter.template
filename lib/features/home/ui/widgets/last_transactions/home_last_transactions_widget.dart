@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class LastTransactionWidget extends StatelessWidget {
-  const LastTransactionWidget({Key? key}) : super(key: key);
+class HomeLastTransactionWidget extends StatelessWidget {
+  const HomeLastTransactionWidget({
+    Key? key,
+    required this.title,
+    required this.userList,
+    required this.newTransactionText,
+  }) : super(key: key);
+
+  final String title;
+  final List<dynamic> userList;
+  final String newTransactionText;
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +19,11 @@ class LastTransactionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Son Transferler",
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 color: Colors.lightBlue,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -24,8 +33,7 @@ class LastTransactionWidget extends StatelessWidget {
           Row(
             children: [
               _buildNewTransactionItem(),
-              _buildLastTransactionItem("Emre", "Reyhanlioglu"),
-              _buildLastTransactionItem("Mertcan", "Yigin"),
+              ...userList.map((userMap) => _buildLastTransactionItem(userMap["name"] ?? "", userMap["surname"] ?? ""))
             ],
           )
         ],
@@ -50,9 +58,9 @@ class LastTransactionWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            "YENİ TRANSFER",
-            style: TextStyle(
+          Text(
+            newTransactionText,
+            style: const TextStyle(
               color: Colors.lightBlue,
               fontWeight: FontWeight.w500,
             ),
