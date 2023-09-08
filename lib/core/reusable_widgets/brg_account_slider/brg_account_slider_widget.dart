@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class AccountSliderWidget extends StatelessWidget {
-  const AccountSliderWidget({Key? key}) : super(key: key);
+class BrgAccountSliderWidget extends StatelessWidget {
+  const BrgAccountSliderWidget({
+    Key? key,
+    required this.openingDate,
+    required this.accountBalance,
+    required this.availableBalance,
+    required this.iban,
+    required this.branchDetails,
+  }) : super(key: key);
+
+  final String openingDate;
+  final String accountBalance;
+  final String availableBalance;
+  final String iban;
+  final String branchDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +50,9 @@ class AccountSliderWidget extends StatelessWidget {
         Column(
           children: [
             Text("Açılış Tarihi", style: TextStyle(color: Colors.white.withAlpha(150), fontSize: 14)),
-            const Text(
-              "21.08.2023",
-              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+            Text(
+              openingDate,
+              style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -48,13 +61,13 @@ class AccountSliderWidget extends StatelessWidget {
   }
 
   Widget _buildAccountBalanceRow() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 16.0, bottom: 8),
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0, bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("Hesap Bakiyesi", style: TextStyle(color: Colors.white, fontSize: 14)),
-          Text("0,00 TL", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+          const Text("Hesap Bakiyesi", style: TextStyle(color: Colors.white, fontSize: 14)),
+          Text(accountBalance, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -67,7 +80,7 @@ class AccountSliderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text("Kullanılabilir Bakiye", style: TextStyle(color: Colors.white.withAlpha(150), fontSize: 14)),
-          Text("1.860,90 TL",
+          Text(availableBalance,
               style: TextStyle(color: Colors.white.withAlpha(180), fontSize: 16, fontWeight: FontWeight.bold)),
         ],
       ),
@@ -75,10 +88,10 @@ class AccountSliderWidget extends StatelessWidget {
   }
 
   Widget _buildIbanRow() {
-    return const Row(
+    return Row(
       children: [
-        Text("TR76 0012 5095 3200 5404 8973 98", style: TextStyle(color: Colors.white, fontSize: 17)),
-        Padding(
+        Text(iban, style: const TextStyle(color: Colors.white, fontSize: 17)),
+        const Padding(
           padding: EdgeInsets.only(left: 4.0),
           child: Icon(Icons.ios_share, color: Colors.white),
         ),
@@ -87,13 +100,11 @@ class AccountSliderWidget extends StatelessWidget {
   }
 
   Widget _buildIbanDetailsRow() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 16.0),
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
       child: Row(
         children: [
-          Text("9530 - Merkez", style: TextStyle(color: Colors.white, fontSize: 14)),
-          SizedBox(width: 16),
-          Text("20054048 - 351", style: TextStyle(color: Colors.white, fontSize: 14)),
+          Text(branchDetails, style: const TextStyle(color: Colors.white, fontSize: 14)),
         ],
       ),
     );

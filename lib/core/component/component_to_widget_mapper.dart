@@ -1,5 +1,4 @@
 import 'package:burgankuwait/core/component/component_id.dart';
-import 'package:burgankuwait/core/reusable_widgets/account_slider/account_slider_widget.dart';
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget.dart';
 import 'package:burgankuwait/core/reusable_widgets/last_transactions/last_transactions_widget.dart';
 import 'package:burgankuwait/core/reusable_widgets/overdraft_info/overdraft_info_widget.dart';
@@ -11,7 +10,7 @@ class ComponentToWidgetMapper {
   Widget map({required ComponentId componentId}) {
     switch (componentId) {
       case ComponentId.accountSlider:
-        return const AccountSliderWidget();
+        return const SizedBox.shrink();
       case ComponentId.overdraftInfo:
         return const OverdraftInfoWidget();
       case ComponentId.accountSummary:
