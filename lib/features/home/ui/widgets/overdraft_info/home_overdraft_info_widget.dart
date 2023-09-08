@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class OverdraftInfoWidget extends StatelessWidget {
-  const OverdraftInfoWidget({Key? key}) : super(key: key);
+class HomeOverdraftInfoWidget extends StatelessWidget {
+  const HomeOverdraftInfoWidget({
+    Key? key,
+    required this.title,
+    required this.closeAccountButtonText,
+    required this.updateLimitButtonText,
+  }) : super(key: key);
+
+  final String title;
+  final String closeAccountButtonText;
+  final String updateLimitButtonText;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +19,9 @@ class OverdraftInfoWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          const Expanded(child: Text("Süper Ek Hesap", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-          _buildButton("Hesabı Kapat"),
-          _buildButton("Limit Güncelle"),
+          Expanded(child: Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+          _buildButton(closeAccountButtonText),
+          _buildButton(updateLimitButtonText),
         ],
       ),
     );
