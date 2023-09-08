@@ -48,9 +48,9 @@ class LoginWorkflowManager extends NetworkManager {
 
   Future submitOtp(String otp, BrgWorkflow workflow) async {
     final selectedEntity = workflow == BrgWorkflow.register ? entityRegister : entityLogin;
-    final selectedTransition = workflow == BrgWorkflow.register ? 'openbanking-sms-key-send': 'send-otp-login-flow';
+    final selectedTransition = workflow == BrgWorkflow.register ? 'openbanking-sms-key-send': 'send-push-login-flow';
     await requestPost('workflow/consumer/$selectedEntity/record/$recordId/transition/$selectedTransition', {
-      "entityData": {"smsKey": otp},
+      "entityData": {"otpValue": otp},
       "formData": "",
       "additionalData": "",
       "getSignalRHub": true,
