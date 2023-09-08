@@ -1,43 +1,24 @@
 import 'package:burgankuwait/core/reusable_widgets/navigation_button/navigation_button.dart';
 import 'package:burgankuwait/core/reusable_widgets/new_badge/new_badge_widget.dart';
-import 'package:burgankuwait/core/reusable_widgets/sub_navigation/bloc/sub_navigation_widget_bloc.dart';
 import 'package:burgankuwait/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SubNavigationWidget extends StatelessWidget {
-  const SubNavigationWidget({Key? key}) : super(key: key);
+  final List<SubNavigationComponentDetails> componentDetailsList;
+
+  const SubNavigationWidget({Key? key, required this.componentDetailsList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: BlocProvider<SubNavigationWidgetBloc>(
-        create: (context) => SubNavigationWidgetBloc()..add(SubNavigationWidgetEventFetchComponentDetails()),
-        child: BlocBuilder<SubNavigationWidgetBloc, SubNavigationWidgetState>(
-          builder: (context, state) {
-            switch (state) {
-              case SubNavigationWidgetStateLoading _:
-                return _buildLoading();
-              case SubNavigationWidgetStateLoaded _:
-                return _buildComponents(state.componentDetailsList, context);
-            }
-          },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          children: [
+            ...componentDetailsList.map((e) => _buildNavigationItemRow(e, context)),
+          ],
         ),
-      ),
-    );
-  }
-
-  // TODO: Display skeleton loading
-  Widget _buildLoading() => const SizedBox(height: 180, child: Center(child: CircularProgressIndicator()));
-
-  Widget _buildComponents(List<SubNavigationComponentDetails> componentDetailsList, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        children: [
-          ...componentDetailsList.map((e) => _buildNavigationItemRow(e, context)),
-        ],
       ),
     );
   }
@@ -57,7 +38,7 @@ class SubNavigationWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                componentDetails.displayName?.localize() ?? '',
+                componentDetails.displayName,
                 style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
               ),
               SizedBox(

@@ -1,5 +1,3 @@
-import 'package:burgankuwait/core/component/component_id.dart';
-import 'package:burgankuwait/core/component/component_to_widget_mapper.dart';
 import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +18,9 @@ class HomePage extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             case HomePageStateLoaded _:
               return JsonWidgetData.fromDynamic(state.componentsMap)?.build(
-                context: context,
-              ) ?? const SizedBox.shrink();
+                    context: context,
+                  ) ??
+                  const SizedBox.shrink();
             default:
               return const Scaffold();
           }

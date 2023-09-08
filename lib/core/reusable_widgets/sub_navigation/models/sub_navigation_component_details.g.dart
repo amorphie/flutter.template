@@ -9,14 +9,11 @@ part of 'sub_navigation_component_details.dart';
 SubNavigationComponentDetails _$SubNavigationComponentDetailsFromJson(
         Map<String, dynamic> json) =>
     SubNavigationComponentDetails(
-      displayName: json['display-name'] == null
-          ? null
-          : LocalizableText.fromJson(
-              json['display-name'] as Map<String, dynamic>),
+      displayName: json['display_name'] as String,
       icon: json['icon'] as String? ?? '',
       navigateTo: json['page'] as String? ?? '',
       navigationType: $enumDecodeNullable(
-              _$NavigationTypeEnumMap, json['navigation-type']) ??
+              _$NavigationTypeEnumMap, json['navigation_type']) ??
           NavigationType.go,
       displayNewBadge: json['new'] as bool? ?? false,
       active: json['active'] as bool? ?? false,

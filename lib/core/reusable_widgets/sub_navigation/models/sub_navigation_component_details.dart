@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -6,8 +5,8 @@ part 'sub_navigation_component_details.g.dart';
 
 @JsonSerializable(createToJson: false)
 class SubNavigationComponentDetails {
-  @JsonKey(name: "display-name")
-  final LocalizableText? displayName;
+  @JsonKey(name: "display_name")
+  final String displayName;
 
   @JsonKey(name: "icon", defaultValue: "")
   final String icon;
@@ -15,7 +14,7 @@ class SubNavigationComponentDetails {
   @JsonKey(name: "page", defaultValue: "")
   final String navigateTo;
 
-  @JsonKey(name: "navigation-type", defaultValue: NavigationType.go)
+  @JsonKey(name: "navigation_type", defaultValue: NavigationType.go)
   final NavigationType navigationType;
 
   @JsonKey(name: "new", defaultValue: false)
@@ -24,8 +23,8 @@ class SubNavigationComponentDetails {
   @JsonKey(name: "active", defaultValue: false)
   final bool active;
 
-  factory SubNavigationComponentDetails.fromJson(Map<String, dynamic> json) =>
-      _$SubNavigationComponentDetailsFromJson(json);
+  factory SubNavigationComponentDetails.fromJson(Map json) =>
+      _$SubNavigationComponentDetailsFromJson(json.cast<String, dynamic>());
 
   SubNavigationComponentDetails({
     required this.displayName,
