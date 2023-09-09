@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:burgankuwait/core/component/component_data.dart';
-import 'package:burgankuwait/features/home/network/home_network_manager.dart';
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   HomePageBloc() : super(HomePageStateInitial()) {
     on<HomePageEventFetchComponents>((event, emit) async {
       emit(HomePageStateLoading());
-      var response = await HomeNetworkManager(baseUrlLocal).fetchHomePageComponents();
+      var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId("home");
       emit(HomePageStateLoaded(componentsMap: response));
     });
   }
