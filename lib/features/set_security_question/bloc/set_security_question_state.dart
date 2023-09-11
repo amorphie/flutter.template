@@ -12,3 +12,17 @@ class SetSecurityQuestionStateInitial extends SetSecurityQuestionState {
   @override
   List<Object?> get props => [navigationPath];
 }
+
+class SetSecurityQuestionStateLoading extends SetSecurityQuestionState {
+  @override
+  List<Object> get props => [];
+}
+
+class SetSecurityQuestionStateLoaded extends SetSecurityQuestionState {
+  final Map<String, dynamic> componentsMap;
+
+  const SetSecurityQuestionStateLoaded({required this.componentsMap});
+
+  @override
+  List<Object> get props => [componentsMap];
+}

@@ -4,10 +4,11 @@ sealed class SetSecurityQuestionEvent extends Equatable {
   const SetSecurityQuestionEvent();
 }
 
-class SetSecurityQuestionEventPressContinueButton extends SetSecurityQuestionEvent {
+class SetSecurityQuestionEventPressChangeButton extends SetSecurityQuestionEvent {
   final String answer;
+  final String transitionId;
 
-  const SetSecurityQuestionEventPressContinueButton({required this.answer});
+  const SetSecurityQuestionEventPressChangeButton({required this.answer, required this.transitionId});
 
   @override
   List<Object?> get props => [answer];
@@ -20,4 +21,9 @@ class SetSecurityQuestionEventHandleNavigation extends SetSecurityQuestionEvent 
 
   @override
   List<Object?> get props => [navigationPath];
+}
+
+class SetSecurityQuestionEventFetchComponents extends SetSecurityQuestionEvent {
+  @override
+  List<Object?> get props => [];
 }

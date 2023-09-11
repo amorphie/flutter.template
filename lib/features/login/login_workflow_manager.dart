@@ -48,7 +48,7 @@ class LoginWorkflowManager extends NetworkManager {
 
   Future submitOtp(String otp, BrgWorkflow workflow, String transitionId) async {
     final selectedEntity = workflow == BrgWorkflow.register ? entityRegister : entityLogin;
-    final selectedKey =  workflow == BrgWorkflow.register ? 'smsKey': 'otpValue';
+    final selectedKey = workflow == BrgWorkflow.register ? 'smsKey' : 'otpValue';
     await requestPost('workflow/consumer/$selectedEntity/record/$recordId/transition/$transitionId', {
       "entityData": {selectedKey: otp},
       "formData": "",
@@ -85,8 +85,8 @@ class LoginWorkflowManager extends NetworkManager {
     });
   }
 
-  Future submitSecurityQuestion(String answer) async {
-    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-sequrity-question', {
+  Future submitSecurityQuestion({required String answer, required String transitionId}) async {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/$transitionId', {
       "entityData": {
         "question": "13c8ecc3-bf95-461c-aad6-6131c06f20e5", // TODO: Get it from API
         "answer": answer

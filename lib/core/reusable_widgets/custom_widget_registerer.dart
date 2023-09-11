@@ -12,6 +12,7 @@ import 'package:burgankuwait/features/otp/widgets/otp_input_with_submit_button/o
 import 'package:burgankuwait/features/otp/widgets/title/otp_title_widget_builder.dart';
 import 'package:burgankuwait/features/personal_info/widgets/personal_info_form_widget_builder.dart';
 import 'package:burgankuwait/features/set_password/widgets/set_password_form_widget_builder.dart';
+import 'package:burgankuwait/features/set_security_question/widgets/set_security_question_form_widget_builder.dart';
 import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
 class CustomWidgetRegisterer {
@@ -91,6 +92,11 @@ class CustomWidgetRegisterer {
     registry.registerCustomBuilder(
       SetPasswordFormWidgetBuilder.type,
       const JsonWidgetBuilderContainer(builder: SetPasswordFormWidgetBuilder.fromDynamic),
+    );
+
+    registry.registerCustomBuilder(
+      SetSecurityQuestionFormWidgetBuilder.type,
+      const JsonWidgetBuilderContainer(builder: SetSecurityQuestionFormWidgetBuilder.fromDynamic),
     );
   }
 }

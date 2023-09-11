@@ -16,7 +16,7 @@ class SetSecurityQuestionPageRoute extends GoRouteData {
       create: (context) => SetSecurityQuestionBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-      ),
+      )..add(SetSecurityQuestionEventFetchComponents()),
       child: const SetSecurityQuestionPage(),
     );
   }
