@@ -15,8 +15,12 @@ class TermsAndConditionsEventUpdateContractStatus extends TermsAndConditionsEven
 }
 
 class TermsAndConditionsEventPressContinueButton extends TermsAndConditionsEvent {
+  final String transitionId;
+
+  const TermsAndConditionsEventPressContinueButton({required this.transitionId});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [transitionId];
 }
 
 class TermsAndConditionsEventHandleNavigation extends TermsAndConditionsEvent {
@@ -26,4 +30,9 @@ class TermsAndConditionsEventHandleNavigation extends TermsAndConditionsEvent {
 
   @override
   List<Object?> get props => [navigationPath];
+}
+
+class TermsAndConditionsEventFetchComponents extends TermsAndConditionsEvent {
+  @override
+  List<Object?> get props => [];
 }

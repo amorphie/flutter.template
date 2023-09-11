@@ -12,3 +12,17 @@ class TermsAndConditionsStateInitial extends TermsAndConditionsState {
   @override
   List<Object?> get props => [navigationPath];
 }
+
+class TermsAndConditionsStateLoading extends TermsAndConditionsState {
+  @override
+  List<Object> get props => [];
+}
+
+class TermsAndConditionsStateLoaded extends TermsAndConditionsState {
+  final Map<String, dynamic> componentsMap;
+
+  const TermsAndConditionsStateLoaded({required this.componentsMap});
+
+  @override
+  List<Object> get props => [componentsMap];
+}

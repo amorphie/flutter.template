@@ -16,7 +16,7 @@ class TermsAndConditionsRoute extends GoRouteData {
       create: (context) => TermsAndConditionsBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-      ),
+      )..add(TermsAndConditionsEventFetchComponents()),
       child: const TermsAndConditionsPage(),
     );
   }
