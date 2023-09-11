@@ -23,3 +23,8 @@ class PersonalInfoEventHandleNavigation extends PersonalInfoEvent {
   @override
   List<Object?> get props => [navigationPath];
 }
+
+class PersonalInfoEventFetchComponents extends PersonalInfoEvent {
+  @override
+  List<Object?> get props => [];
+}
