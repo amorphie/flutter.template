@@ -1,5 +1,7 @@
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_account_slider/brg_account_slider_widget_builder.dart';
+import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget_builder.dart';
+import 'package:burgankuwait/core/reusable_widgets/spacer/spacer_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/sub_navigation/sub_navigation_widget_builder.dart';
 import 'package:burgankuwait/features/home/ui/widgets/last_transactions/home_last_transactions_widget_builder.dart';
 import 'package:burgankuwait/features/home/ui/widgets/overdraft_info/home_overdraft_info_widget_builder.dart';
@@ -61,6 +63,16 @@ class CustomWidgetRegisterer {
     registry.registerCustomBuilder(
       OtpInputWithSubmitButtonWidgetBuilder.type,
       const JsonWidgetBuilderContainer(builder: OtpInputWithSubmitButtonWidgetBuilder.fromDynamic),
+    );
+
+    registry.registerCustomBuilder(
+      SecurityIconWidgetBuilder.type,
+      const JsonWidgetBuilderContainer(builder: SecurityIconWidgetBuilder.fromDynamic),
+    );
+
+    registry.registerCustomBuilder(
+      SpacerBuilder.type,
+      const JsonWidgetBuilderContainer(builder: SpacerBuilder.fromDynamic),
     );
   }
 }

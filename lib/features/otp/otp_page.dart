@@ -2,7 +2,6 @@ import 'package:burgankuwait/core/models/brg_workflow.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/features/otp/bloc/otp_page_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,28 +21,32 @@ class _OtpPageState extends State<OtpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BrgAppBar(),
-      body: SingleChildScrollView(
+      body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
-        child: BlocConsumer<OtpPageBloc, OtpPageState>(
-          listener: (context, state) {
-            if (state is OtpPageStateInitial && state.navigationPath != null) {
-              _handleNavigation(context, state.navigationPath!);
-            }
-          },
-          builder: (context, state) {
-            switch (state) {
-              case OtpPageStateLoading _:
-                return const Center(child: CircularProgressIndicator());
-              case OtpPageStateLoaded _:
-                return JsonWidgetData.fromDynamic(state.componentsMap)?.build(
-                      context: context,
-                    ) ??
-                    const SizedBox.shrink();
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
+        slivers: [
+          SliverFillRemaining(
+            child: BlocConsumer<OtpPageBloc, OtpPageState>(
+              listener: (context, state) {
+                if (state is OtpPageStateInitial && state.navigationPath != null) {
+                  _handleNavigation(context, state.navigationPath!);
+                }
+              },
+              builder: (context, state) {
+                switch (state) {
+                  case OtpPageStateLoading _:
+                    return const Center(child: CircularProgressIndicator());
+                  case OtpPageStateLoaded _:
+                    return JsonWidgetData.fromDynamic(state.componentsMap)?.build(
+                          context: context,
+                        ) ??
+                        const SizedBox.shrink();
+                  default:
+                    return const SizedBox.shrink();
+                }
+              },
+            ),
+          )
+        ],
       ),
     );
   }
