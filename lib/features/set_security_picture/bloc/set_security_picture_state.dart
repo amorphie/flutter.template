@@ -12,3 +12,17 @@ class SetSecurityPictureStateInitial extends SetSecurityPictureState {
   @override
   List<Object?> get props => [navigationPath];
 }
+
+class SetSecurityPictureStateLoading extends SetSecurityPictureState {
+  @override
+  List<Object> get props => [];
+}
+
+class SetSecurityPictureStateLoaded extends SetSecurityPictureState {
+  final Map<String, dynamic> componentsMap;
+
+  const SetSecurityPictureStateLoaded({required this.componentsMap});
+
+  @override
+  List<Object> get props => [componentsMap];
+}

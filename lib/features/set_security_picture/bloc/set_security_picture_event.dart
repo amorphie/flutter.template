@@ -6,8 +6,9 @@ sealed class SetSecurityPictureEvent extends Equatable {
 
 class SetSecurityPictureEventPressContinueButton extends SetSecurityPictureEvent {
   final String selectedPictureId;
+  final String transitionId;
 
-  const SetSecurityPictureEventPressContinueButton({required this.selectedPictureId});
+  const SetSecurityPictureEventPressContinueButton({required this.selectedPictureId, required this.transitionId});
 
   @override
   List<Object?> get props => [selectedPictureId];
@@ -20,4 +21,9 @@ class SetSecurityPictureEventHandleNavigation extends SetSecurityPictureEvent {
 
   @override
   List<Object?> get props => [navigationPath];
+}
+
+class SetSecurityPictureEventFetchComponents extends SetSecurityPictureEvent {
+  @override
+  List<Object?> get props => [];
 }
