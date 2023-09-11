@@ -16,7 +16,7 @@ class SetPasswordPageRoute extends GoRouteData {
       create: (context) => SetPasswordBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-      ),
+      )..add(SetPasswordEventFetchComponents()),
       child: const SetPasswordPage(),
     );
   }

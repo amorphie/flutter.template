@@ -6,8 +6,9 @@ sealed class SetPasswordEvent extends Equatable {
 
 class SetPasswordEventPressContinueButton extends SetPasswordEvent {
   final String password;
+  final String transitionId;
 
-  const SetPasswordEventPressContinueButton({required this.password});
+  const SetPasswordEventPressContinueButton({required this.password, required this.transitionId});
 
   @override
   List<Object?> get props => [password];
@@ -20,4 +21,9 @@ class SetPasswordEventHandleNavigation extends SetPasswordEvent {
 
   @override
   List<Object?> get props => [navigationPath];
+}
+
+class SetPasswordEventFetchComponents extends SetPasswordEvent {
+  @override
+  List<Object?> get props => [];
 }

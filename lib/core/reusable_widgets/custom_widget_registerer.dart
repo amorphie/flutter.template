@@ -1,5 +1,6 @@
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_account_slider/brg_account_slider_widget_builder.dart';
+import 'package:burgankuwait/core/reusable_widgets/brg_bullet_list_view/brg_bullet_list_view_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/spacer/spacer_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/sub_navigation/sub_navigation_widget_builder.dart';
@@ -10,6 +11,7 @@ import 'package:burgankuwait/features/otp/widgets/message/otp_message_widget_bui
 import 'package:burgankuwait/features/otp/widgets/otp_input_with_submit_button/otp_input_with_submit_button_widget_builder.dart';
 import 'package:burgankuwait/features/otp/widgets/title/otp_title_widget_builder.dart';
 import 'package:burgankuwait/features/personal_info/widgets/personal_info_form_widget_builder.dart';
+import 'package:burgankuwait/features/set_password/widgets/set_password_form_widget_builder.dart';
 import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
 class CustomWidgetRegisterer {
@@ -79,6 +81,16 @@ class CustomWidgetRegisterer {
     registry.registerCustomBuilder(
       PersonalInfoFormWidgetBuilder.type,
       const JsonWidgetBuilderContainer(builder: PersonalInfoFormWidgetBuilder.fromDynamic),
+    );
+
+    registry.registerCustomBuilder(
+      BrgBulletListViewBuilder.type,
+      const JsonWidgetBuilderContainer(builder: BrgBulletListViewBuilder.fromDynamic),
+    );
+
+    registry.registerCustomBuilder(
+      SetPasswordFormWidgetBuilder.type,
+      const JsonWidgetBuilderContainer(builder: SetPasswordFormWidgetBuilder.fromDynamic),
     );
   }
 }
