@@ -10,6 +10,7 @@ class OtpInputWithSubmitButtonWidgetBuilder extends JsonWidgetBuilder {
     required this.buttonText,
     required this.otpLength,
     required this.workflow,
+    required this.transitionId,
   }) : super(numSupportedChildren: 0);
 
   static const type = 'otp_input_with_submit_button_widget';
@@ -19,6 +20,7 @@ class OtpInputWithSubmitButtonWidgetBuilder extends JsonWidgetBuilder {
   final String buttonText;
   final int otpLength;
   final BrgWorkflow workflow;
+  final String transitionId;
 
   static OtpInputWithSubmitButtonWidgetBuilder? fromDynamic(
     dynamic map, {
@@ -29,6 +31,7 @@ class OtpInputWithSubmitButtonWidgetBuilder extends JsonWidgetBuilder {
       buttonText: map["button_text"] ?? "",
       otpLength: map["otp_length"] ?? _defaultOtpLength,
       workflow: map["workflow"] == "register" ? BrgWorkflow.register : BrgWorkflow.login,
+      transitionId:  map["transition_id"] ?? "",
     );
   }
 
@@ -49,6 +52,7 @@ class OtpInputWithSubmitButtonWidgetBuilder extends JsonWidgetBuilder {
       buttonText: buttonText,
       otpLength: otpLength,
       workflow: workflow,
+      transitionId: transitionId,
     );
   }
 }

@@ -31,7 +31,7 @@ class OtpPageBloc extends Bloc<OtpPageEvent, OtpPageState> {
 
   Future _onContinueButtonPressed(OtpPageEventPressContinueButton event) async {
     await workflowManager.getTransitions();
-    await workflowManager.submitOtp(event.otp, event.workflow);
+    await workflowManager.submitOtp(event.otp, event.workflow, event.transitionId);
   }
 
   _listenForSignalrUpdates() {

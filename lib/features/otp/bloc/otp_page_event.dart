@@ -7,8 +7,9 @@ abstract class OtpPageEvent extends Equatable {
 class OtpPageEventPressContinueButton extends OtpPageEvent {
   final String otp;
   final BrgWorkflow workflow;
+  final String transitionId;
 
-  const OtpPageEventPressContinueButton({required this.otp, required this.workflow});
+  const OtpPageEventPressContinueButton({required this.otp, required this.workflow, required this.transitionId});
 
   @override
   List<Object?> get props => [otp, workflow];

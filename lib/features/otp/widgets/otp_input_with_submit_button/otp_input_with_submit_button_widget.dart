@@ -13,6 +13,7 @@ class OtpInputWithSubmitButtonWidget extends StatefulWidget {
   final String buttonText;
   final int otpLength;
   final BrgWorkflow workflow;
+  final String transitionId;
 
   const OtpInputWithSubmitButtonWidget({
     Key? key,
@@ -20,6 +21,7 @@ class OtpInputWithSubmitButtonWidget extends StatefulWidget {
     required this.buttonText,
     required this.otpLength,
     required this.workflow,
+    required this.transitionId,
   }) : super(key: key);
 
   @override
@@ -69,9 +71,11 @@ class _OtpInputWithSubmitButtonWidgetState extends State<OtpInputWithSubmitButto
         BrgButton(
           text: widget.buttonText,
           onPressed: () {
-            context
-                .read<OtpPageBloc>()
-                .add(OtpPageEventPressContinueButton(otp: controllerOtp.text, workflow: widget.workflow));
+            context.read<OtpPageBloc>().add(OtpPageEventPressContinueButton(
+                  otp: controllerOtp.text,
+                  workflow: widget.workflow,
+                  transitionId: widget.transitionId,
+                ));
           },
         ),
       ],

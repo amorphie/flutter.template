@@ -26,6 +26,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
           name: event.name,
           surname: event.surname,
           email: event.email,
+          transitionId: event.transitionId,
         ));
     on<PersonalInfoEventHandleNavigation>(
       (event, emit) => emit(PersonalInfoStateInitial(navigationPath: event.navigationPath)),
@@ -40,9 +41,14 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     emit(PersonalInfoStateLoaded(componentsMap: response));
   }
 
-  Future _onContinueButtonPressed({required String name, required String surname, required String email}) async {
+  Future _onContinueButtonPressed({
+    required String name,
+    required String surname,
+    required String email,
+    required transitionId,
+  }) async {
     await workflowManager.getTransitions();
-    await workflowManager.submitPersonalInfo(name, surname, email);
+    await workflowManager.submitPersonalInfo(name, surname, email, transitionId);
   }
 
   _listenForSignalrUpdates() {

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PersonalInfoFormWidget extends StatefulWidget {
+  final String transitionId;
   final String labelName;
   final String labelSurname;
   final String labelEmail;
@@ -17,6 +18,7 @@ class PersonalInfoFormWidget extends StatefulWidget {
 
   const PersonalInfoFormWidget({
     Key? key,
+    required this.transitionId,
     required this.labelName,
     required this.labelSurname,
     required this.labelEmail,
@@ -116,6 +118,7 @@ class _PersonalInfoFormWidgetState extends State<PersonalInfoFormWidget> {
                   name: textControllerName.text,
                   surname: textControllerSurname.text,
                   email: textControllerEmail.text,
+                  transitionId: widget.transitionId,
                 ),
               );
         }

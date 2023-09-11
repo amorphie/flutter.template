@@ -46,11 +46,10 @@ class LoginWorkflowManager extends NetworkManager {
     });
   }
 
-  Future submitOtp(String otp, BrgWorkflow workflow) async {
+  Future submitOtp(String otp, BrgWorkflow workflow, String transitionId) async {
     final selectedEntity = workflow == BrgWorkflow.register ? entityRegister : entityLogin;
-    final selectedTransition = workflow == BrgWorkflow.register ? 'openbanking-sms-key-send': 'send-push-login-flow';
     final selectedKey =  workflow == BrgWorkflow.register ? 'smsKey': 'otpValue';
-    await requestPost('workflow/consumer/$selectedEntity/record/$recordId/transition/$selectedTransition', {
+    await requestPost('workflow/consumer/$selectedEntity/record/$recordId/transition/$transitionId', {
       "entityData": {selectedKey: otp},
       "formData": "",
       "additionalData": "",
@@ -60,8 +59,8 @@ class LoginWorkflowManager extends NetworkManager {
     });
   }
 
-  Future submitPersonalInfo(String name, String surname, String email) async {
-    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-personal-information', {
+  Future submitPersonalInfo(String name, String surname, String email, String transitionId) async {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/$transitionId', {
       "entityData": {
         "firstName": name,
         "lastName": surname,

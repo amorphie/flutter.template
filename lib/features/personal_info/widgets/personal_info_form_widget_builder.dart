@@ -7,6 +7,7 @@ const int _defaultMinLength = 2;
 
 class PersonalInfoFormWidgetBuilder extends JsonWidgetBuilder {
   const PersonalInfoFormWidgetBuilder._({
+    required this.transitionId,
     required this.labelName,
     required this.labelSurname,
     required this.labelEmail,
@@ -17,6 +18,7 @@ class PersonalInfoFormWidgetBuilder extends JsonWidgetBuilder {
 
   static const type = 'personal_info_form_widget';
 
+  final String transitionId;
   final String labelName;
   final String labelSurname;
   final String labelEmail;
@@ -29,6 +31,7 @@ class PersonalInfoFormWidgetBuilder extends JsonWidgetBuilder {
     JsonWidgetRegistry? registry,
   }) {
     return PersonalInfoFormWidgetBuilder._(
+      transitionId: map["transition_id"] ?? "",
       labelName: map["label_name"] ?? "",
       labelSurname: map["label_surname"] ?? "",
       labelEmail: map["label_email"] ?? "",
@@ -51,6 +54,7 @@ class PersonalInfoFormWidgetBuilder extends JsonWidgetBuilder {
     );
 
     return PersonalInfoFormWidget(
+      transitionId: transitionId,
       labelName: labelName,
       labelSurname: labelSurname,
       labelEmail: labelEmail,
