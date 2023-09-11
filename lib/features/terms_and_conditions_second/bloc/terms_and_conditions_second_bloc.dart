@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
+import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
+import 'package:burgankuwait/features/terms_and_conditions_second/terms_and_conditions_second_page_route.dart';
 import 'package:equatable/equatable.dart';
 
 part 'terms_and_conditions_second_event.dart';
@@ -19,6 +22,7 @@ class TermsAndConditionsSecondBloc extends Bloc<TermsAndConditionsSecondEvent, T
   }) : super(const TermsAndConditionsSecondStateInitial()) {
     _listenForSignalrUpdates();
 
+    on<TermsAndConditionsSecondEventFetchComponents>((event, emit) async => _onFetchComponents(emit));
     on<TermsAndConditionsSecondEventUpdateContractStatus>((event, emit) => _onUpdateContractStatus(
           contract3Accepted: event.contract3Accepted,
         ));
@@ -26,6 +30,14 @@ class TermsAndConditionsSecondBloc extends Bloc<TermsAndConditionsSecondEvent, T
     on<TermsAndConditionsSecondEventHandleNavigation>(
       (event, emit) => emit(TermsAndConditionsSecondStateInitial(navigationPath: event.navigationPath)),
     );
+  }
+
+  Future _onFetchComponents(Emitter<TermsAndConditionsSecondState> emit) async {
+    emit(TermsAndConditionsSecondStateLoading());
+    var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(
+      TermsAndConditionsSecondRoute.path,
+    );
+    emit(TermsAndConditionsSecondStateLoaded(componentsMap: response));
   }
 
   void _onUpdateContractStatus({required bool contract3Accepted}) {

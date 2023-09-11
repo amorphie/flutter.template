@@ -26,3 +26,8 @@ class TermsAndConditionsSecondEventHandleNavigation extends TermsAndConditionsSe
   @override
   List<Object?> get props => [navigationPath];
 }
+
+class TermsAndConditionsSecondEventFetchComponents extends TermsAndConditionsSecondEvent {
+  @override
+  List<Object?> get props => [];
+}

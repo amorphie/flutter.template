@@ -15,6 +15,7 @@ import 'package:burgankuwait/features/set_password/widgets/set_password_form_wid
 import 'package:burgankuwait/features/set_security_picture/widgets/set_security_picture_form_widget/set_security_picture_form_widget_builder.dart';
 import 'package:burgankuwait/features/set_security_question/widgets/set_security_question_form_widget_builder.dart';
 import 'package:burgankuwait/features/terms_and_conditions/widgets/terms_and_conditions_form_widget/terms_and_conditions_form_widget_builder.dart';
+import 'package:burgankuwait/features/terms_and_conditions_second/widgets/terms_and_conditions_second_form_widget/terms_and_conditions_second_form_widget_builder.dart';
 import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
 class CustomWidgetRegisterer {
@@ -109,6 +110,11 @@ class CustomWidgetRegisterer {
     registry.registerCustomBuilder(
       TermsAndConditionsFormWidgetBuilder.type,
       const JsonWidgetBuilderContainer(builder: TermsAndConditionsFormWidgetBuilder.fromDynamic),
+    );
+
+    registry.registerCustomBuilder(
+      TermsAndConditionsSecondFormWidgetBuilder.type,
+      const JsonWidgetBuilderContainer(builder: TermsAndConditionsSecondFormWidgetBuilder.fromDynamic),
     );
   }
 }
