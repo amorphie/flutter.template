@@ -121,8 +121,8 @@ class LoginWorkflowManager extends NetworkManager {
     });
   }
 
-  Future submitThirdContract({required bool contract3}) async {
-    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/ob-send-contract-2', {
+  Future submitThirdContract({required bool contract3, required String transitionId}) async {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/$transitionId', {
       "entityData": {"contract3": contract3},
       "formData": "",
       "additionalData": "",

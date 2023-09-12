@@ -26,7 +26,9 @@ class TermsAndConditionsSecondBloc extends Bloc<TermsAndConditionsSecondEvent, T
     on<TermsAndConditionsSecondEventUpdateContractStatus>((event, emit) => _onUpdateContractStatus(
           contract3Accepted: event.contract3Accepted,
         ));
-    on<TermsAndConditionsSecondEventPressContinueButton>((event, emit) => _onContinueButtonPressed());
+    on<TermsAndConditionsSecondEventPressContinueButton>((event, emit) => _onContinueButtonPressed(
+      transitionId: event.transitionId,
+        ));
     on<TermsAndConditionsSecondEventHandleNavigation>(
       (event, emit) => emit(TermsAndConditionsSecondStateInitial(navigationPath: event.navigationPath)),
     );
@@ -44,12 +46,12 @@ class TermsAndConditionsSecondBloc extends Bloc<TermsAndConditionsSecondEvent, T
     _contract3Accepted = contract3Accepted;
   }
 
-  Future _onContinueButtonPressed() async {
+  Future _onContinueButtonPressed({required String transitionId}) async {
     if (!_contract3Accepted) {
       return;
     }
     await workflowManager.getTransitions();
-    await workflowManager.submitThirdContract(contract3: _contract3Accepted);
+    await workflowManager.submitThirdContract(contract3: _contract3Accepted, transitionId: transitionId);
   }
 
   _listenForSignalrUpdates() {

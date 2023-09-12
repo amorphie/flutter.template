@@ -14,8 +14,12 @@ class TermsAndConditionsSecondEventUpdateContractStatus extends TermsAndConditio
 }
 
 class TermsAndConditionsSecondEventPressContinueButton extends TermsAndConditionsSecondEvent {
+  final String transitionId;
+
+  const TermsAndConditionsSecondEventPressContinueButton({required this.transitionId});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [transitionId];
 }
 
 class TermsAndConditionsSecondEventHandleNavigation extends TermsAndConditionsSecondEvent {

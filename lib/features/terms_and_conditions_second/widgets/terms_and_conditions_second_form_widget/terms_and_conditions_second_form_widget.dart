@@ -56,7 +56,9 @@ class _TermsAndConditionsSecondFormWidgetState extends State<TermsAndConditionsS
     return BrgButton(
       text: widget.buttonText,
       onPressed: () {
-        context.read<TermsAndConditionsSecondBloc>().add(TermsAndConditionsSecondEventPressContinueButton());
+        context.read<TermsAndConditionsSecondBloc>().add(
+              TermsAndConditionsSecondEventPressContinueButton(transitionId: widget.transitionId),
+            );
       },
     ).padding(top: 16);
   }
