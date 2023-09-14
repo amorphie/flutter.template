@@ -7,9 +7,12 @@ class OtpTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        title,
+        style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }
