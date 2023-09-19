@@ -29,7 +29,7 @@ class SetSecurityPictureBloc extends Bloc<SetSecurityPictureEvent, SetSecurityPi
 
   Future _onFetchComponents(Emitter<SetSecurityPictureState> emit) async {
     emit(SetSecurityPictureStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(
+    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
       SetSecurityPicturePageRoute.path,
     );
     emit(SetSecurityPictureStateLoaded(componentsMap: response));

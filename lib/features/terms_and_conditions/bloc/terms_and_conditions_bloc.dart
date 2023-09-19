@@ -38,7 +38,7 @@ class TermsAndConditionsBloc extends Bloc<TermsAndConditionsEvent, TermsAndCondi
 
   Future _onFetchComponents(Emitter<TermsAndConditionsState> emit) async {
     emit(TermsAndConditionsStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(
+    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
       TermsAndConditionsRoute.path,
     );
     emit(TermsAndConditionsStateLoaded(componentsMap: response));

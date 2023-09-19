@@ -29,7 +29,7 @@ class SetSecurityQuestionBloc extends Bloc<SetSecurityQuestionEvent, SetSecurity
 
   Future _onFetchComponents(Emitter<SetSecurityQuestionState> emit) async {
     emit(SetSecurityQuestionStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(
+    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
       SetSecurityQuestionPageRoute.path,
     );
     emit(SetSecurityQuestionStateLoaded(componentsMap: response));

@@ -29,7 +29,7 @@ class SetPasswordBloc extends Bloc<SetPasswordEvent, SetPasswordState> {
 
   Future _onFetchComponents(Emitter<SetPasswordState> emit) async {
     emit(SetPasswordStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(
+    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
       SetPasswordPageRoute.path,
     );
     emit(SetPasswordStateLoaded(componentsMap: response));

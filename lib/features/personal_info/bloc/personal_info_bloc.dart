@@ -35,7 +35,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   Future _onFetchComponents(Emitter<PersonalInfoState> emit) async {
     emit(PersonalInfoStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(
+    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
       PersonalInfoPageRoute.path,
     );
     emit(PersonalInfoStateLoaded(componentsMap: response));

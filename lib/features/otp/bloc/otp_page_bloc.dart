@@ -22,7 +22,7 @@ class OtpPageBloc extends Bloc<OtpPageEvent, OtpPageState> {
     _listenForSignalrUpdates();
     on<OtpPageEventFetchComponents>((event, emit) async {
       emit(OtpPageStateLoading());
-      var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId(pageId);
+      var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(pageId);
       emit(OtpPageStateLoaded(componentsMap: response));
     });
     on<OtpPageEventPressContinueButton>((event, emit) => _onContinueButtonPressed(event));

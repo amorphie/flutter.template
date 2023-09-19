@@ -15,7 +15,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   HomePageBloc() : super(HomePageStateInitial()) {
     on<HomePageEventFetchComponents>((event, emit) async {
       emit(HomePageStateLoading());
-      var response = await ComponentsNetworkManager(baseUrlLocal).fetchHomePageComponentsByPageId("home");
+      var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId("home");
       emit(HomePageStateLoaded(componentsMap: response));
     });
   }
