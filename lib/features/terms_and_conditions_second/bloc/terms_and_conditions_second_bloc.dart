@@ -36,7 +36,7 @@ class TermsAndConditionsSecondBloc extends Bloc<TermsAndConditionsSecondEvent, T
 
   Future _onFetchComponents(Emitter<TermsAndConditionsSecondState> emit) async {
     emit(TermsAndConditionsSecondStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
+    var response = await ComponentsNetworkManager().fetchPageComponentsByPageId(
       TermsAndConditionsSecondRoute.path,
     );
     emit(TermsAndConditionsSecondStateLoaded(componentsMap: response));

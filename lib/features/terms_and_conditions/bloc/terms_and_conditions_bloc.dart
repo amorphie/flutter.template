@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/core/util/network/components_network_manager.dart';
-import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/terms_and_conditions/terms_and_conditions_page_route.dart';
 import 'package:equatable/equatable.dart';
@@ -38,7 +37,7 @@ class TermsAndConditionsBloc extends Bloc<TermsAndConditionsEvent, TermsAndCondi
 
   Future _onFetchComponents(Emitter<TermsAndConditionsState> emit) async {
     emit(TermsAndConditionsStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
+    var response = await ComponentsNetworkManager().fetchPageComponentsByPageId(
       TermsAndConditionsRoute.path,
     );
     emit(TermsAndConditionsStateLoaded(componentsMap: response));

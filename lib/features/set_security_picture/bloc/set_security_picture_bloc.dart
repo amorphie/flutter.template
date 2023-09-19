@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/core/util/network/components_network_manager.dart';
-import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';
 import 'package:equatable/equatable.dart';
@@ -29,7 +28,7 @@ class SetSecurityPictureBloc extends Bloc<SetSecurityPictureEvent, SetSecurityPi
 
   Future _onFetchComponents(Emitter<SetSecurityPictureState> emit) async {
     emit(SetSecurityPictureStateLoading());
-    var response = await ComponentsNetworkManager(baseUrlLocal).fetchPageComponentsByPageId(
+    var response = await ComponentsNetworkManager().fetchPageComponentsByPageId(
       SetSecurityPicturePageRoute.path,
     );
     emit(SetSecurityPictureStateLoaded(componentsMap: response));

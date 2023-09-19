@@ -17,9 +17,8 @@ class LoginOtpPageRoute extends GoRouteData {
       create: (context) => OtpPageBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-        pageId: "login-otp",
-      )..add(OtpPageEventFetchComponents()),
-      child: const OtpPage(workflow: BrgWorkflow.login),
+      ),
+      child: const OtpPage(workflow: BrgWorkflow.login, pageId: "login-otp"),
     );
   }
 }

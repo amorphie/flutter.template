@@ -23,8 +23,3 @@ class OtpPageEventHandleNavigation extends OtpPageEvent {
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class OtpPageEventFetchComponents extends OtpPageEvent {
-  @override
-  List<Object?> get props => [];
-}
