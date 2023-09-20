@@ -22,8 +22,3 @@ class SetPasswordEventHandleNavigation extends SetPasswordEvent {
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class SetPasswordEventFetchComponents extends SetPasswordEvent {
-  @override
-  List<Object?> get props => [];
-}

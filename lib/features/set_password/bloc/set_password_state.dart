@@ -12,17 +12,3 @@ class SetPasswordStateInitial extends SetPasswordState {
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class SetPasswordStateLoading extends SetPasswordState {
-  @override
-  List<Object> get props => [];
-}
-
-class SetPasswordStateLoaded extends SetPasswordState {
-  final Map<String, dynamic> componentsMap;
-
-  const SetPasswordStateLoaded({required this.componentsMap});
-
-  @override
-  List<Object> get props => [componentsMap];
-}
