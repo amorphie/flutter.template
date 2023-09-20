@@ -22,8 +22,3 @@ class SetSecurityQuestionEventHandleNavigation extends SetSecurityQuestionEvent 
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class SetSecurityQuestionEventFetchComponents extends SetSecurityQuestionEvent {
-  @override
-  List<Object?> get props => [];
-}

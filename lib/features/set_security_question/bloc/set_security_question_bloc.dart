@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
-import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
-import 'package:burgankuwait/features/set_security_question/set_security_question_page_route.dart';
 import 'package:equatable/equatable.dart';
 
 part 'set_security_question_event.dart';
@@ -19,19 +17,10 @@ class SetSecurityQuestionBloc extends Bloc<SetSecurityQuestionEvent, SetSecurity
   }) : super(const SetSecurityQuestionStateInitial()) {
     _listenForSignalrUpdates();
 
-    on<SetSecurityQuestionEventFetchComponents>((event, emit) async => _onFetchComponents(emit));
     on<SetSecurityQuestionEventPressChangeButton>((event, emit) => _onChangeButtonPressed(event));
     on<SetSecurityQuestionEventHandleNavigation>(
       (event, emit) => emit(SetSecurityQuestionStateInitial(navigationPath: event.navigationPath)),
     );
-  }
-
-  Future _onFetchComponents(Emitter<SetSecurityQuestionState> emit) async {
-    emit(SetSecurityQuestionStateLoading());
-    var response = await ComponentsNetworkManager().fetchPageComponentsByPageId(
-      SetSecurityQuestionPageRoute.path,
-    );
-    emit(SetSecurityQuestionStateLoaded(componentsMap: response));
   }
 
   Future _onChangeButtonPressed(SetSecurityQuestionEventPressChangeButton event) async {
