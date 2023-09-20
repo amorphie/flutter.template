@@ -5,10 +5,8 @@ abstract class PersonalInfoState extends Equatable {
 }
 
 class PersonalInfoStateInitial extends PersonalInfoState {
-  final String? navigationPath;
-
-  const PersonalInfoStateInitial({this.navigationPath});
+  const PersonalInfoStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }

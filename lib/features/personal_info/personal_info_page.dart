@@ -1,6 +1,4 @@
 import 'package:burgankuwait/core/localization/localizable_text.dart';
-import 'package:burgankuwait/core/navigation/navigation_helper.dart';
-import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
@@ -25,12 +23,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverFillRemaining(
-            child: BlocConsumer<PersonalInfoBloc, PersonalInfoState>(
-              listener: (context, state) {
-                if (state is PersonalInfoStateInitial && state.navigationPath != null) {
-                  _handleNavigation(context, state.navigationPath!);
-                }
-              },
+            child: BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
               builder: (context, state) {
                 return const BrgComponentTreeBuilder(pageId: PersonalInfoPageRoute.path);
               },
@@ -49,14 +42,6 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
         ).padding(right: 48),
       ),
-    );
-  }
-
-  void _handleNavigation(BuildContext context, String navigationPath) {
-    NavigationHelper().navigate(
-      context: context,
-      navigationType: NavigationType.pushReplacement,
-      path: navigationPath,
     );
   }
 }

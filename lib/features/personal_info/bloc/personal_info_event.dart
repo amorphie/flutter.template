@@ -18,14 +18,5 @@ class PersonalInfoEventPressContinueButton extends PersonalInfoEvent {
   });
 
   @override
-  List<Object?> get props => [name, surname, email];
-}
-
-class PersonalInfoEventHandleNavigation extends PersonalInfoEvent {
-  final String navigationPath;
-
-  const PersonalInfoEventHandleNavigation({required this.navigationPath});
-
-  @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [name, surname, email, transitionId];
 }

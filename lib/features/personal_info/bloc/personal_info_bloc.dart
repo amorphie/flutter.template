@@ -15,7 +15,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     required this.workflowManager,
     required this.signalrConnectionManager,
   }) : super(const PersonalInfoStateInitial()) {
-    _listenForSignalrUpdates();
 
     on<PersonalInfoEventPressContinueButton>((event, emit) => _onContinueButtonPressed(
           name: event.name,
@@ -23,9 +22,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
           email: event.email,
           transitionId: event.transitionId,
         ));
-    on<PersonalInfoEventHandleNavigation>(
-      (event, emit) => emit(PersonalInfoStateInitial(navigationPath: event.navigationPath)),
-    );
   }
 
   Future _onContinueButtonPressed({
@@ -36,17 +32,5 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   }) async {
     await workflowManager.getTransitions();
     await workflowManager.submitPersonalInfo(name, surname, email, transitionId);
-  }
-
-  _listenForSignalrUpdates() {
-    signalrConnectionManager.init(onPageNavigation: _onSignalrNavigation);
-  }
-
-  _onSignalrNavigation(String navigationPath) {
-    if (isClosed) {
-      return;
-    }
-    add(PersonalInfoEventHandleNavigation(navigationPath: navigationPath));
-    signalrConnectionManager.stop();
   }
 }
