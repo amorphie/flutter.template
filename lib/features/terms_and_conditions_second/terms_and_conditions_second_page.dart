@@ -1,6 +1,4 @@
 import 'package:burgankuwait/core/localization/localizable_text.dart';
-import 'package:burgankuwait/core/navigation/navigation_helper.dart';
-import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
@@ -20,12 +18,7 @@ class TermsAndConditionsSecondPage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverFillRemaining(
-            child: BlocConsumer<TermsAndConditionsSecondBloc, TermsAndConditionsSecondState>(
-              listener: (context, state) {
-                if (state is TermsAndConditionsSecondStateInitial && state.navigationPath != null) {
-                  _handleNavigation(context, state.navigationPath!);
-                }
-              },
+            child: BlocBuilder<TermsAndConditionsSecondBloc, TermsAndConditionsSecondState>(
               builder: (context, state) {
                 return const BrgComponentTreeBuilder(pageId: TermsAndConditionsSecondRoute.path);
               },
@@ -44,14 +37,6 @@ class TermsAndConditionsSecondPage extends StatelessWidget {
           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
         ).padding(right: 48),
       ),
-    );
-  }
-
-  void _handleNavigation(BuildContext context, String navigationPath) {
-    NavigationHelper().navigate(
-      context: context,
-      navigationType: NavigationType.pushReplacement,
-      path: navigationPath,
     );
   }
 }
