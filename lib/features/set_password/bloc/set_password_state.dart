@@ -5,10 +5,8 @@ sealed class SetPasswordState extends Equatable {
 }
 
 class SetPasswordStateInitial extends SetPasswordState {
-  final String? navigationPath;
-
-  const SetPasswordStateInitial({this.navigationPath});
+  const SetPasswordStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }

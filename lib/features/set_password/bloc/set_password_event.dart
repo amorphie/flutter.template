@@ -13,12 +13,3 @@ class SetPasswordEventPressContinueButton extends SetPasswordEvent {
   @override
   List<Object?> get props => [password];
 }
-
-class SetPasswordEventHandleNavigation extends SetPasswordEvent {
-  final String navigationPath;
-
-  const SetPasswordEventHandleNavigation({required this.navigationPath});
-
-  @override
-  List<Object?> get props => [navigationPath];
-}

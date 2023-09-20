@@ -15,28 +15,11 @@ class SetPasswordBloc extends Bloc<SetPasswordEvent, SetPasswordState> {
     required this.workflowManager,
     required this.signalrConnectionManager,
   }) : super(const SetPasswordStateInitial()) {
-    _listenForSignalrUpdates();
-
     on<SetPasswordEventPressContinueButton>((event, emit) => _onContinueButtonPressed(event));
-    on<SetPasswordEventHandleNavigation>(
-      (event, emit) => emit(SetPasswordStateInitial(navigationPath: event.navigationPath)),
-    );
   }
 
   Future _onContinueButtonPressed(SetPasswordEventPressContinueButton event) async {
     await workflowManager.getTransitions();
     await workflowManager.submitPassword(event.password, event.transitionId);
-  }
-
-  _listenForSignalrUpdates() {
-    signalrConnectionManager.init(onPageNavigation: _onSignalrNavigation);
-  }
-
-  _onSignalrNavigation(String navigationPath) {
-    if (isClosed) {
-      return;
-    }
-    add(SetPasswordEventHandleNavigation(navigationPath: navigationPath));
-    signalrConnectionManager.stop();
   }
 }
