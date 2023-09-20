@@ -16,7 +16,7 @@ class TermsAndConditionsSecondRoute extends GoRouteData {
       create: (context) => TermsAndConditionsSecondBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-      )..add(TermsAndConditionsSecondEventFetchComponents()),
+      ),
       child: const TermsAndConditionsSecondPage(),
     );
   }

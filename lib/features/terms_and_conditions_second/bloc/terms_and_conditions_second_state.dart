@@ -12,17 +12,3 @@ class TermsAndConditionsSecondStateInitial extends TermsAndConditionsSecondState
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class TermsAndConditionsSecondStateLoading extends TermsAndConditionsSecondState {
-  @override
-  List<Object> get props => [];
-}
-
-class TermsAndConditionsSecondStateLoaded extends TermsAndConditionsSecondState {
-  final Map<String, dynamic> componentsMap;
-
-  const TermsAndConditionsSecondStateLoaded({required this.componentsMap});
-
-  @override
-  List<Object> get props => [componentsMap];
-}
