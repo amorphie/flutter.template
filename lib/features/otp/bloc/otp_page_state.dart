@@ -5,10 +5,8 @@ abstract class OtpPageState extends Equatable {
 }
 
 class OtpPageStateInitial extends OtpPageState {
-  final String? navigationPath;
-
-  const OtpPageStateInitial({this.navigationPath});
+  const OtpPageStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }

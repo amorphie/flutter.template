@@ -12,5 +12,5 @@ class OtpPageEventPressContinueButton extends OtpPageEvent {
   const OtpPageEventPressContinueButton({required this.otp, required this.workflow, required this.transitionId});
 
   @override
-  List<Object?> get props => [otp, workflow];
+  List<Object?> get props => [otp, workflow, transitionId];
 }
