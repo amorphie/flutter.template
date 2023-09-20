@@ -31,8 +31,3 @@ class TermsAndConditionsEventHandleNavigation extends TermsAndConditionsEvent {
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class TermsAndConditionsEventFetchComponents extends TermsAndConditionsEvent {
-  @override
-  List<Object?> get props => [];
-}
