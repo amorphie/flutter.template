@@ -14,12 +14,3 @@ class OtpPageEventPressContinueButton extends OtpPageEvent {
   @override
   List<Object?> get props => [otp, workflow];
 }
-
-class OtpPageEventHandleNavigation extends OtpPageEvent {
-  final String navigationPath;
-
-  const OtpPageEventHandleNavigation({required this.navigationPath});
-
-  @override
-  List<Object?> get props => [navigationPath];
-}

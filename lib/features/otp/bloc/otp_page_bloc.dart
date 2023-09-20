@@ -16,25 +16,11 @@ class OtpPageBloc extends Bloc<OtpPageEvent, OtpPageState> {
 
   OtpPageBloc({required this.workflowManager, required this.signalrConnectionManager})
       : super(const OtpPageStateInitial()) {
-    _listenForSignalrUpdates();
     on<OtpPageEventPressContinueButton>((event, emit) => _onContinueButtonPressed(event));
-    on<OtpPageEventHandleNavigation>((event, emit) => emit(OtpPageStateInitial(navigationPath: event.navigationPath)));
   }
 
   Future _onContinueButtonPressed(OtpPageEventPressContinueButton event) async {
     await workflowManager.getTransitions();
     await workflowManager.submitOtp(event.otp, event.workflow, event.transitionId);
-  }
-
-  _listenForSignalrUpdates() {
-    signalrConnectionManager.init(onPageNavigation: _onSignalrNavigation);
-  }
-
-  _onSignalrNavigation(String navigationPath) {
-    if (isClosed) {
-      return;
-    }
-    add(OtpPageEventHandleNavigation(navigationPath: navigationPath));
-    signalrConnectionManager.stop();
   }
 }
