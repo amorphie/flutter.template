@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/personal_info/bloc/personal_info_bloc.dart';
 import 'package:burgankuwait/features/personal_info/personal_info_page.dart';
@@ -15,7 +14,6 @@ class PersonalInfoPageRoute extends GoRouteData {
     return BlocProvider(
       create: (context) => PersonalInfoBloc(
         workflowManager: LoginWorkflowManager(),
-        signalrConnectionManager: SignalrConnectionManager(),
       ),
       child: const PersonalInfoPage(),
     );

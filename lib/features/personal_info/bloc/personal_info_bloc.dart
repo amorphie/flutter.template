@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,13 +8,10 @@ part 'personal_info_state.dart';
 
 class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   final LoginWorkflowManager workflowManager;
-  final SignalrConnectionManager signalrConnectionManager;
 
   PersonalInfoBloc({
     required this.workflowManager,
-    required this.signalrConnectionManager,
   }) : super(const PersonalInfoStateInitial()) {
-
     on<PersonalInfoEventPressContinueButton>((event, emit) => _onContinueButtonPressed(
           name: event.name,
           surname: event.surname,
