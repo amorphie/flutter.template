@@ -17,8 +17,8 @@ class LoginWorkflowManager extends NetworkManager {
     print('Response is $response');
   }
 
-  Future register({required String tckn, required BrgPhoneNumber phoneNumber}) async {
-    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/openbanking-register-send-sms', {
+  Future register({required String tckn, required BrgPhoneNumber phoneNumber, required String transitionId}) async {
+    await requestPost('workflow/consumer/$entityRegister/record/$recordId/transition/$transitionId', {
       "entityData": {"reference": tckn, "phone": phoneNumber.toJson()},
       "formData": "",
       "additionalData": "",

@@ -5,10 +5,8 @@ abstract class RegisterState extends Equatable {
 }
 
 class RegisterStateInitial extends RegisterState {
-  final String? navigationPath;
-
-  const RegisterStateInitial({this.navigationPath});
+  const RegisterStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }

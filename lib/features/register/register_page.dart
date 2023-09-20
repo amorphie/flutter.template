@@ -9,12 +9,18 @@ import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
+import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
 import 'package:burgankuwait/features/register/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  final String transitionId;
+
+  const RegisterPage({
+    Key? key,
+    this.transitionId = "openbanking-register-send-sms",
+  }) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -42,33 +48,32 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: BlocConsumer<RegisterBloc, RegisterState>(
-        listener: (context, state) {
-          if (state is RegisterStateInitial && state.navigationPath != null) {
-            _handleNavigation(context, state.navigationPath!);
-          }
-        },
+      body: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Center(child: Image.asset(Assets.loginLock.path)),
-                  BrgTextFormField.tckn(
-                    context: context,
-                    controller: textControllerTckn,
-                  ).padding(left: 32, right: 32, top: 32, bottom: 8),
-                  BrgTextFormField.phoneNumber(
-                    context: context,
-                    controller: textControllerPhoneNumber,
-                  ).padding(left: 32, right: 32, top: 8, bottom: 16),
-                  _buildLoginButton(context),
-                  const Spacer(),
-                  const SecurityIconWidget(),
-                ],
+          return BrgTransitionListenerWidget(
+            transitionId: widget.transitionId,
+            onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * AppConstants.safeAreaPercentage,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Center(child: Image.asset(Assets.loginLock.path)),
+                    BrgTextFormField.tckn(
+                      context: context,
+                      controller: textControllerTckn,
+                    ).padding(left: 32, right: 32, top: 32, bottom: 8),
+                    BrgTextFormField.phoneNumber(
+                      context: context,
+                      controller: textControllerPhoneNumber,
+                    ).padding(left: 32, right: 32, top: 8, bottom: 16),
+                    _buildLoginButton(context),
+                    const Spacer(),
+                    const SecurityIconWidget(),
+                  ],
+                ),
               ),
             ),
           );
@@ -91,6 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   prefix: prefix,
                   number: number,
                 ),
+                transitionId: widget.transitionId,
               ),
             );
       },
