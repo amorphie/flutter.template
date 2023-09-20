@@ -28,8 +28,8 @@ class LoginWorkflowManager extends NetworkManager {
     });
   }
 
-  Future login({required String username, required String password}) async {
-    await requestPost('workflow/consumer/login/record/$recordId/transition/start-password-flow-web', {
+  Future login({required String username, required String password, required String transitionId}) async {
+    await requestPost('workflow/consumer/login/record/$recordId/transition/$transitionId', {
       "entityData": {
         "username": username,
         "password": password,

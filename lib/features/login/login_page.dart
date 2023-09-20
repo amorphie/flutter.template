@@ -9,15 +9,21 @@ import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
+import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
 import 'package:burgankuwait/features/login/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({
+    Key? key,
+    this.transitionId = "start-password-flow-web",
+  }) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+
+  final String transitionId;
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -43,12 +49,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: BlocConsumer<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if (state is LoginStateInitial && state.navigationPath != null) {
-            _handleNavigation(context, state.navigationPath!);
-          }
-        },
+      body: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -91,17 +92,22 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLoginButton(
     BuildContext context,
   ) {
-    return BrgButton(
-      text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(),
-      onPressed: () {
-        context.read<LoginBloc>().add(
-              LoginEventLoginWithCredentials(
-                username: textControllerTckn.text,
-                password: textControllerPassword.text, // TODO: Pass password
-              ),
-            );
-      },
-    ).padding(left: 32, right: 32, bottom: 16);
+    return BrgTransitionListenerWidget(
+      transitionId: widget.transitionId,
+      onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
+      child: BrgButton(
+        text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(),
+        onPressed: () {
+          context.read<LoginBloc>().add(
+                LoginEventLoginWithCredentials(
+                  username: textControllerTckn.text,
+                  password: textControllerPassword.text, // TODO: Pass password
+                  transitionId: widget.transitionId,
+                ),
+              );
+        },
+      ).padding(left: 32, right: 32, bottom: 16),
+    );
   }
 
   void _handleNavigation(BuildContext context, String navigationPath) {
