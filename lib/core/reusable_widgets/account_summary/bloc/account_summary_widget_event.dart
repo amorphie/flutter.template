@@ -10,12 +10,3 @@ class AccountSummaryWidgetEventFetchComponentDetails extends AccountSummaryWidge
   @override
   List<Object?> get props => [iban];
 }
-
-class AccountSummaryWidgetEventSetUIModel extends AccountSummaryWidgetEvent {
-  final AccountSummaryWidgetUIModel uiModel;
-
-  AccountSummaryWidgetEventSetUIModel(this.uiModel);
-
-  @override
-  List<Object?> get props => [uiModel];
-}

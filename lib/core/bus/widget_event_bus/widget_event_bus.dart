@@ -7,11 +7,11 @@ class WidgetEventBus {
   final _eventBus = BehaviorSubject<WidgetEvent>();
 
   listen({
-    required String widgetId,
+    required String eventId,
     required Function(WidgetEvent) onEventReceived,
   }) {
     _eventBus.stream.listen((event) {
-      if (event.widgetId == widgetId) {
+      if (event.eventId == eventId) {
         onEventReceived(event);
       }
     });

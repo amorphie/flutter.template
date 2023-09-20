@@ -7,9 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletons/skeletons.dart';
 
 class AccountSummaryWidget extends StatelessWidget {
-  final String iban;
-
-  const AccountSummaryWidget({Key? key, required this.iban}) : super(key: key);
+  const AccountSummaryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +21,12 @@ class AccountSummaryWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocBuilder<AccountSummaryWidgetBloc, AccountSummaryWidgetState>(
-            bloc: AccountSummaryWidgetBloc()..add(AccountSummaryWidgetEventFetchComponentDetails(iban)),
             builder: (context, state) {
               switch (state) {
                 case AccountSummaryWidgetStateLoading _:
                   return _buildSkeletonLoading();
                 case AccountSummaryWidgetStateLoaded _:
-                  return _buildComponents(state.uiModel);
+                  return _buildComponents(state.uiModel, context);
               }
             },
           ),
@@ -76,7 +73,7 @@ class AccountSummaryWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildComponents(AccountSummaryWidgetUIModel uiModel) {
+  Widget _buildComponents(AccountSummaryWidgetUIModel uiModel, BuildContext context) {
     return Column(
       children: [
         _buildRowItem(key: "Kullanılabilir Limit", value: uiModel.availableLimit),
@@ -90,6 +87,8 @@ class AccountSummaryWidget extends StatelessWidget {
         _buildRowItem(key: "Aylık Faiz Oranı", value: uiModel.monthlyInterestRate),
         _buildDivider(),
         _buildRowItem(key: "Yıllık Faiz Oranı", value: uiModel.yearlyInterestRate),
+        _buildDivider(),
+        _buildRowItem(key: "Is Flipped", value: context.read<AccountSummaryWidgetBloc>().isFlipped.toString()),
       ],
     );
   }

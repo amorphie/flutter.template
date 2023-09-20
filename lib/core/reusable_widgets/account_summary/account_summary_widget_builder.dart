@@ -1,6 +1,8 @@
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget.dart';
+import 'package:burgankuwait/core/reusable_widgets/account_summary/bloc/account_summary_widget_bloc.dart';
 import 'package:child_builder/child_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
 class AccountSummaryWidgetBuilder extends JsonWidgetBuilder {
@@ -34,6 +36,9 @@ class AccountSummaryWidgetBuilder extends JsonWidgetBuilder {
       '[AccountSummaryWidgetBuilder] does not support children.',
     );
 
-    return AccountSummaryWidget(iban: iban);
+    return BlocProvider(
+      create: (context) => AccountSummaryWidgetBloc()..add(AccountSummaryWidgetEventFetchComponentDetails(iban)),
+      child: const AccountSummaryWidget(),
+    );
   }
 }

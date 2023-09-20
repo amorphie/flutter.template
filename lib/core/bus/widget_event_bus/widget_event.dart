@@ -1,6 +1,6 @@
 class WidgetEvent {
-  final String widgetId;
+  final String eventId;
   final Object? data;
 
-  WidgetEvent({required this.widgetId, this.data});
+  WidgetEvent({required this.eventId, this.data});
 }

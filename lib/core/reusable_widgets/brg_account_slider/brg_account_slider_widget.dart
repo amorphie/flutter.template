@@ -1,7 +1,11 @@
+import 'package:burgankuwait/core/bus/widget_event_bus/widget_event.dart';
+import 'package:burgankuwait/core/bus/widget_event_bus/widget_event_bus.dart';
+import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
+import 'package:burgankuwait/core/reusable_widgets/brg_account_slider/brg_account_slider_widget_builder.dart';
 import 'package:flutter/material.dart';
 
 class BrgAccountSliderWidget extends StatelessWidget {
-  const BrgAccountSliderWidget({
+  BrgAccountSliderWidget({
     Key? key,
     required this.openingDate,
     required this.accountBalance,
@@ -16,26 +20,39 @@ class BrgAccountSliderWidget extends StatelessWidget {
   final String iban;
   final String branchDetails;
 
+  bool isFlipped = false;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-        color: Colors.orange,
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildMainAccountRow(),
-              _buildAccountBalanceRow(),
-              _buildAvailableBalanceRow(),
-              _buildIbanRow(),
-              _buildIbanDetailsRow(),
-            ],
+    return GestureDetector(
+      onTap: () {
+        isFlipped = !isFlipped;
+        getIt.get<WidgetEventBus>().addEvent(
+              WidgetEvent(
+                eventId: BrgAccountSliderWidgetBuilder.type,
+                data: isFlipped,
+              ),
+            );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          color: Colors.orange,
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildMainAccountRow(),
+                _buildAccountBalanceRow(),
+                _buildAvailableBalanceRow(),
+                _buildIbanRow(),
+                _buildIbanDetailsRow(),
+              ],
+            ),
           ),
         ),
       ),
