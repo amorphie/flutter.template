@@ -22,12 +22,3 @@ class TermsAndConditionsEventPressContinueButton extends TermsAndConditionsEvent
   @override
   List<Object?> get props => [transitionId];
 }
-
-class TermsAndConditionsEventHandleNavigation extends TermsAndConditionsEvent {
-  final String navigationPath;
-
-  const TermsAndConditionsEventHandleNavigation({required this.navigationPath});
-
-  @override
-  List<Object?> get props => [navigationPath];
-}

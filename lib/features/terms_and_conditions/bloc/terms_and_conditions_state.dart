@@ -5,10 +5,8 @@ sealed class TermsAndConditionsState extends Equatable {
 }
 
 class TermsAndConditionsStateInitial extends TermsAndConditionsState {
-  final String? navigationPath;
-
-  const TermsAndConditionsStateInitial({this.navigationPath});
+  const TermsAndConditionsStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }
