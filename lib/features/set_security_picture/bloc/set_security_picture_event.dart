@@ -22,8 +22,3 @@ class SetSecurityPictureEventHandleNavigation extends SetSecurityPictureEvent {
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class SetSecurityPictureEventFetchComponents extends SetSecurityPictureEvent {
-  @override
-  List<Object?> get props => [];
-}

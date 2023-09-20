@@ -16,7 +16,7 @@ class SetSecurityPicturePageRoute extends GoRouteData {
       create: (context) => SetSecurityPictureBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-      )..add(SetSecurityPictureEventFetchComponents()),
+      ),
       child: const SetSecurityPicturePage(),
     );
   }

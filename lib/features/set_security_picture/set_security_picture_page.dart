@@ -3,10 +3,11 @@ import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
+import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
 import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
+import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
 class SetSecurityPicturePage extends StatelessWidget {
   const SetSecurityPicturePage({Key? key}) : super(key: key);
@@ -26,17 +27,7 @@ class SetSecurityPicturePage extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                switch (state) {
-                  case SetSecurityPictureStateLoading _:
-                    return const Center(child: CircularProgressIndicator());
-                  case SetSecurityPictureStateLoaded _:
-                    return JsonWidgetData.fromDynamic(state.componentsMap)?.build(
-                          context: context,
-                        ) ??
-                        const SizedBox.shrink();
-                  default:
-                    return const SizedBox.shrink();
-                }
+                return const BrgComponentTreeBuilder(pageId: SetSecurityPicturePageRoute.path);
               },
             ),
           )
