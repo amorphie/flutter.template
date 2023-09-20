@@ -5,10 +5,8 @@ sealed class SetSecurityPictureState extends Equatable {
 }
 
 class SetSecurityPictureStateInitial extends SetSecurityPictureState {
-  final String? navigationPath;
-
-  const SetSecurityPictureStateInitial({this.navigationPath});
+  const SetSecurityPictureStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }

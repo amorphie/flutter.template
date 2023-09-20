@@ -13,12 +13,3 @@ class SetSecurityPictureEventPressContinueButton extends SetSecurityPictureEvent
   @override
   List<Object?> get props => [selectedPictureId];
 }
-
-class SetSecurityPictureEventHandleNavigation extends SetSecurityPictureEvent {
-  final String navigationPath;
-
-  const SetSecurityPictureEventHandleNavigation({required this.navigationPath});
-
-  @override
-  List<Object?> get props => [navigationPath];
-}

@@ -1,4 +1,3 @@
-import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
 import 'package:burgankuwait/features/set_security_picture/set_security_picture_page.dart';
@@ -15,7 +14,6 @@ class SetSecurityPicturePageRoute extends GoRouteData {
     return BlocProvider(
       create: (context) => SetSecurityPictureBloc(
         workflowManager: LoginWorkflowManager(),
-        signalrConnectionManager: SignalrConnectionManager(),
       ),
       child: const SetSecurityPicturePage(),
     );

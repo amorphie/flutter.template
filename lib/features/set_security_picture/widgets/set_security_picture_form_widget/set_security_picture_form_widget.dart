@@ -1,7 +1,10 @@
 import 'package:burgankuwait/core/localization/localizable_text.dart';
+import 'package:burgankuwait/core/navigation/navigation_helper.dart';
+import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_image_selector/brg_image_selector_widget.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
+import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
 import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,13 +28,17 @@ class SetSecurityPictureFormWidget extends StatefulWidget {
 class _SetSecurityPictureFormWidgetState extends State<SetSecurityPictureFormWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _buildImageSelectorWidget(),
-        _buildContinueButton(context),
-      ],
+    return BrgTransitionListenerWidget(
+      transitionId: widget.transitionId,
+      onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildImageSelectorWidget(),
+          _buildContinueButton(context),
+        ],
+      ),
     );
   }
 
@@ -58,5 +65,13 @@ class _SetSecurityPictureFormWidgetState extends State<SetSecurityPictureFormWid
             );
       },
     ).padding(top: 16);
+  }
+
+  void _handleNavigation(BuildContext context, String navigationPath) {
+    NavigationHelper().navigate(
+      context: context,
+      navigationType: NavigationType.pushReplacement,
+      path: navigationPath,
+    );
   }
 }
