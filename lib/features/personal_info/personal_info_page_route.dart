@@ -16,7 +16,7 @@ class PersonalInfoPageRoute extends GoRouteData {
       create: (context) => PersonalInfoBloc(
         workflowManager: LoginWorkflowManager(),
         signalrConnectionManager: SignalrConnectionManager(),
-      )..add(PersonalInfoEventFetchComponents()),
+      ),
       child: const PersonalInfoPage(),
     );
   }

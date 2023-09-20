@@ -12,17 +12,3 @@ class PersonalInfoStateInitial extends PersonalInfoState {
   @override
   List<Object?> get props => [navigationPath];
 }
-
-class PersonalInfoStateLoading extends PersonalInfoState {
-  @override
-  List<Object> get props => [];
-}
-
-class PersonalInfoStateLoaded extends PersonalInfoState {
-  final Map<String, dynamic> componentsMap;
-
-  const PersonalInfoStateLoaded({required this.componentsMap});
-
-  @override
-  List<Object> get props => [componentsMap];
-}
