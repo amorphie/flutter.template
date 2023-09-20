@@ -5,10 +5,8 @@ sealed class SetSecurityQuestionState extends Equatable {
 }
 
 class SetSecurityQuestionStateInitial extends SetSecurityQuestionState {
-  final String? navigationPath;
-
-  const SetSecurityQuestionStateInitial({this.navigationPath});
+  const SetSecurityQuestionStateInitial();
 
   @override
-  List<Object?> get props => [navigationPath];
+  List<Object?> get props => [];
 }

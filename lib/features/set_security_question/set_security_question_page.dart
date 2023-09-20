@@ -1,6 +1,4 @@
 import 'package:burgankuwait/core/localization/localizable_text.dart';
-import 'package:burgankuwait/core/navigation/navigation_helper.dart';
-import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
 import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
@@ -25,12 +23,7 @@ class _SetSecurityQuestionPageState extends State<SetSecurityQuestionPage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverFillRemaining(
-            child: BlocConsumer<SetSecurityQuestionBloc, SetSecurityQuestionState>(
-              listener: (context, state) {
-                if (state is SetSecurityQuestionStateInitial && state.navigationPath != null) {
-                  _handleNavigation(context, state.navigationPath!);
-                }
-              },
+            child: BlocBuilder<SetSecurityQuestionBloc, SetSecurityQuestionState>(
               builder: (context, state) {
                 return const BrgComponentTreeBuilder(pageId: SetSecurityQuestionPageRoute.path);
               },
@@ -49,29 +42,6 @@ class _SetSecurityQuestionPageState extends State<SetSecurityQuestionPage> {
           style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16),
         ).padding(right: 48),
       ),
-    );
-  }
-
-  Widget _buildTitleText() => Text(
-        const LocalizableText(tr: "Güvenlik Sorusu Tanımla", en: "Define Security Question").localize(),
-        style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-      );
-
-  Widget _buildDescriptionText() => const Row(
-        children: [
-          Flexible(
-            child: Text(
-              "Şifrenizi unutmanız durumunda kullanacağınız güvenlik sorusunu belirleyin.",
-            ),
-          ),
-        ],
-      ).paddingVertical(8);
-
-  void _handleNavigation(BuildContext context, String navigationPath) {
-    NavigationHelper().navigate(
-      context: context,
-      navigationType: NavigationType.pushReplacement,
-      path: navigationPath,
     );
   }
 }

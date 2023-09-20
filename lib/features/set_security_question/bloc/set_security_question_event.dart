@@ -13,12 +13,3 @@ class SetSecurityQuestionEventPressChangeButton extends SetSecurityQuestionEvent
   @override
   List<Object?> get props => [answer];
 }
-
-class SetSecurityQuestionEventHandleNavigation extends SetSecurityQuestionEvent {
-  final String navigationPath;
-
-  const SetSecurityQuestionEventHandleNavigation({required this.navigationPath});
-
-  @override
-  List<Object?> get props => [navigationPath];
-}
