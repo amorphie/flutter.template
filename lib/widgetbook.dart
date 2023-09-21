@@ -1,10 +1,15 @@
+import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
+import 'package:burgankuwait/core/reusable_widgets/custom_widget_registerer.dart';
+import 'package:burgankuwait/widgetbook/pages/widgetbook_folder_dynamic_pages.dart';
 import 'package:burgankuwait/widgetbook/pages/widgetbook_folder_login_signup_pages.dart';
 import 'package:burgankuwait/widgetbook/reusable_widgets/widgetbook_brg_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-void main() {
+void main() async {
+  await configureDependencies();
+  CustomWidgetRegisterer().init();
   runApp(const WidgetbookApp());
 }
 
@@ -31,6 +36,7 @@ class WidgetbookApp extends StatelessWidget {
           name: 'Pages',
           children: [
             widgetbookFolderLoginSignupPages,
+            widgetbookFolderDynamicPages,
           ],
         ),
       ],
