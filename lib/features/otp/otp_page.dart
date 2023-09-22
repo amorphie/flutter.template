@@ -1,7 +1,9 @@
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/models/brg_workflow.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
+import 'package:burgankuwait/features/otp/bloc/otp_page_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OtpPage extends StatefulWidget {
   final BrgWorkflow workflow;
@@ -22,7 +24,10 @@ class _OtpPageState extends State<OtpPage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverFillRemaining(
-            child: BrgComponentTreeBuilder(pageId: widget.pageId),
+            child: BrgComponentTreeBuilder(
+              componentsNetworkManager: context.read<OtpPageBloc>().componentsNetworkManager,
+              pageId: widget.pageId,
+            ),
           )
         ],
       ),

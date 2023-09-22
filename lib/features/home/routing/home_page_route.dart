@@ -1,3 +1,4 @@
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/home/bloc/home_page_bloc.dart';
 import 'package:burgankuwait/features/home/ui/home_page.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class HomePageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => HomePageBloc(),
+      create: (context) => HomePageBloc(componentsNetworkManager: ComponentsNetworkManager()),
       child: const HomePage(),
     );
   }

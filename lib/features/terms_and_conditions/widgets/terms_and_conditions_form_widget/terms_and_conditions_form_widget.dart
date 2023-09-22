@@ -3,7 +3,7 @@ import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgankuwait/core/reusable_widgets/terms_and_conditions/terms_and_conditions_widget.dart';
-import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
+import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/features/terms_and_conditions/bloc/terms_and_conditions_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +39,8 @@ class _TermsAndConditionsFormWidgetState extends State<TermsAndConditionsFormWid
   Widget build(BuildContext context) {
     return BrgTransitionListenerWidget(
       transitionId: widget.transitionId,
+      signalRServerUrl: AppConstants.workflowHubUrl,
+      signalRMethodName: AppConstants.workflowMethodName,
       onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

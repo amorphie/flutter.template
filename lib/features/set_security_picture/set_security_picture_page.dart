@@ -1,7 +1,6 @@
 import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
 import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
 import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,10 @@ class SetSecurityPicturePage extends StatelessWidget {
           SliverFillRemaining(
             child: BlocBuilder<SetSecurityPictureBloc, SetSecurityPictureState>(
               builder: (context, state) {
-                return const BrgComponentTreeBuilder(pageId: SetSecurityPicturePageRoute.path);
+                return BrgComponentTreeBuilder(
+                  componentsNetworkManager: context.read<SetSecurityPictureBloc>().componentsNetworkManager,
+                  pageId: SetSecurityPicturePageRoute.path,
+                );
               },
             ),
           )

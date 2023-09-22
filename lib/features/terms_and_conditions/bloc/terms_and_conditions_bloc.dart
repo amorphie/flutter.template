@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,12 +9,14 @@ part 'terms_and_conditions_state.dart';
 
 class TermsAndConditionsBloc extends Bloc<TermsAndConditionsEvent, TermsAndConditionsState> {
   final LoginWorkflowManager workflowManager;
+  final IComponentsNetworkManager componentsNetworkManager;
 
   bool _contract1Accepted = false;
   bool _contract2Accepted = false;
 
   TermsAndConditionsBloc({
     required this.workflowManager,
+    required this.componentsNetworkManager,
   }) : super(const TermsAndConditionsStateInitial()) {
     on<TermsAndConditionsEventUpdateContractStatus>((event, emit) => _onUpdateContractStatus(
           contract1Accepted: event.contract1Accepted,

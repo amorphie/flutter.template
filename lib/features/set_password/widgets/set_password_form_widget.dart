@@ -4,9 +4,9 @@ import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
+import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/core/util/brg_validator.dart';
-import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
 import 'package:burgankuwait/features/set_password/bloc/set_password_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,6 +74,8 @@ class _SetPasswordFormWidgetState extends State<SetPasswordFormWidget> {
   Widget build(BuildContext context) {
     return BrgTransitionListenerWidget(
       transitionId: widget.transitionId,
+      signalRServerUrl: AppConstants.workflowHubUrl,
+      signalRMethodName: AppConstants.workflowMethodName,
       onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
       child: Form(
         key: formKey,

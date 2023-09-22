@@ -5,9 +5,10 @@ import 'package:burgan_core/burgan_core.dart';
 // STOPSHIP: Update it with real base url
 final _baseUrlLocal = Platform.isAndroid ? "http://10.0.2.2:3000" : "http://localhost:3000";
 
-class ComponentsNetworkManager extends NetworkManager {
-  ComponentsNetworkManager() : super(baseURL: _baseUrlLocal);
+class ComponentsNetworkManager extends IComponentsNetworkManager {
+  ComponentsNetworkManager() : super(baseUrl: _baseUrlLocal);
 
+  @override
   Future<Map<String, dynamic>> fetchPageComponentsByPageId(String pageId) async {
     return await requestGet('components?pageId=$pageId');
   }

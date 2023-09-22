@@ -1,7 +1,6 @@
 import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
 import 'package:burgankuwait/features/terms_and_conditions_second/bloc/terms_and_conditions_second_bloc.dart';
 import 'package:burgankuwait/features/terms_and_conditions_second/terms_and_conditions_second_page_route.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,10 @@ class TermsAndConditionsSecondPage extends StatelessWidget {
           SliverFillRemaining(
             child: BlocBuilder<TermsAndConditionsSecondBloc, TermsAndConditionsSecondState>(
               builder: (context, state) {
-                return const BrgComponentTreeBuilder(pageId: TermsAndConditionsSecondRoute.path);
+                return BrgComponentTreeBuilder(
+                  componentsNetworkManager: context.read<TermsAndConditionsSecondBloc>().componentsNetworkManager,
+                  pageId: TermsAndConditionsSecondRoute.path,
+                );
               },
             ),
           )

@@ -1,4 +1,5 @@
 import 'package:burgankuwait/core/models/brg_workflow.dart';
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/login/bloc/login_bloc.dart';
 import 'package:burgankuwait/features/login/login_page.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
@@ -19,6 +20,9 @@ import 'package:burgankuwait/features/terms_and_conditions_second/terms_and_cond
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+final _loginWorkflowManager = LoginWorkflowManager();
+final _componentsNetworkManager = ComponentsNetworkManager();
+
 WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
       name: 'Login & Signup Flows',
       children: [
@@ -28,9 +32,7 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
             WidgetbookUseCase(
               name: "Default",
               builder: (context) => BlocProvider(
-                create: (context) => LoginBloc(
-                  workflowManager: LoginWorkflowManager(),
-                ),
+                create: (context) => LoginBloc(workflowManager: _loginWorkflowManager),
                 child: const LoginPage(),
               ),
             )
@@ -43,7 +45,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Register Otp",
               builder: (context) => BlocProvider(
                 create: (context) => OtpPageBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const OtpPage(workflow: BrgWorkflow.register, pageId: "register-otp"),
               ),
@@ -52,7 +55,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Login Otp",
               builder: (context) => BlocProvider(
                 create: (context) => OtpPageBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const OtpPage(workflow: BrgWorkflow.login, pageId: "login-otp"),
               ),
@@ -66,7 +70,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Default",
               builder: (context) => BlocProvider(
                 create: (context) => PersonalInfoBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const PersonalInfoPage(),
               ),
@@ -80,7 +85,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Default",
               builder: (context) => BlocProvider(
                 create: (context) => SetPasswordBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const SetPasswordPage(),
               ),
@@ -94,7 +100,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Default",
               builder: (context) => BlocProvider(
                 create: (context) => SetSecurityQuestionBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const SetSecurityQuestionPage(),
               ),
@@ -108,7 +115,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Default",
               builder: (context) => BlocProvider(
                 create: (context) => SetSecurityPictureBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const SetSecurityPicturePage(),
               ),
@@ -122,7 +130,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Default",
               builder: (context) => BlocProvider(
                 create: (context) => TermsAndConditionsBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const TermsAndConditionsPage(),
               ),
@@ -136,7 +145,8 @@ WidgetbookFolder get widgetbookFolderLoginSignupPages => WidgetbookFolder(
               name: "Default",
               builder: (context) => BlocProvider(
                 create: (context) => TermsAndConditionsSecondBloc(
-                  workflowManager: LoginWorkflowManager(),
+                  workflowManager: _loginWorkflowManager,
+                  componentsNetworkManager: _componentsNetworkManager,
                 ),
                 child: const TermsAndConditionsSecondPage(),
               ),

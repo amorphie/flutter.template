@@ -1,3 +1,4 @@
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/set_security_question/bloc/set_security_question_bloc.dart';
 import 'package:burgankuwait/features/set_security_question/set_security_question_page.dart';
@@ -14,6 +15,7 @@ class SetSecurityQuestionPageRoute extends GoRouteData {
     return BlocProvider(
       create: (context) => SetSecurityQuestionBloc(
         workflowManager: LoginWorkflowManager(),
+        componentsNetworkManager: ComponentsNetworkManager(),
       ),
       child: const SetSecurityQuestionPage(),
     );

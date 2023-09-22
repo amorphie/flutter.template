@@ -1,3 +1,4 @@
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
 import 'package:burgankuwait/features/set_security_picture/set_security_picture_page.dart';
@@ -14,6 +15,7 @@ class SetSecurityPicturePageRoute extends GoRouteData {
     return BlocProvider(
       create: (context) => SetSecurityPictureBloc(
         workflowManager: LoginWorkflowManager(),
+        componentsNetworkManager: ComponentsNetworkManager(),
       ),
       child: const SetSecurityPicturePage(),
     );

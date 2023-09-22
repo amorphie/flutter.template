@@ -1,7 +1,6 @@
 import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
 import 'package:burgankuwait/features/set_security_question/bloc/set_security_question_bloc.dart';
 import 'package:burgankuwait/features/set_security_question/set_security_question_page_route.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,10 @@ class _SetSecurityQuestionPageState extends State<SetSecurityQuestionPage> {
           SliverFillRemaining(
             child: BlocBuilder<SetSecurityQuestionBloc, SetSecurityQuestionState>(
               builder: (context, state) {
-                return const BrgComponentTreeBuilder(pageId: SetSecurityQuestionPageRoute.path);
+                return BrgComponentTreeBuilder(
+                  componentsNetworkManager: context.read<SetSecurityQuestionBloc>().componentsNetworkManager,
+                  pageId: SetSecurityQuestionPageRoute.path,
+                );
               },
             ),
           )

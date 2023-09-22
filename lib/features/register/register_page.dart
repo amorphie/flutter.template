@@ -9,7 +9,6 @@ import 'package:burgankuwait/core/reusable_widgets/brg_text_form_field/brg_text_
 import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
-import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
 import 'package:burgankuwait/features/register/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +51,8 @@ class _RegisterPageState extends State<RegisterPage> {
         builder: (context, state) {
           return BrgTransitionListenerWidget(
             transitionId: widget.transitionId,
+            signalRServerUrl: AppConstants.workflowHubUrl,
+            signalRMethodName: AppConstants.workflowMethodName,
             onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

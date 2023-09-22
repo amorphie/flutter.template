@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,9 +9,11 @@ part 'personal_info_state.dart';
 
 class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   final LoginWorkflowManager workflowManager;
+  final IComponentsNetworkManager componentsNetworkManager;
 
   PersonalInfoBloc({
     required this.workflowManager,
+    required this.componentsNetworkManager,
   }) : super(const PersonalInfoStateInitial()) {
     on<PersonalInfoEventPressContinueButton>((event, emit) => _onContinueButtonPressed(
           name: event.name,

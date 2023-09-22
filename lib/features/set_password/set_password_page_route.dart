@@ -1,3 +1,4 @@
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/set_password/bloc/set_password_bloc.dart';
 import 'package:burgankuwait/features/set_password/set_password_page.dart';
@@ -14,6 +15,7 @@ class SetPasswordPageRoute extends GoRouteData {
     return BlocProvider(
       create: (context) => SetPasswordBloc(
         workflowManager: LoginWorkflowManager(),
+        componentsNetworkManager: ComponentsNetworkManager(),
       ),
       child: const SetPasswordPage(),
     );

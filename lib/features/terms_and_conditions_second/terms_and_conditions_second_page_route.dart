@@ -1,3 +1,4 @@
+import 'package:burgankuwait/core/util/network/components_network_manager.dart';
 import 'package:burgankuwait/features/login/login_workflow_manager.dart';
 import 'package:burgankuwait/features/terms_and_conditions_second/bloc/terms_and_conditions_second_bloc.dart';
 import 'package:burgankuwait/features/terms_and_conditions_second/terms_and_conditions_second_page.dart';
@@ -14,6 +15,7 @@ class TermsAndConditionsSecondRoute extends GoRouteData {
     return BlocProvider(
       create: (context) => TermsAndConditionsSecondBloc(
         workflowManager: LoginWorkflowManager(),
+        componentsNetworkManager: ComponentsNetworkManager(),
       ),
       child: const TermsAndConditionsSecondPage(),
     );

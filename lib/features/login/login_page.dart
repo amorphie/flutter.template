@@ -9,7 +9,6 @@ import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/core/util/brg_validator.dart';
-import 'package:burgankuwait/core/widgets/brg_transition_listener/brg_transition_listener_widget.dart';
 import 'package:burgankuwait/features/login/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,6 +94,8 @@ class _LoginPageState extends State<LoginPage> {
     return BrgTransitionListenerWidget(
       transitionId: widget.transitionId,
       onPageNavigation: (String navigationPath) => _handleNavigation(context, navigationPath),
+      signalRServerUrl: AppConstants.workflowHubUrl,
+      signalRMethodName: AppConstants.workflowMethodName,
       child: BrgButton(
         text: const LocalizableText(tr: "GİRİŞ YAP", en: "LOGIN").localize(),
         onPressed: () {
