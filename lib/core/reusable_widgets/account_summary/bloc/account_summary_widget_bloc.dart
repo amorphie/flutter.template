@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:burgankuwait/core/bus/widget_event_bus/widget_event.dart';
-import 'package:burgankuwait/core/bus/widget_event_bus/widget_event_bus.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_network_manager.dart';
 import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget_ui_model.dart';
@@ -30,9 +29,9 @@ class AccountSummaryWidgetBloc extends Bloc<AccountSummaryWidgetEvent, AccountSu
   }
 
   _listenForWidgetEvents() {
-    getIt.get<WidgetEventBus>().listen(
+    getIt.get<BrgWidgetEventBus>().listen(
           eventId: BrgAccountSliderWidgetBuilder.type,
-          onEventReceived: (WidgetEvent event) {
+          onEventReceived: (BrgWidgetEvent event) {
             if (event.data is bool) {
               isFlipped = event.data as bool;
               add(AccountSummaryWidgetEventFetchComponentDetails("iban"));

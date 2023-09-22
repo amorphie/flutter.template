@@ -1,5 +1,4 @@
-import 'package:burgankuwait/core/bus/widget_event_bus/widget_event.dart';
-import 'package:burgankuwait/core/bus/widget_event_bus/widget_event_bus.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_account_slider/brg_account_slider_widget_builder.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +26,8 @@ class BrgAccountSliderWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         isFlipped = !isFlipped;
-        getIt.get<WidgetEventBus>().addEvent(
-              WidgetEvent(
+        getIt.get<BrgWidgetEventBus>().addEvent(
+              BrgWidgetEvent(
                 eventId: BrgAccountSliderWidgetBuilder.type,
                 data: isFlipped,
               ),
