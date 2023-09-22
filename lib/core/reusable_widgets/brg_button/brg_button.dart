@@ -1,4 +1,4 @@
-import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:flutter/material.dart';
 
 const _buttonColor = Color(0xFF0069AA); // TODO: Move to colors file

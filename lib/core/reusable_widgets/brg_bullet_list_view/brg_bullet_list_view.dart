@@ -1,4 +1,4 @@
-import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:flutter/material.dart';
 
 class BrgBulletListView extends StatelessWidget {

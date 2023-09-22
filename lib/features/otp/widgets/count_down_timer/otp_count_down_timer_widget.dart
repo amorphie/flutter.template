@@ -1,6 +1,6 @@
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/reusable_widgets/count_down_timer/circular_count_down_timer.dart';
 import 'package:burgankuwait/core/reusable_widgets/count_down_timer/count_down_timer_text_format.dart';
-import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:flutter/material.dart';
 
 class OtpCountDownTimerWidget extends StatelessWidget {

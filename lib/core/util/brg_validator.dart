@@ -1,5 +1,5 @@
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
-import 'package:burgankuwait/core/util/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class BrgValidator {

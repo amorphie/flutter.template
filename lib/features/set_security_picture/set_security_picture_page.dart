@@ -1,6 +1,6 @@
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/util/extensions/widget_extensions.dart';
 import 'package:burgankuwait/core/widgets/brg_component_tree_builder/brg_component_tree_builder.dart';
 import 'package:burgankuwait/features/set_security_picture/bloc/set_security_picture_bloc.dart';
 import 'package:burgankuwait/features/set_security_picture/set_security_picture_page_route.dart';

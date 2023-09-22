@@ -125,8 +125,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.1"
-      resolved-ref: "521510b65811518b85aef6d7c2909c09552e32b2"
+      ref: "0.0.2"
+      resolved-ref: f3550cf6ed2605ed0e10e4181a480ee6ab508e95
       url: "git@bitbucket.org:commencers/burgancore.git"
     source: git
     version: "0.0.1"
