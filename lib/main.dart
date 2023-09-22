@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:burgan_ui/burgan_ui.dart';
 import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
 import 'package:burgankuwait/core/navigation/app_route.dart';
 import 'package:burgankuwait/core/reusable_widgets/custom_widget_registerer.dart';
@@ -8,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 void main() async {
   await configureDependencies();
+  BurganUI.init();
   CustomWidgetRegisterer().init();
   runApp(const MyApp());
 }

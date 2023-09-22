@@ -1,5 +1,5 @@
+import 'package:burgan_ui/components/burgan_components.dart';
 import 'package:burgankuwait/core/reusable_widgets/navigation_button/navigation_button.dart';
-import 'package:burgankuwait/core/reusable_widgets/new_badge/new_badge_widget.dart';
 import 'package:burgankuwait/core/reusable_widgets/sub_navigation/models/sub_navigation_component_details.dart';
 import 'package:flutter/material.dart';
 

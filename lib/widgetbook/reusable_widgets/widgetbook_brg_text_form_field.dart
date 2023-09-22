@@ -1,6 +1,5 @@
 import 'package:burgan_core/burgan_core.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
-import 'package:burgankuwait/core/util/brg_validator.dart';
+import 'package:burgan_ui/burgan_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 

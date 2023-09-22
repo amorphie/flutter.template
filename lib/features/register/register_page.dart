@@ -1,12 +1,9 @@
 import 'package:burgan_core/burgan_core.dart';
+import 'package:burgan_ui/components/burgan_components.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/models/brg_phone_number.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_app_bar/brg_app_bar.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
-import 'package:burgankuwait/core/reusable_widgets/security_icon_widget/security_icon_widget.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/core/util/assets.dart';
 import 'package:burgankuwait/features/register/bloc/register_bloc.dart';

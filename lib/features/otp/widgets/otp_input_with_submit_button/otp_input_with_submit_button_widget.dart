@@ -1,12 +1,10 @@
 import 'package:burgan_core/burgan_core.dart';
+import 'package:burgan_ui/burgan_ui.dart';
 import 'package:burgankuwait/core/localization/localizable_text.dart';
 import 'package:burgankuwait/core/models/brg_workflow.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_text_form_field/brg_text_form_field.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
-import 'package:burgankuwait/core/util/brg_validator.dart';
 import 'package:burgankuwait/features/otp/bloc/otp_page_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

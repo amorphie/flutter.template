@@ -1,6 +1,6 @@
 import 'package:burgan_core/burgan_core.dart';
+import 'package:burgan_ui/burgan_ui.dart';
 import 'package:burgankuwait/core/navigation/app_route.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
 import 'package:burgankuwait/features/login/login_page_route.dart';
 import 'package:burgankuwait/features/register/register_page_route.dart';
 import 'package:flutter/material.dart';

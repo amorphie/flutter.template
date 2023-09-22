@@ -130,6 +130,15 @@ packages:
       url: "git@bitbucket.org:commencers/burgancore.git"
     source: git
     version: "0.0.1"
+  burgan_ui:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "0.0.1"
+      resolved-ref: "8b00b7f01590a96892475eb41601d4d6e5ab5996"
+      url: "git@bitbucket.org:commencers/burganui.git"
+    source: git
+    version: "0.0.1"
   characters:
     dependency: transitive
     description:

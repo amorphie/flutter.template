@@ -1,8 +1,7 @@
 import 'package:burgan_core/burgan_core.dart';
+import 'package:burgan_ui/burgan_ui.dart';
 import 'package:burgankuwait/core/navigation/navigation_helper.dart';
 import 'package:burgankuwait/core/navigation/navigation_type.dart';
-import 'package:burgankuwait/core/reusable_widgets/brg_button/brg_button.dart';
-import 'package:burgankuwait/core/reusable_widgets/terms_and_conditions/terms_and_conditions_widget.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:burgankuwait/features/terms_and_conditions_second/bloc/terms_and_conditions_second_bloc.dart';
 import 'package:flutter/material.dart';
