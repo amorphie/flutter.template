@@ -1,4 +1,4 @@
-import 'package:burgankuwait/core/network/network_manager.dart';
+import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/reusable_widgets/account_summary/models/account_summary_component_details_response.dart';
 
 class AccountSummaryNetworkManager extends NetworkManager {

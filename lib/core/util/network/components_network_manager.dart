@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:burgankuwait/core/network/network_manager.dart';
+import 'package:burgan_core/burgan_core.dart';
 
 // STOPSHIP: Update it with real base url
 final _baseUrlLocal = Platform.isAndroid ? "http://10.0.2.2:3000" : "http://localhost:3000";

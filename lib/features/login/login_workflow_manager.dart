@@ -1,6 +1,6 @@
+import 'package:burgan_core/core/network/burgan_network.dart';
 import 'package:burgankuwait/core/models/brg_phone_number.dart';
 import 'package:burgankuwait/core/models/brg_workflow.dart';
-import 'package:burgankuwait/core/network/network_manager.dart';
 import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:uuid/uuid.dart';
 

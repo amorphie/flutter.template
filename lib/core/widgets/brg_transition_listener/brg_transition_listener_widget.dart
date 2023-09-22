@@ -1,4 +1,5 @@
-import 'package:burgankuwait/core/network/signalr_connection_manager.dart';
+import 'package:burgan_core/core/network/burgan_network.dart';
+import 'package:burgankuwait/core/util/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class BrgTransitionListenerWidget extends StatefulWidget {
@@ -23,7 +24,10 @@ class _BrgTransitionListenerWidgetState extends State<BrgTransitionListenerWidge
   @override
   void initState() {
     super.initState();
-    signalrConnectionManager = SignalrConnectionManager()..init();
+    signalrConnectionManager = SignalrConnectionManager(
+      serverUrl: AppConstants.workflowHubUrl,
+      methodName: AppConstants.workflowMethodName,
+    )..init();
     signalrConnectionManager.listenForTransitionEvents(
         transitionId: widget.transitionId, onPageNavigation: widget.onPageNavigation);
   }
