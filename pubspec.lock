@@ -379,7 +379,7 @@ packages:
     source: hosted
     version: "2.3.1"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
@@ -739,7 +739,7 @@ packages:
     source: hosted
     version: "1.0.4"
   signalr_netcore:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: signalr_netcore
       sha256: "222883d5961e2d5e4ff54711a78a54991c89f585f9da05328be950cb10c8b0e2"
