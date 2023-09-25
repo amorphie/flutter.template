@@ -1,4 +1,4 @@
-import 'package:burgankuwait/core/reusable_widgets/account_summary/models/account_summary_component_details_response.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/models/account_summary_component_details_response.dart';
 
 class AccountSummaryWidgetUIModel {
   final String availableLimit;

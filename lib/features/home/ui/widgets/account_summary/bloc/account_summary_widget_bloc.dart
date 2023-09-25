@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:burgan_core/burgan_core.dart';
 import 'package:burgankuwait/core/dependency_injection/dependency_injection.dart';
-import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_network_manager.dart';
-import 'package:burgankuwait/core/reusable_widgets/account_summary/account_summary_widget_ui_model.dart';
 import 'package:burgankuwait/core/reusable_widgets/brg_account_slider/brg_account_slider_widget_builder.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/account_summary_network_manager.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/account_summary_widget_ui_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
