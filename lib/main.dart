@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 void main() async {
-  await configureDependencies();
+  configureDependencies();
   BurganUI.init();
   CustomWidgetRegisterer().init();
   runApp(const MyApp());

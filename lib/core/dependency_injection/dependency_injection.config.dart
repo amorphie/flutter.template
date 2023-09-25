@@ -9,7 +9,6 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:burgan_core/burgan_core.dart' as _i4;
 import 'package:burgankuwait/core/navigation/navigation_helper.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -26,7 +25,6 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.singleton<_i3.NavigationHelper>(_i3.NavigationHelper());
-    gh.singleton<_i4.BrgWidgetEventBus>(_i4.BrgWidgetEventBus());
     return this;
   }
 }
