@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'account_summary_component_details_response.g.dart';
+part 'home_account_summary_component_details_response.g.dart';
 
 @JsonSerializable(createToJson: false)
-class AccountSummaryComponentDetailsResponse {
+class HomeAccountSummaryComponentDetailsResponse {
   @JsonKey(name: "availableLimit", defaultValue: "")
   final String availableLimit;
 
@@ -22,10 +22,10 @@ class AccountSummaryComponentDetailsResponse {
   @JsonKey(name: "yearlyInterestRate", defaultValue: "")
   final String yearlyInterestRate;
 
-  factory AccountSummaryComponentDetailsResponse.fromJson(Map<String, dynamic> json) =>
-      _$AccountSummaryComponentDetailsResponseFromJson(json);
+  factory HomeAccountSummaryComponentDetailsResponse.fromJson(Map<String, dynamic> json) =>
+      _$HomeAccountSummaryComponentDetailsResponseFromJson(json);
 
-  AccountSummaryComponentDetailsResponse({
+  HomeAccountSummaryComponentDetailsResponse({
     required this.availableLimit,
     required this.totalLimit,
     required this.currentDebt,

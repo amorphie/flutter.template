@@ -1,6 +1,6 @@
 import 'package:burgankuwait/core/reusable_widgets/brg_account_slider/brg_account_slider_widget_builder.dart';
 import 'package:burgankuwait/core/reusable_widgets/sub_navigation/sub_navigation_widget_builder.dart';
-import 'package:burgankuwait/features/home/ui/widgets/account_summary/account_summary_widget_builder.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/home_account_summary_widget_builder.dart';
 import 'package:burgankuwait/features/home/ui/widgets/last_transactions/home_last_transactions_widget_builder.dart';
 import 'package:burgankuwait/features/home/ui/widgets/overdraft_info/home_overdraft_info_widget_builder.dart';
 import 'package:burgankuwait/features/otp/widgets/count_down_timer/otp_count_down_timer_widget_builder.dart';
@@ -20,8 +20,8 @@ class CustomWidgetRegisterer {
 
   init() {
     registry.registerCustomBuilder(
-      AccountSummaryWidgetBuilder.type,
-      const JsonWidgetBuilderContainer(builder: AccountSummaryWidgetBuilder.fromDynamic),
+      HomeAccountSummaryWidgetBuilder.type,
+      const JsonWidgetBuilderContainer(builder: HomeAccountSummaryWidgetBuilder.fromDynamic),
     );
 
     registry.registerCustomBuilder(

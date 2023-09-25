@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:burgankuwait/features/home/ui/widgets/account_summary/account_summary_widget_ui_model.dart';
-import 'package:burgankuwait/features/home/ui/widgets/account_summary/bloc/account_summary_widget_bloc.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/home_account_summary_widget_ui_model.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/bloc/home_account_summary_widget_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletons/skeletons.dart';
 
-class AccountSummaryWidget extends StatelessWidget {
-  const AccountSummaryWidget({Key? key}) : super(key: key);
+class HomeAccountSummaryWidget extends StatelessWidget {
+  const HomeAccountSummaryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +20,10 @@ class AccountSummaryWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: BlocBuilder<AccountSummaryWidgetBloc, AccountSummaryWidgetState>(
+          child: BlocBuilder<HomeAccountSummaryWidgetBloc, HomeAccountSummaryWidgetState>(
             builder: (context, state) {
               switch (state) {
-                case AccountSummaryWidgetStateLoading _:
+                case HomeAccountSummaryWidgetStateLoading _:
                   return _buildSkeletonLoading();
                 case AccountSummaryWidgetStateLoaded _:
                   return _buildComponents(state.uiModel, context);
@@ -73,7 +73,7 @@ class AccountSummaryWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildComponents(AccountSummaryWidgetUIModel uiModel, BuildContext context) {
+  Widget _buildComponents(HomeAccountSummaryWidgetUIModel uiModel, BuildContext context) {
     return Column(
       children: [
         _buildRowItem(key: "Kullanılabilir Limit", value: uiModel.availableLimit),
@@ -88,7 +88,7 @@ class AccountSummaryWidget extends StatelessWidget {
         _buildDivider(),
         _buildRowItem(key: "Yıllık Faiz Oranı", value: uiModel.yearlyInterestRate),
         _buildDivider(),
-        _buildRowItem(key: "Is Flipped", value: context.read<AccountSummaryWidgetBloc>().isFlipped.toString()),
+        _buildRowItem(key: "Is Flipped", value: context.read<HomeAccountSummaryWidgetBloc>().isFlipped.toString()),
       ],
     );
   }

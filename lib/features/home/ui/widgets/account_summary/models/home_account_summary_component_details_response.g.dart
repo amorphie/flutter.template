@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_summary_component_details_response.dart';
+part of 'home_account_summary_component_details_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountSummaryComponentDetailsResponse
-    _$AccountSummaryComponentDetailsResponseFromJson(
+HomeAccountSummaryComponentDetailsResponse
+    _$HomeAccountSummaryComponentDetailsResponseFromJson(
             Map<String, dynamic> json) =>
-        AccountSummaryComponentDetailsResponse(
+        HomeAccountSummaryComponentDetailsResponse(
           availableLimit: json['availableLimit'] as String? ?? '',
           totalLimit: json['totalLimit'] as String? ?? '',
           currentDebt: json['currentDebt'] as String? ?? '',

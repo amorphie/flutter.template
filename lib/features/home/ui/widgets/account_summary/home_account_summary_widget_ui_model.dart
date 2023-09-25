@@ -1,6 +1,6 @@
-import 'package:burgankuwait/features/home/ui/widgets/account_summary/models/account_summary_component_details_response.dart';
+import 'package:burgankuwait/features/home/ui/widgets/account_summary/models/home_account_summary_component_details_response.dart';
 
-class AccountSummaryWidgetUIModel {
+class HomeAccountSummaryWidgetUIModel {
   final String availableLimit;
   final String totalLimit;
   final String currentDebt;
@@ -8,7 +8,7 @@ class AccountSummaryWidgetUIModel {
   final String monthlyInterestRate;
   final String yearlyInterestRate;
 
-  AccountSummaryWidgetUIModel({
+  HomeAccountSummaryWidgetUIModel({
     required this.availableLimit,
     required this.totalLimit,
     required this.currentDebt,
@@ -17,7 +17,7 @@ class AccountSummaryWidgetUIModel {
     required this.yearlyInterestRate,
   });
 
-  AccountSummaryWidgetUIModel.fromResponse(AccountSummaryComponentDetailsResponse response)
+  HomeAccountSummaryWidgetUIModel.fromResponse(HomeAccountSummaryComponentDetailsResponse response)
       : availableLimit = response.availableLimit,
         totalLimit = response.totalLimit,
         currentDebt = response.currentDebt,
