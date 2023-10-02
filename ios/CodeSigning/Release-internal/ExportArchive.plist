@@ -8,7 +8,7 @@
 	<string>enterprise</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.commencis.burgankuwait.internal</key>
+		<key>com.example.template.internal</key>
 		<string>DistEntInHouseWildcard</string>
 	</dict>
 	<key>compileBitcode</key>

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _routerConfig,
-      title: 'Burgan Kuwait',
+      title: 'Burgan Template',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
